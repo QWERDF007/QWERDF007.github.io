@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="[TOC] What is PyTorchPyTorch 是基于 python 的科学计算软件包，GPU 版 NumPy，深度学习框架，可以按 NumPy 来操作 Getting StartedTensors构造 5 x 3 的矩阵，不初始化: 12import torchx = torch.empty(5, 3) 构造随机初始化的矩阵 1x = torch.rand(5, 3) torch.ra">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-28T15:08:18.908Z">
+<meta property="og:updated_time" content="2019-01-30T08:33:39.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PyTorch学习笔记(1)">
 <meta name="twitter:description" content="[TOC] What is PyTorchPyTorch 是基于 python 的科学计算软件包，GPU 版 NumPy，深度学习框架，可以按 NumPy 来操作 Getting StartedTensors构造 5 x 3 的矩阵，不初始化: 12import torchx = torch.empty(5, 3) 构造随机初始化的矩阵 1x = torch.rand(5, 3) torch.ra">
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-28 23:08:18" itemprop="dateModified" datetime="2019-01-28T23:08:18+08:00">2019-01-28</time>
+                <time title="Modified: 2019-01-30 16:33:39" itemprop="dateModified" datetime="2019-01-30T16:33:39+08:00">2019-01-30</time>
               
             
           </span>
@@ -442,14 +442,14 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 <p>构造随机初始化的矩阵</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = torch.rand(<span class="number">5</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>torch.rand()</strong> 返回在区间 [0, 1] 均匀分布的随机数组。<strong>torch.randn()</strong> 返回符合正态分布的随机数组，均值为0，方差为1</p>
-<p>构造由零填充的矩阵，类型为long</p>
+<p><code>torch.rand()</code> 返回在区间 [0, 1] 均匀分布的随机数组。<code>torch.randn()</code> 返回符合正态分布的随机数组，均值为0，方差为1</p>
+<p>构造由零填充的矩阵，类型为 long</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = torch.zeros(<span class="number">5</span>, <span class="number">3</span>, dtype=torch.long)</span><br></pre></td></tr></table></figure>
 <p>直接由 data 构造 tensor</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">5.5</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-<p>由存在的 tensor 创建 tensor，这些方法除了用户传递的新值，会保留输入 tensor 的属性，如dtype等。</p>
+<p>由存在的 tensor 创建 tensor，这些方法除了用户传递的新值，会保留输入 tensor 的属性，如 dtype 等。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = x.new_ones(<span class="number">5</span>, <span class="number">3</span>, dtype=torch.double)</span><br><span class="line">x = torch.randn_like(x, dtype=torch.float)</span><br></pre></td></tr></table></figure>
-<p>获取 tensor 的size:</p>
+<p>获取 tensor 的 size:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(x.size())</span><br></pre></td></tr></table></figure>
 <p>注意：torch.Size 实际是一个元组，因此支持所有元组的操作</p>
 <h2 id="Operations"><a href="#Operations" class="headerlink" title="Operations"></a>Operations</h2><p>加法:</p>
@@ -457,12 +457,12 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(torch.add(x, y))</span><br></pre></td></tr></table></figure>
 <p>参数 – 输出 tensor</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = touch.empty(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line">torch.add(x, y, out=result)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-<p>任何调整 tensor 的操作都可以用相应名称+后缀 “<em>“ 替代，例如: x.copy\</em>(), x.t_()</p>
+<p>任何调整 tensor 的操作都可以用相应名称+后缀 “_” 替代，例如: <code>x.copy()</code> ，<code>x.t()</code></p>
 <p>可以用类似标注 NumPy 索引</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(x[:, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<p>想要 resize/reshape tensor，可以用 <strong>torch.view</strong>:</p>
+<p>想要 resize/reshape tensor，可以用 <code>torch.view()</code>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">y = x.view(<span class="number">16</span>)</span><br><span class="line">z = x.view(<span class="number">-1</span>, <span class="number">8</span>) <span class="comment"># size -1 将由其他维度推测出</span></span><br></pre></td></tr></table></figure>
-<p>只有一个元素的 tensor，可以用.item() 获取其 python 数值</p>
+<p>只有一个元素的 tensor，可以用 <code>.item()</code> 获取其 python 数值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">1</span>)</span><br><span class="line">print(x)</span><br><span class="line">print(x.item())</span><br></pre></td></tr></table></figure>
 <h1 id="Numpy-Brideg"><a href="#Numpy-Brideg" class="headerlink" title="Numpy Brideg"></a>Numpy Brideg</h1><p>将一个 Torch Tensor 转换为 NumPy 数组很简单，反之亦然</p>
 <p>Torch Tensor 和NumPy 数组将共享底层内存位置，改变其中之一会改变另外一个</p>
@@ -470,7 +470,7 @@
 <h2 id="Converting-NumPy-Array-to-Torch-Tensor"><a href="#Converting-NumPy-Array-to-Torch-Tensor" class="headerlink" title="Converting NumPy Array to Torch Tensor"></a>Converting NumPy Array to Torch Tensor</h2><p>修改 NumPy 数组将自动修改相应的 Tensor</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.ones(<span class="number">5</span>)</span><br><span class="line">b = torch.from_numpy(a)</span><br><span class="line">np.add(a, <span class="number">1</span>, out=a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
 <p>CPU 上的 Tensor，除了 CharTensor，都支持转换为 NumPy  和返回</p>
-<h1 id="CUDA-Tensors"><a href="#CUDA-Tensors" class="headerlink" title="CUDA Tensors"></a>CUDA Tensors</h1><p>使用.to 方法，Tensors 能被移动至任何设备上</p>
+<h1 id="CUDA-Tensors"><a href="#CUDA-Tensors" class="headerlink" title="CUDA Tensors"></a>CUDA Tensors</h1><p>使用 <code>.to()</code> 方法，Tensors 能被移动至任何设备上</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅当 GPU 可用才执行</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="comment"># 创建 GPU 设备对象</span></span><br><span class="line">    device = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line">    <span class="comment"># 直接在 GPU 上创建 Tensor</span></span><br><span class="line">    y = torch.ones_like(x, device=device)</span><br><span class="line">    <span class="comment"># 使用 .to 方法将 Tensor 移至 GPU</span></span><br><span class="line">    x = x.to(device)</span><br><span class="line">    z = x + y</span><br><span class="line">    print(z)</span><br><span class="line">    <span class="comment"># .to 也可以改变 dtype</span></span><br><span class="line">    print(z.to(<span class="string">"cpu"</span>, torch.double))</span><br></pre></td></tr></table></figure>
 
       
@@ -506,6 +506,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/30/PyTorch学习笔记-2/" rel="prev" title="PyTorch学习笔记(2)">
+                PyTorch学习笔记(2) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -572,7 +588,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

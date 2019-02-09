@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络  在输入数据集上迭代  通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数">
+  <meta name="description" content="[TOC] Autograd: Automatic Differentiationautograd 包是 PyTorch 中所有神经网络的核心。autograd 包为所有 Tensors 上的操作提供自动求导。这是个运行时定义的框架，这意味着反向传播是根据代码如何运行来决定的，并且每次迭代可能是不同的。 Tensortorch.Tensor 是这个包的核心类。如果将它的属性 .requires_g">
 <meta name="keywords" content="Python,PyTorch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PyTorch学习笔记(3)">
-<meta property="og:url" content="https://QWERDF007.github.io/2019/01/31/PyTorch学习笔记-3/index.html">
+<meta property="og:title" content="2.自动求导 (Automatic Differentiation)">
+<meta property="og:url" content="https://QWERDF007.github.io/2019/01/30/2-自动求导-Automatic-Differentiation/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
-<meta property="og:description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络  在输入数据集上迭代  通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数">
+<meta property="og:description" content="[TOC] Autograd: Automatic Differentiationautograd 包是 PyTorch 中所有神经网络的核心。autograd 包为所有 Tensors 上的操作提供自动求导。这是个运行时定义的框架，这意味着反向传播是根据代码如何运行来决定的，并且每次迭代可能是不同的。 Tensortorch.Tensor 是这个包的核心类。如果将它的属性 .requires_g">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-01T08:07:05.182Z">
+<meta property="og:updated_time" content="2019-02-09T01:06:57.263Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PyTorch学习笔记(3)">
-<meta name="twitter:description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络  在输入数据集上迭代  通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数">
+<meta name="twitter:title" content="2.自动求导 (Automatic Differentiation)">
+<meta name="twitter:description" content="[TOC] Autograd: Automatic Differentiationautograd 包是 PyTorch 中所有神经网络的核心。autograd 包为所有 Tensors 上的操作提供自动求导。这是个运行时定义的框架，这意味着反向传播是根据代码如何运行来决定的，并且每次迭代可能是不同的。 Tensortorch.Tensor 是这个包的核心类。如果将它的属性 .requires_g">
 
 
 
 
 
 
-  <link rel="canonical" href="https://QWERDF007.github.io/2019/01/31/PyTorch学习笔记-3/">
+  <link rel="canonical" href="https://QWERDF007.github.io/2019/01/30/2-自动求导-Automatic-Differentiation/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>PyTorch学习笔记(3) | QWERDF007 的博客</title>
+  <title>2.自动求导 (Automatic Differentiation) | QWERDF007 的博客</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/01/31/PyTorch学习笔记-3/">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/01/30/2-自动求导-Automatic-Differentiation/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QWERDF007">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PyTorch学习笔记(3)
+          <h1 class="post-title" itemprop="name headline">2.自动求导 (Automatic Differentiation)
 
               
             
@@ -368,7 +368,7 @@
                 
               
 
-              <time title="Created: 2019-01-31 09:02:31" itemprop="dateCreated datePublished" datetime="2019-01-31T09:02:31+08:00">2019-01-31</time>
+              <time title="Created: 2019-01-30 15:33:02" itemprop="dateCreated datePublished" datetime="2019-01-30T15:33:02+08:00">2019-01-30</time>
             
 
             
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-01 16:07:05" itemprop="dateModified" datetime="2019-02-01T16:07:05+08:00">2019-02-01</time>
+                <time title="Modified: 2019-02-09 09:06:57" itemprop="dateModified" datetime="2019-02-09T09:06:57+08:00">2019-02-09</time>
               
             
           </span>
@@ -416,7 +416,7 @@
 
           
           
-             <span id="/2019/01/31/PyTorch学习笔记-3/" class="leancloud_visitors" data-flag-title="PyTorch学习笔记(3)">
+             <span id="/2019/01/30/2-自动求导-Automatic-Differentiation/" class="leancloud_visitors" data-flag-title="2.自动求导 (Automatic Differentiation)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -448,44 +448,31 @@
 
       
         <p>[TOC]</p>
-<h1 id="Neural-Networks"><a href="#Neural-Networks" class="headerlink" title="Neural Networks"></a>Neural Networks</h1><p><code>torch.nn</code> 可以构建神经网络。</p>
-<p><code>nn</code> 依赖于 <code>autograd</code> 来定义模型并且对其求导。一个 <code>nn.Module</code> 包含多个层，和返回 <code>output</code> 的 <code>forward(input)</code> 方法。</p>
-<p>神经网络典型的训练过程如下:</p>
-<ul>
-<li><p>定义包含训练参数的神经网络</p>
-</li>
-<li><p>在输入数据集上迭代</p>
-</li>
-<li>通过网络处理输入</li>
-<li>计算损失 (输出离正确差多远)</li>
-<li>将梯度反向传播至网络的参数</li>
-<li>更新网络的权重，通常用一个简单的更新规则: <code>weight = weight - learning_rate * gradient</code>  </li>
-</ul>
-<h1 id="Define-the-network"><a href="#Define-the-network" class="headerlink" title="Define the network"></a>Define the network</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.function <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">Class Net(nn.Module):</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        <span class="comment"># 输入图像通道数为1，输出通道数6，5x5的卷积核</span></span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">6</span>, <span class="number">5</span>)</span><br><span class="line">        self.conv2 = nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>)</span><br><span class="line">        <span class="comment"># 仿射变换: y = Wx + b</span></span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>, <span class="number">120</span>)</span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">120</span>, <span class="number">84</span>)</span><br><span class="line">        self.fc3 = nn.Linear(<span class="number">84</span>, <span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="comment"># 2x2 窗口最大池化</span></span><br><span class="line">        x = F.max_pool2d(F.relu(self.conv1(x)), (<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">        <span class="comment"># 如果 size 为正方形可以仅传个数值</span></span><br><span class="line">        x = F.max_pool2d(F.relu(self.conv2(x)), <span class="number">2</span>)</span><br><span class="line">        x = x.view(<span class="number">-1</span>, self.num_flat_features(x))</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        x = self.fc3(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">num_flat_features</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        size = x.size()[<span class="number">1</span>:]</span><br><span class="line">        num_features = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> size:</span><br><span class="line">            num_features *= s</span><br><span class="line">        <span class="keyword">return</span> num_features</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">net = Net()</span><br><span class="line"><span class="comment"># 打印出网络结构</span></span><br><span class="line">print(net)</span><br><span class="line"><span class="comment"># 用 1x1x32x32 随机 Tensor 测试</span></span><br><span class="line">input_data = torch.randn(<span class="number">1</span>, <span class="number">1</span>, <span class="number">32</span>, <span class="number">32</span>)</span><br><span class="line">out = net(input_data)</span><br><span class="line">print(out)</span><br></pre></td></tr></table></figure>
-<p>仅需要定义 <code>forward</code> 函数， <code>backward</code> 函数会在使用 <code>autograd</code> 时自动定义。可以在 <code>forward</code> 函数内使用任何 Tensor 的操作。</p>
-<p><code>net.parameters()</code> 返回模型的可学习参数(generator)，torch 会自动加偏置(bias)，参数长度会是定义的两倍</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">params = list(net.parameters())</span><br><span class="line">print(len(params))</span><br><span class="line">print(params[<span class="number">0</span>].size())</span><br></pre></td></tr></table></figure>
-<p>清零梯度缓存区，并用随机梯度进行反向传播</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.zero_grad()</span><br><span class="line">out.backward(toch.randn(<span class="number">1</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong></p>
-<p>整个 <code>torch.nn</code> 仅支持小批量样本，而非单个样本 (所以单个样本的要reshape) 。例如，<code>nn.Conv2d</code> 接收形状为 <code>nSamples x nChannels x Height x Width</code> 的4维 Tensor。如果要用单个样本，使用 <code>input.unsqueeze(0)</code> 来虚构 batch 维度。(<code>.unsqueeze()</code> 和 NumPy 的 <code>.expand_dims()</code> 类似)</p>
-<h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>损失函数接收(output, target) 对作为输入，计算评估输出与目标差多少的数值。</p>
-<p>nn包中有许多不同的损失函数。一个简单的损失：<code>nn.MSELoss</code> ，计算输入与目标的均方误差。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">output = net(input_data)</span><br><span class="line">target = torch.randn(<span class="number">10</span>)</span><br><span class="line">target = target.view(<span class="number">1</span>, <span class="number">-1</span>)</span><br><span class="line">criterion = nn.MSELoss()</span><br><span class="line"></span><br><span class="line">loss = criterion(output, target)</span><br><span class="line">print(loss)</span><br></pre></td></tr></table></figure>
-<p>如果跟踪 <code>loss</code> 的反向过程，使用它的 <code>.grad_fn</code> 属性，将会看到一张如下的计算图：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">input_data -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d</span><br><span class="line">      	   -&gt; view -&gt; linear -&gt; relu -&gt; linear -&gt; relu -&gt; linear</span><br><span class="line">      	   -&gt; MSELoss</span><br><span class="line">      	   -&gt; loss</span><br></pre></td></tr></table></figure>
-<p>当调用 <code>loss.backward()</code> ，整张图对 loss 求导，并且图所有的 <code>requires_grad=True</code> 的 Tensor 的 <code>.grad</code> 属性将累积梯度。</p>
-<h1 id="Backprop"><a href="#Backprop" class="headerlink" title="Backprop"></a>Backprop</h1><p>为了反向传播误差，仅需要调用 <code>loss.backward()</code> 。需要清空已经存在的梯度，否则梯度会累积至已经存在的梯度上。</p>
-<p>调用 <code>loss.backward()</code> ，看一下反向传播前后 conv1 的偏置的梯度。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net.zero_grad()</span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv1.bias.grad before backward'</span>)</span><br><span class="line">print(net.conv1.bias.grad)</span><br><span class="line"></span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv1.bias.grad after backward'</span>)</span><br><span class="line">print(net.conv1.bias.grad)</span><br></pre></td></tr></table></figure>
-<h1 id="Update-the-weights"><a href="#Update-the-weights" class="headerlink" title="Update the weights"></a>Update the weights</h1><p>实际使用最简单的更新规则是随机梯度下降算法(SGD)：</p>
-<center>weight = weight - learning_rate * gradient</center>
-
-<p>使用 Python 简单实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">learning_rate = <span class="number">0.01</span></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> net.parameters():</span><br><span class="line">    f.data.sub_(f.grad.data * learning_rate)</span><br></pre></td></tr></table></figure>
-<p>想使用各种更新规则诸如 SGD，Nesterov-SGD，Adam，RMSProp 等等。<code>torch.optim</code> 实现了这些方法。使用非常简单：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="comment"># 创建优化器</span></span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"><span class="comment"># 训练循环</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line">output = net(input_data)</span><br><span class="line">loss = criterion(output, target)</span><br><span class="line">loss.backward()</span><br><span class="line">optimizer.ster() <span class="comment"># 更新参数</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong>需要手动清零梯度的缓存区，因为梯度会如反向传播章节所说，会累加至已存在的梯度上。</p>
+<h1 id="Autograd-Automatic-Differentiation"><a href="#Autograd-Automatic-Differentiation" class="headerlink" title="Autograd: Automatic Differentiation"></a>Autograd: Automatic Differentiation</h1><p><code>autograd</code> 包是 <strong>PyTorch</strong> 中所有神经网络的核心。<code>autograd</code> 包为所有 Tensors 上的操作提供自动求导。这是个运行时定义的框架，这意味着反向传播是根据代码如何运行来决定的，并且每次迭代可能是不同的。</p>
+<h1 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h1><p><code>torch.Tensor</code> 是这个包的核心类。如果将它的属性 <code>.requires_grad</code> 设为 <code>True</code>，将跟踪对该 Tensor 的所有的操作。当计算完成时可以调用 <code>.backward()</code>，来自动计算所有的梯度。该 Tensor 的梯度将会自动累加至 <code>.grad</code> 属性。</p>
+<p>停止跟踪一个 Tensor ，可以调用 <code>.detach()</code> 来使之脱离跟踪历史，别阻止跟踪它将来的计算。</p>
+<p>阻止跟踪历史，你可以把代码块包在 <code>with torch.no_grad():</code> 里。这对评估一个模型时尤其有用，因为模型可能包含 <code>requires_grad=True</code> 的可训练参数，但我们不需要这些梯度。</p>
+<p>还有一个类对于自动求导实现非常有用 — <code>Function</code> 。</p>
+<p><code>Tensor</code> 和 <code>Function</code> 相互连接并且生成了一个非循环图，这个图编码了整个计算历史。每个 Tensor 都有 <code>.grad_fn</code> 属性，它引用一个创建该 Tensor 的 <code>Function</code> (除非 Tensor 是由用户创建的 — 它们的 <code>grad_fn</code> 是 <code>None</code>)。</p>
+<p>如果想计算导数，可以在 <code>Tensor</code> 上调用 <code>.backward()</code> 。如果 <code>Tensor</code> 是一个标量 (只有一个元素)，不需要为 <code>backward()</code> 指定任何参数，然而如果包含多个元素，则需为 <code>gradient</code> 参数指定一个匹配形状的 tensor。</p>
+<p>创建一个张量，并设置 <code>requires_grad=True</code> 来跟踪它的计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.ones(<span class="number">2</span>, <span class="number">2</span>, requires_grad=<span class="keyword">True</span>)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+<p>进行 Tensor 操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y = x + <span class="number">2</span></span><br><span class="line">print(y)</span><br><span class="line">print(y.grad_fn)</span><br></pre></td></tr></table></figure>
+<p><code>y</code> 由该操作的结果创建，所以它有 <code>grad_fn</code> 属性。</p>
+<p>在 <code>y</code> 上进行更多的操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">z = y * y * <span class="number">3</span></span><br><span class="line">out = z.mean()</span><br><span class="line">print(z, out)</span><br></pre></td></tr></table></figure>
+<p><code>.requires_grad_()</code> 就地改变存在的 Tensor 的<code>requires_grad</code> 标志，默认参数为 <code>False</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = torch.randn(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">a = ((a * <span class="number">3</span>) / (a <span class="number">-1</span>))</span><br><span class="line">print(a.requires_grad)</span><br><span class="line">a.requires_grad_(<span class="keyword">True</span>)</span><br><span class="line">print(a.requires_grad)</span><br><span class="line">b = (a * a).sum()</span><br><span class="line">print(b.grad_fn)</span><br></pre></td></tr></table></figure>
+<h1 id="Gradients"><a href="#Gradients" class="headerlink" title="Gradients"></a>Gradients</h1><p><code>out</code> 是一个标量，<code>out.backward()</code> 等于 <code>out.backward(torch.tensor(1.))</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out.backward()</span><br><span class="line"><span class="comment"># 打印梯度 d(out)/dx</span></span><br><span class="line">print(x.grad)</span><br></pre></td></tr></table></figure>
+<p>通常来说，<code>torch.autograd</code> 是一个计算雅克比矩阵向量积的引擎。(链式法则) 使得将外部梯度反馈至有非标量输出的模型变得非常容易。</p>
+<p>下面看一个关于雅克比矩阵的例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">3</span>, requires_grad=<span class="keyword">True</span>)</span><br><span class="line">y = x * <span class="number">2</span></span><br><span class="line"><span class="comment"># y 的范数 &lt; 1000</span></span><br><span class="line"><span class="keyword">while</span> y.data.norm() &lt; <span class="number">1000</span>:</span><br><span class="line">    y = y * <span class="number">2</span></span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
+<p><code>.data</code> 返回 <code>Tensor</code> ，<code>.norm()</code> 计算 Tensor 的范数</p>
+<p>该情况下 <code>y</code> 不再为一个标量，<code>torch.autograd</code> 不能直接计算完整的雅克比矩阵，但如果仅想得到雅克比矩阵向量积，只要向 <code>backward</code> 传递该向量即可。</p>
+<p>可以通过将代码块包裹在 <code>with torch.no_grad()</code> 里来使 autograd 停止跟踪 Tensor 的梯度历史</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(x.requires_grad)</span><br><span class="line">print((x ** <span class="number">2</span>).requires_grad)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    print((x ** <span class="number">2</span>).requires_grad)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -524,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/30/PyTorch学习笔记-2/" rel="next" title="PyTorch学习笔记(2)">
-                <i class="fa fa-chevron-left"></i> PyTorch学习笔记(2)
+              <a href="/2019/01/25/1-什么是PyTorch-What-is-PyTorch/" rel="next" title="1.什么是PyTorch (What is PyTorch)">
+                <i class="fa fa-chevron-left"></i> 1.什么是PyTorch (What is PyTorch)
               </a>
             
           </div>
@@ -533,6 +520,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/31/3-神经网络-Neural-Networks/" rel="prev" title="3.神经网络 (Neural Networks)">
+                3.神经网络 (Neural Networks) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -602,7 +593,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -685,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Neural-Networks"><span class="nav-number">1.</span> <span class="nav-text">Neural Networks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Define-the-network"><span class="nav-number">2.</span> <span class="nav-text">Define the network</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss-Function"><span class="nav-number">3.</span> <span class="nav-text">Loss Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Backprop"><span class="nav-number">4.</span> <span class="nav-text">Backprop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Update-the-weights"><span class="nav-number">5.</span> <span class="nav-text">Update the weights</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Autograd-Automatic-Differentiation"><span class="nav-number">1.</span> <span class="nav-text">Autograd: Automatic Differentiation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensor"><span class="nav-number">2.</span> <span class="nav-text">Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradients"><span class="nav-number">3.</span> <span class="nav-text">Gradients</span></a></li></ol></div>
             
 
           </div>

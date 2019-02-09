@@ -99,14 +99,14 @@
   <meta name="description" content="[TOC] What is PyTorchPyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似 Getting StartedTensors构造 5 x 3 的矩阵，不初始化: 12import torchx = torch.empty(5, 3) 构造随机初始化的矩阵 1x = torch.rand(5, 3) torch.r">
 <meta name="keywords" content="Python,PyTorch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PyTorch学习笔记(1)">
-<meta property="og:url" content="https://QWERDF007.github.io/2019/01/25/PyTorch学习笔记-1/index.html">
+<meta property="og:title" content="1.什么是PyTorch (What is PyTorch)">
+<meta property="og:url" content="https://QWERDF007.github.io/2019/01/25/1-什么是PyTorch-What-is-PyTorch/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="[TOC] What is PyTorchPyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似 Getting StartedTensors构造 5 x 3 的矩阵，不初始化: 12import torchx = torch.empty(5, 3) 构造随机初始化的矩阵 1x = torch.rand(5, 3) torch.r">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-30T10:25:58.008Z">
+<meta property="og:updated_time" content="2019-02-06T11:29:18.750Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PyTorch学习笔记(1)">
+<meta name="twitter:title" content="1.什么是PyTorch (What is PyTorch)">
 <meta name="twitter:description" content="[TOC] What is PyTorchPyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似 Getting StartedTensors构造 5 x 3 的矩阵，不初始化: 12import torchx = torch.empty(5, 3) 构造随机初始化的矩阵 1x = torch.rand(5, 3) torch.r">
 
 
@@ -114,7 +114,7 @@
 
 
 
-  <link rel="canonical" href="https://QWERDF007.github.io/2019/01/25/PyTorch学习笔记-1/">
+  <link rel="canonical" href="https://QWERDF007.github.io/2019/01/25/1-什么是PyTorch-What-is-PyTorch/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>PyTorch学习笔记(1) | QWERDF007 的博客</title>
+  <title>1.什么是PyTorch (What is PyTorch) | QWERDF007 的博客</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/01/25/PyTorch学习笔记-1/">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/01/25/1-什么是PyTorch-What-is-PyTorch/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QWERDF007">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PyTorch学习笔记(1)
+          <h1 class="post-title" itemprop="name headline">1.什么是PyTorch (What is PyTorch)
 
               
             
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-30 18:25:58" itemprop="dateModified" datetime="2019-01-30T18:25:58+08:00">2019-01-30</time>
+                <time title="Modified: 2019-02-06 19:29:18" itemprop="dateModified" datetime="2019-02-06T19:29:18+08:00">2019-02-06</time>
               
             
           </span>
@@ -416,7 +416,7 @@
 
           
           
-             <span id="/2019/01/25/PyTorch学习笔记-1/" class="leancloud_visitors" data-flag-title="PyTorch学习笔记(1)">
+             <span id="/2019/01/25/1-什么是PyTorch-What-is-PyTorch/" class="leancloud_visitors" data-flag-title="1.什么是PyTorch (What is PyTorch)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -469,7 +469,7 @@
 <p>参数 – 输出 Tensor</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = touch.empty(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line">torch.add(x, y, out=result)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
 <p>任何调整 Tensor 的操作都可以用相应名称+后缀 “_” 替代，例如: <code>x.copy()</code> ，<code>x.t()</code></p>
-<p>可以用类似标注 NumPy 索引</p>
+<p>与 NumPy 类似的索引操作</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(x[:, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
 <p>想要 resize/reshape Tensor，可以用 <code>torch.view()</code>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">y = x.view(<span class="number">16</span>)</span><br><span class="line">z = x.view(<span class="number">-1</span>, <span class="number">8</span>) <span class="comment"># size -1 将由其他维度推测出</span></span><br></pre></td></tr></table></figure>
@@ -527,8 +527,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/30/PyTorch学习笔记-2/" rel="prev" title="PyTorch学习笔记(2)">
-                PyTorch学习笔记(2) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/30/2-自动求导-Automatic-Differentiation/" rel="prev" title="2.自动求导 (Automatic Differentiation)">
+                2.自动求导 (Automatic Differentiation) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -599,7 +599,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

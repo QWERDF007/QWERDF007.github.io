@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="[TOC] What is torch.nn really?PyTorch 提供许多优雅的模块，如 torch.nn，torch.optim，Dataset，DataLoader等，来协助创建和训练网络。为了充分利用这些来解决问题，需要真正地理解它们到底在做些啥。首先，先不用这些模块的任何功能，在 MNIST 数据上训练一个基础的神经网络，一开始仅用 PyTorch 的最基本的 Tensor 函数">
+<meta name="keywords" content="Python,PyTorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.torch.nn是啥 (What is torch.nn really)">
+<meta property="og:url" content="https://QWERDF007.github.io/2019/02/13/9-torch-nn是啥-What-is-torch-nn-really/index.html">
+<meta property="og:site_name" content="QWERDF007 的博客">
+<meta property="og:description" content="[TOC] What is torch.nn really?PyTorch 提供许多优雅的模块，如 torch.nn，torch.optim，Dataset，DataLoader等，来协助创建和训练网络。为了充分利用这些来解决问题，需要真正地理解它们到底在做些啥。首先，先不用这些模块的任何功能，在 MNIST 数据上训练一个基础的神经网络，一开始仅用 PyTorch 的最基本的 Tensor 函数">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-15T14:42:34.891Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9.torch.nn是啥 (What is torch.nn really)">
+<meta name="twitter:description" content="[TOC] What is torch.nn really?PyTorch 提供许多优雅的模块，如 torch.nn，torch.optim，Dataset，DataLoader等，来协助创建和训练网络。为了充分利用这些来解决问题，需要真正地理解它们到底在做些啥。首先，先不用这些模块的任何功能，在 MNIST 数据上训练一个基础的神经网络，一开始仅用 PyTorch 的最基本的 Tensor 函数">
+
+
+
+
+
+
+  <link rel="canonical" href="https://QWERDF007.github.io/2019/02/13/9-torch-nn是啥-What-is-torch-nn-really/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>9.torch.nn是啥 (What is torch.nn really) | QWERDF007 的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <!--GitHub-start-->
+    <a href="https://github.com/QWERDF007" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <!--GitHub-end-->
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QWERDF007 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/02/13/9-torch-nn是啥-What-is-torch-nn-really/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QWERDF007">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QWERDF007 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">9.torch.nn是啥 (What is torch.nn really)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-13 19:48:15" itemprop="dateCreated datePublished" datetime="2019-02-13T19:48:15+08:00">2019-02-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-15 22:42:34" itemprop="dateModified" datetime="2019-02-15T22:42:34+08:00">2019-02-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PyTorch学习笔记/" itemprop="url" rel="index"><span itemprop="name">PyTorch学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/13/9-torch-nn是啥-What-is-torch-nn-really/" class="leancloud_visitors" data-flag-title="9.torch.nn是啥 (What is torch.nn really)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="What-is-torch-nn-really"><a href="#What-is-torch-nn-really" class="headerlink" title="What is torch.nn really?"></a>What is torch.nn really?</h1><p>PyTorch 提供许多优雅的模块，如 <code>torch.nn</code>，<code>torch.optim</code>，<code>Dataset</code>，<code>DataLoader</code>等，来协助创建和训练网络。为了充分利用这些来解决问题，需要真正地理解它们到底在做些啥。首先，先不用这些模块的任何功能，在 MNIST 数据上训练一个基础的神经网络，一开始仅用 PyTorch 的最基本的 Tensor 函数。然后，逐步添加这些模块的功能，精确地展示每一块完成什么，并如何工作使得代码更加简介，灵活。</p>
+<h1 id="MNIST-data-setup"><a href="#MNIST-data-setup" class="headerlink" title="MNIST data setup"></a>MNIST data setup</h1><p>使用 <code>pathlib</code> 处理路径，使用 <code>requests</code> 下载数据。仅在使用模块时才导入它们，这样就可以明确知道每个点用了什么。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">DATA_PATH = Path(<span class="string">'data'</span>)</span><br><span class="line">PATH = DATA_PATH / <span class="string">'mnist'</span></span><br><span class="line"></span><br><span class="line">PATH.mkdir(parents=<span class="keyword">True</span>, exist_ok=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">URL = <span class="string">'http://deeplearning.net/data/mnist/'</span></span><br><span class="line">FILENAME = <span class="string">'mnist.pkl.gz'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (PATH / FILENAME).exists():</span><br><span class="line">    content = requests.get(URL + FILENAME).content</span><br><span class="line">    (PATH / FILENAME).open(<span class="string">'wb'</span>).write(content)</span><br></pre></td></tr></table></figure>
+<p><code>pathlib</code> 提供表示文件系统路径的类，其语义适合各种操作系统。分成两类，一类是 pure paths，纯粹的计算操作没有 I/O，另一类是 concrete paths，继承自 pure paths 但提供 I/O 操作。</p>
+<p>该数据集是 NumPy 数组格式，使用一种特殊的 Python 序列化数据格式 <code>pickle</code> 存储的。使用 <code>gzip</code> 来打开。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> gzip.open((PATH / FILENAME).as_posix(), <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ((x_train, y_train), (x_valid, y_valid), _) = \</span><br><span class="line">        pickle.load(f, encoding=<span class="string">'latin-1'</span>)</span><br></pre></td></tr></table></figure>
+<p>每张图像是28x28像素大小的，被存储为扁平的一行，长度为784。可视化需要将其 reshape 为2维的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot</span><br><span class="line"></span><br><span class="line">print(x_train.shape)</span><br><span class="line">pyplot.imshow(x_train[<span class="number">0</span>].reshape((<span class="number">28</span>, <span class="number">28</span>)), cmap=<span class="string">'gray'</span>)</span><br><span class="line">pyplot.show()</span><br></pre></td></tr></table></figure>
+<p>PyTorch 使用  <code>torch.tensor</code> 而不是 NumPy 数组，因此需要转换数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x_train, y_train, x_valid, y_valid = map(</span><br><span class="line">    torch.tensor, (x_train, y_train, x_valid, y_valid)</span><br><span class="line">)</span><br><span class="line">n, c = x_train.shape</span><br><span class="line">print(x_train, y_train)</span><br><span class="line">print(x_train.shape)</span><br><span class="line">print(y_train.min(), y_train.max())</span><br></pre></td></tr></table></figure>
+<h1 id="Neural-net-from-scratch-no-torch-nn"><a href="#Neural-net-from-scratch-no-torch-nn" class="headerlink" title="Neural net from scratch (no torch.nn)"></a>Neural net from scratch (no torch.nn)</h1><p>首先使用 PyTorch Tensor 运算来创建一个模型。PyTorch 提供方法创建随机或零填充的 Tensors，将用这些来为线性模型创建权重和偏置。这些就是普通的 Tensor，仅有一项特殊的附加项：告知 PyTorch 它们需要梯度。这使得 PyTorch 记录 Tensor 上的运算，这样就能在反向传播期间自动计算梯度。</p>
+<p>在权重初始化后，通过带下划线的 <code>requires_grad_()</code> 设置 <code>requires_grad</code>。(下划线在 PyTorch 中标志运算就地执行)，使用 Xavier 初始化权重，乘上 1/sqrt(n)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">weights = torch.randn(<span class="number">784</span>, <span class="number">10</span>) / math.sqrt(<span class="number">784</span>)</span><br><span class="line">weights.requires_grad_() <span class="comment"># 默认 requires_grad 为 True</span></span><br><span class="line">bias = torch.zeros(<span class="number">10</span>, requires_grad=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>由于 PyTorch 能够自动计算梯度，因此可以使用标准的 Python 函数(或者可调用对象)作为模型。编写一个简单的矩阵相乘和广播加法来创建一个简单的线性模型。还需要激活函数，因此编写 log_softmax 并使用它。尽管 PyTorch 提供了许多预先写好的损失函数，激活函数等等，但是可以使用简单的 Python 轻松地编写自己的函数。PyTorch 甚至会自动地为创建快速的 GPU 或者向量化的 CPU 代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log_softmax</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="comment"># 对最后一个维度求和，unsqueeze 表示在指定位置插入一个维度</span></span><br><span class="line">    <span class="keyword">return</span> x - x.exp().sum(<span class="number">-1</span>).log().unsqueeze(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(xb)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> log_softmax(xb @ weights + bias)</span><br></pre></td></tr></table></figure>
+<p>上述代码中，<code>@</code> 表示点乘运算。在一批数据上调用这些函数(该情况为64张图像)。这是前向传播的一部分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">batch_size = <span class="number">64</span></span><br><span class="line">xb = x_train[<span class="number">0</span>:batch_size]</span><br><span class="line">preds = model(xb)</span><br><span class="line">print(preds[<span class="number">0</span>], preds.shape)</span><br></pre></td></tr></table></figure>
+<p><code>preds</code> 中不仅包含了 Tensors 数值，还包含了梯度函数，稍后将使用这些函数进行反向传播。实现负对数似然函数来作为损失函数(仍然仅用标准的 Python)，然后用上面的随机模型来查看一下损失，稍后就可以看到在反向传播后是否有所提升。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nll</span><span class="params">(inputs, target)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> -inputs[range(target.shape[<span class="number">0</span>]), target].mean()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">loss_func = nll</span><br><span class="line">yb = y_train[<span class="number">0</span>:batch_size]</span><br><span class="line">print(loss_func(preds, yb))</span><br></pre></td></tr></table></figure>
+<p>同时也实现一个函数来计算模型的准确率，如果最大值的索引匹配目标值，则预测是正确的。并查看一下上面的随机模型的准确率。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accuracy</span><span class="params">(out, yb)</span>:</span></span><br><span class="line">    preds = torch.argmax(out, dim=<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> (preds == yb).float().mean()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(accuracy(preds, yb))</span><br></pre></td></tr></table></figure>
+<p>现在可以运行训练循环。每次迭代都将：</p>
+<ul>
+<li>选择小批次数据(大小为 <code>batch_size</code> )</li>
+<li>使用模型作预测</li>
+<li>计算损失</li>
+<li><code>loss.backward()</code> 更新模型的梯度</li>
+</ul>
+<p>现在使用这些梯度来更新 <code>weights</code> 和 <code>bias</code>。在 <code>torch.no_grad()</code> 上下文管理器中做这些，因为不需要为下次梯度计算来记录这次的更新参数行为。之后将这些梯度置零，准备下一循环。否则，梯度将记录所发生的所有运算(无论已经存储了什么，<code>loss.backward()</code> 都会叠加梯度，而不是覆盖它们)</p>
+<p>可以使用标准的 Python 调试器来单步调试 PyTorch 代码，在每一步检查变量值。取消注释 <code>set_trace()</code> 来尝试。迭代后损失应该降低，准确率上升。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.debugger <span class="keyword">import</span> set_trace</span><br><span class="line"></span><br><span class="line">lr = <span class="number">0.5</span>  <span class="comment"># 学习率</span></span><br><span class="line">epochs = <span class="number">2</span>  <span class="comment"># 训练多少轮</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range((n - <span class="number">1</span>) // batch_size + <span class="number">1</span>):</span><br><span class="line">        <span class="comment"># set_trace()</span></span><br><span class="line">        start_i = i * batch_size</span><br><span class="line">        end_i = start_i + batch_size</span><br><span class="line">        xb = x_train[start_i:end_i]</span><br><span class="line">        yb = y_train[start_i:end_i]</span><br><span class="line">        pred = model(xb)</span><br><span class="line">        loss = loss_func(pred, yb)</span><br><span class="line"></span><br><span class="line">        loss.backward()</span><br><span class="line">        <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">            weights -= weights.grad * lr</span><br><span class="line">            bias -= bias.grad * lr</span><br><span class="line">            weights.grad.zero_()</span><br><span class="line">            bias.grad.zero_()</span><br><span class="line"></span><br><span class="line">print(loss_func(model(xb), yb), accuracy(model(xb), yb))</span><br></pre></td></tr></table></figure>
+<h1 id="Using-torch-nn-functional"><a href="#Using-torch-nn-functional" class="headerlink" title="Using torch.nn.functional"></a>Using torch.nn.functional</h1><p>使用 PyTorch 的 <code>nn</code> 类重构之前的代码，使得代码更加简介和灵活。第一步也是最简单的一步就是使用 <code>torch.nn.functional</code> (通常按照约定导入为命名空间 <code>F</code> )的函数重构之前手撸的激活函数和损失函数。这个模块包含 <code>torch.nn</code> 库中所有的函数(该库剩余的部分包含类)。该库不仅有许多损失和激活函数，还有一些实用的函数，例如池化函数。(还有些函数用来做卷积，线性层等等，但这些通常用 <code>torch.nn</code> 库来做更好)</p>
+<p>如果使用负对数似然损失函数和 log softmax 激活函数，PyTorch 提供一个单独的函数 <code>F.cross_entropy</code> 来组合它们。下面使用它们来定义模型，并查看一下损失和准确率。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">loss_func = F.cross_entropy</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(xb)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> xb @ weights + bias</span><br><span class="line"></span><br><span class="line">print(loss_func(model(xb), yb), accuracy(model(xb), yb))</span><br></pre></td></tr></table></figure>
+<h1 id="Refactor-using-nn-Module"><a href="#Refactor-using-nn-Module" class="headerlink" title="Refactor using nn.Module"></a>Refactor using nn.Module</h1><p>使用 <code>nn.Module</code> 和 <code>nn.Parameter</code> 以获得更清晰和更简洁的训练循环。继承 <code>nn.Module</code> 实现子类(能够跟踪状态)。<code>nn.Module</code> 有许多的属性和方法(例如 <code>.parameters()</code> 和 <code>.zero_grad()</code> )可以使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mnist_Logistic</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.weights = nn.Parameter(torch.randn(<span class="number">784</span>, <span class="number">10</span>) / math.sqrt(<span class="number">784</span>))</span><br><span class="line">        self.bias = nn.Parameter(torch.zeros(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, xb)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> xb @ self.weights + self.bias</span><br><span class="line"></span><br><span class="line">model = Mnist_Logistic()</span><br></pre></td></tr></table></figure>
+<p><code>nn.Module</code> 对象被当做函数来使用，但 PyTorch 会在后台自动地调用定义的 <code>forward</code> 方法。还是跟以前一样计算损失。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(loss_func(model(xb), yb))</span><br></pre></td></tr></table></figure>
+<p>现在可以使用 <code>model.parameters()</code> 和 <code>model.zero_grad()</code> (都是由 PyTorch 为 <code>nn.Module</code> 定义的)使得更新参数更加简洁，并且更不容易忘记一些参数，尤其是对于复杂模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> model.parameters():</span><br><span class="line">        p -= p.grad * lr</span><br><span class="line">    model.zero_grad()</span><br></pre></td></tr></table></figure>
+<p>将训练循环包装在 <code>fit</code> 函数内：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range((n - <span class="number">1</span>) // batch_size - <span class="number">1</span>):</span><br><span class="line">            start_i = i * batch_size</span><br><span class="line">            end_i = start_i + batch_size</span><br><span class="line">            xb = x_train[start_i:end_i]</span><br><span class="line">            yb = y_train[start_i:end_i]</span><br><span class="line">            pred = model(xb)</span><br><span class="line">            loss = loss_func(pred, yb)</span><br><span class="line"></span><br><span class="line">            loss.backward()</span><br><span class="line">            <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">                <span class="keyword">for</span> p <span class="keyword">in</span> model.parameters():</span><br><span class="line">                    p -= p.grad * lr</span><br><span class="line">                model.zero_grad()</span><br><span class="line"></span><br><span class="line">fit()</span><br><span class="line">print(loss_func(model(xb), yb))</span><br></pre></td></tr></table></figure>
+<h1 id="Refactor-using-nn-Linear"><a href="#Refactor-using-nn-Linear" class="headerlink" title="Refactor using nn.Linear"></a>Refactor using nn.Linear</h1>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/11/8-保存和加载模型-Saving-and-Loading-Models/" rel="next" title="8.保存和加载模型 (Saving and Loading Models)">
+                <i class="fa fa-chevron-left"></i> 8.保存和加载模型 (Saving and Loading Models)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QWERDF007</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/QWERDF007" title="GitHub &rarr; https://github.com/QWERDF007" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-torch-nn-really"><span class="nav-number">1.</span> <span class="nav-text">What is torch.nn really?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MNIST-data-setup"><span class="nav-number">2.</span> <span class="nav-text">MNIST data setup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Neural-net-from-scratch-no-torch-nn"><span class="nav-number">3.</span> <span class="nav-text">Neural net from scratch (no torch.nn)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Using-torch-nn-functional"><span class="nav-number">4.</span> <span class="nav-text">Using torch.nn.functional</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Refactor-using-nn-Module"><span class="nav-number">5.</span> <span class="nav-text">Refactor using nn.Module</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Refactor-using-nn-Linear"><span class="nav-number">6.</span> <span class="nav-text">Refactor using nn.Linear</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QWERDF007</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "Krm9HI5SLyUYN5cnLvBfPp6C-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "Krm9HI5SLyUYN5cnLvBfPp6C-gzGzoHsz",
+                'X-LC-Key': "787aFD6m4QVDw9BhnJTF05E0",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

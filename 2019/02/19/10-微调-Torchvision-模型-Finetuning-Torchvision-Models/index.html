@@ -96,21 +96,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://QWERDF007.github.io/tags/index.html">
+  <meta name="description" content="[TOC] Finetuning Torchvision Models了解如何对 torchvision 的模型进行微调和特征提取，这些模型都已经在1000类 Imagenet 数据集上预训练过。深入了解如何运用几个现代的 CNN 结构，并将建立微调任意 PyTorch 模型的直觉。由于每个模型结构不同，因此没有可以在所有场景都能工作的微调模板代码。相反，必须查看现有的体系结构，并调整每个模型。">
+<meta name="keywords" content="Python,PyTorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10.微调 Torchvision 模型 (Finetuning Torchvision Models)">
+<meta property="og:url" content="https://QWERDF007.github.io/2019/02/19/10-微调-Torchvision-模型-Finetuning-Torchvision-Models/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
+<meta property="og:description" content="[TOC] Finetuning Torchvision Models了解如何对 torchvision 的模型进行微调和特征提取，这些模型都已经在1000类 Imagenet 数据集上预训练过。深入了解如何运用几个现代的 CNN 结构，并将建立微调任意 PyTorch 模型的直觉。由于每个模型结构不同，因此没有可以在所有场景都能工作的微调模板代码。相反，必须查看现有的体系结构，并调整每个模型。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-18T13:20:36.922Z">
+<meta property="og:updated_time" content="2019-02-19T13:07:57.757Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="10.微调 Torchvision 模型 (Finetuning Torchvision Models)">
+<meta name="twitter:description" content="[TOC] Finetuning Torchvision Models了解如何对 torchvision 的模型进行微调和特征提取，这些模型都已经在1000类 Imagenet 数据集上预训练过。深入了解如何运用几个现代的 CNN 结构，并将建立微调任意 PyTorch 模型的直觉。由于每个模型结构不同，因此没有可以在所有场景都能工作的微调模板代码。相反，必须查看现有的体系结构，并调整每个模型。">
 
 
 
 
 
 
-  <link rel="canonical" href="https://QWERDF007.github.io/tags/">
+  <link rel="canonical" href="https://QWERDF007.github.io/2019/02/19/10-微调-Torchvision-模型-Finetuning-Torchvision-Models/">
 
 
 
@@ -120,7 +124,7 @@
   };
 </script>
 
-  <title>tags | QWERDF007 的博客</title>
+  <title>10.微调 Torchvision 模型 (Finetuning Torchvision Models) | QWERDF007 的博客</title>
   
 
 
@@ -225,7 +229,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -301,99 +305,211 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/02/19/10-微调-Torchvision-模型-Finetuning-Torchvision-Models/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QWERDF007">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QWERDF007 的博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">tags
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
+          <h1 class="post-title" itemprop="name headline">10.微调 Torchvision 模型 (Finetuning Torchvision Models)
+
               
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-              5 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Linux/" style="font-size: 12px; color: #ccc">Linux</a> <a href="/tags/NVIDIA/" style="font-size: 12px; color: #ccc">NVIDIA</a> <a href="/tags/PyTorch/" style="font-size: 30px; color: #111">PyTorch</a> <a href="/tags/Python/" style="font-size: 30px; color: #111">Python</a> <a href="/tags/Ubuntu/" style="font-size: 12px; color: #ccc">Ubuntu</a>
-            </div>
-          </div>
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-19 21:05:20 / Modified: 21:07:57" itemprop="dateCreated datePublished" datetime="2019-02-19T21:05:20+08:00">2019-02-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PyTorch学习笔记/" itemprop="url" rel="index"><span itemprop="name">PyTorch学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/19/10-微调-Torchvision-模型-Finetuning-Torchvision-Models/" class="leancloud_visitors" data-flag-title="10.微调 Torchvision 模型 (Finetuning Torchvision Models)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>[TOC]</p>
+<h1 id="Finetuning-Torchvision-Models"><a href="#Finetuning-Torchvision-Models" class="headerlink" title="Finetuning Torchvision Models"></a>Finetuning Torchvision Models</h1><p>了解如何对 torchvision 的模型进行微调和特征提取，这些模型都已经在1000类 Imagenet 数据集上预训练过。深入了解如何运用几个现代的 CNN 结构，并将建立微调任意 PyTorch 模型的直觉。由于每个模型结构不同，因此没有可以在所有场景都能工作的微调模板代码。相反，必须查看现有的体系结构，并调整每个模型。</p>
+<p>微调，由预训练的模型开始，并为新任务更新模型的全部参数；特征提取，由预训练的模型开始，仅更新最后的层的权重，由该层得到预测值。它之所以叫特征提取，是因为使用预训练的 CNN 作为固定的特征提取器，并且仅修改输出层。</p>
+<p>两种迁移学习的方法都遵循下面的步骤：</p>
+<ul>
+<li>初始化预训练的模型</li>
+<li>改变最后一层的大小来获取与新数据集类别数量相同的输出</li>
+<li>定义优化算法，在训练过程更新相应的参数</li>
+<li>运行训练步骤</li>
+</ul>
+<p>先导入一些要用到的库，输出 PyTorch 和 torchvision 的版本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> datasets, models, transforms</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">print(<span class="string">'PyTorch Version:'</span>, torch.__version__)</span><br><span class="line">print(<span class="string">'Torchvision Version:'</span>, torchvision.__version__)</span><br></pre></td></tr></table></figure>
+<h1 id="Inputs"><a href="#Inputs" class="headerlink" title="Inputs"></a>Inputs</h1><p>将使用 _hymenoptera_data_ 数据集，它包含两类，蜜蜂和蚂蚁，并且是结构化的，因此可以使用 <code>ImageFolder</code> 类来处理。下面是运行时需要修改的参数。</p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/19/Linux安装NVIDIA驱动-CUDA和cuDNN/" rel="next" title="Linux安装NVIDIA驱动,CUDA和cuDNN">
+                <i class="fa fa-chevron-left"></i> Linux安装NVIDIA驱动,CUDA和cuDNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -423,8 +539,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -519,6 +644,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Finetuning-Torchvision-Models"><span class="nav-number">1.</span> <span class="nav-text">Finetuning Torchvision Models</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inputs"><span class="nav-number">2.</span> <span class="nav-text">Inputs</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -687,43 +829,42 @@
   
   <script>
     
-    function showTime(Counter) {
-      var entries = [];
+    function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
         .done(function ({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
           }
         })
-        .fail(function ({ responseJSON }) {
-          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
-        });
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
     }
     
 
@@ -743,9 +884,7 @@
             });
           };
           
-          if ($('.post-title-link').length >= 1) {
-            showTime(Counter);
-          }
+          addCount(Counter);
           
         })
     });

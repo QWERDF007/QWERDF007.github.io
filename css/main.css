@@ -1889,7 +1889,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff1;
+  background: #c39df2;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3200,7 +3200,7 @@ ul.breadcrumb li+li:last-child {
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
 body {
-  background: url("/images/city.jpg");
+  background: url("../../../images/city.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;

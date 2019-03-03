@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="[TOC] CUDA 安装前准备 验证是否有支持的GPU 验证系统是否是受支持版本 验证是否已安装gcc 验证是否安装相应的内核头文件和开发包 下载 NVIDIA 驱动 下载 CUDA 和 cuDNN 工具包  验证 GPU1lspci | grep -i nvidia http://developer.nvidia.com/cuda-gpus 中列出了受支持的 GPU 验证 Linux 系统CU">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-19T14:06:22.385Z">
+<meta property="og:updated_time" content="2019-03-03T05:18:18.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux安装NVIDIA驱动,CUDA和cuDNN">
 <meta name="twitter:description" content="[TOC] CUDA 安装前准备 验证是否有支持的GPU 验证系统是否是受支持版本 验证是否已安装gcc 验证是否安装相应的内核头文件和开发包 下载 NVIDIA 驱动 下载 CUDA 和 cuDNN 工具包  验证 GPU1lspci | grep -i nvidia http://developer.nvidia.com/cuda-gpus 中列出了受支持的 GPU 验证 Linux 系统CU">
@@ -368,12 +368,24 @@
                 
               
 
-              <time title="Created: 2019-02-19 21:00:51 / Modified: 22:06:22" itemprop="dateCreated datePublished" datetime="2019-02-19T21:00:51+08:00">2019-02-19</time>
+              <time title="Created: 2019-02-19 21:00:51" itemprop="dateCreated datePublished" datetime="2019-02-19T21:00:51+08:00">2019-02-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-03 13:18:18" itemprop="dateModified" datetime="2019-03-03T13:18:18+08:00">2019-03-03</time>
               
             
           </span>
@@ -465,17 +477,7 @@
 <h2 id="下载-NVIDIA-驱动"><a href="#下载-NVIDIA-驱动" class="headerlink" title="下载 NVIDIA 驱动"></a>下载 NVIDIA 驱动</h2><p>单独安装驱动，而不要安装 CUDA 附带的驱动，建议下载runfile。<br>下载地址：<a href="https://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" rel="noopener">https://www.nvidia.com/Download/index.aspx?lang=en-us</a></p>
 <h2 id="下载-CUDA-和-cuDNN-工具包"><a href="#下载-CUDA-和-cuDNN-工具包" class="headerlink" title="下载 CUDA 和 cuDNN 工具包"></a>下载 CUDA 和 cuDNN 工具包</h2><p>建议下载 runfile(.run 文件)，这里以 <strong>CUDA 10</strong> 为例<br>CUDA 下载地址：<a href="http://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">http://developer.nvidia.com/cuda-downloads</a><br>cuDNN 下载地址：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>先单独安装驱动，再安装 CUDA 和 cudnn。runfile (.run 文件) 通过交互式文本界面安装 NVIDIA 驱动，CUDA 和 CUDA 示例。使用 root 执行安装程序，而不要在安装期间使用权限提升。</p>
-<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><ol>
-<li><a href="#1.执行安装前准备">执行安装前准备</a></li>
-<li><a href="#2.关闭 Nouveau 驱动">关闭 Nouveau 驱动</a></li>
-<li><a href="#3.设备节点验证">设备节点验证</a></li>
-<li><a href="#4.重启进入文本模式">重启进入文本模式</a></li>
-<li><a href="#5.安装 NVIDIA 驱动">安装 NVIDIA 驱动</a></li>
-<li><a href="#6.安装 CUDA">安装 CUDA</a></li>
-<li><a href="#7.安装 cuDNN">安装 cuDNN</a></li>
-<li><a href="#8.执行安装后准备">执行安装后准备</a></li>
-</ol>
-<h3 id="1-执行安装前准备"><a href="#1-执行安装前准备" class="headerlink" title="1.执行安装前准备"></a>1.执行安装前准备</h3><p>按上面的 CUDA 安装前准备进行</p>
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="1-执行安装前准备"><a href="#1-执行安装前准备" class="headerlink" title="1.执行安装前准备"></a>1.执行安装前准备</h3><p>按上面的 CUDA 安装前准备进行</p>
 <h3 id="2-关闭-Nouveau-驱动"><a href="#2-关闭-Nouveau-驱动" class="headerlink" title="2.关闭 Nouveau 驱动"></a>2.关闭 Nouveau 驱动</h3><p>安装 NVIDIA 显卡驱动，首先得关闭 Nouveau 驱动，如果执行下面的命令，有输出则说明 Nouveau 驱动被加载</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></table></figure>
 <p><strong>Ubuntu</strong>：</p>
@@ -513,6 +515,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init 3</span><br></pre></td></tr></table></figure>
 <h3 id="5-安装-NVIDIA-驱动"><a href="#5-安装-NVIDIA-驱动" class="headerlink" title="5.安装 NVIDIA 驱动"></a>5.安装 NVIDIA 驱动</h3><p>运行下面的指令安装驱动：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh NVIDIA-Linux-x86_64-410.93.run</span><br></pre></td></tr></table></figure>
+<p>或者通过 chmod 修改权限，直接在终端运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x NVIDIA-Linux-x86_64-410.93.run</span><br><span class="line">./NVIDIA-Linux-x86_64-410.93.run</span><br></pre></td></tr></table></figure>
 <p>然后巴拉巴拉一顿安装，安装完可能会出现黑屏或者无限登录的情况，网上有多种解决方案：</p>
 <ol>
 <li><p>安装的时候加参数</p>
@@ -538,6 +542,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash acpi_osi=linux&quot;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<p><strong>注意：</strong>安装过程可能会提示是否要用 NVIDIA 的 xconfig 覆盖，如果用 N 卡作为显示卡，则选择覆盖。</p>
 <h3 id="6-安装-CUDA"><a href="#6-安装-CUDA" class="headerlink" title="6.安装 CUDA"></a>6.安装 CUDA</h3><p>运行下面的命令安装 CUDA，并按照指示进行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh cuda_10.0.130_410.48_linux.run</span><br></pre></td></tr></table></figure>
 <p>这里如果不是 root 用户可能会提示权限不够，建议使用 root 用户安装，或者使用 <strong>sudo</strong> 提升权限。注意先前已经安装了驱动，因此不要安装 CUDA 附带的驱动。</p>

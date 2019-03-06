@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="[TOC] What is torch.nn really?PyTorch 提供许多优雅的模块，如 torch.nn，torch.optim，Dataset，DataLoader等，来协助创建和训练网络。为了充分利用这些来解决问题，需要真正地理解它们到底在做些啥。首先，先不用这些模块的任何功能，在 MNIST 数据上训练一个基础的神经网络，一开始仅用 PyTorch 的最基本的 Tensor 函数">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-19T13:06:59.483Z">
+<meta property="og:updated_time" content="2019-03-06T15:18:16.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="9.torch.nn是啥 (What is torch.nn really)">
 <meta name="twitter:description" content="[TOC] What is torch.nn really?PyTorch 提供许多优雅的模块，如 torch.nn，torch.optim，Dataset，DataLoader等，来协助创建和训练网络。为了充分利用这些来解决问题，需要真正地理解它们到底在做些啥。首先，先不用这些模块的任何功能，在 MNIST 数据上训练一个基础的神经网络，一开始仅用 PyTorch 的最基本的 Tensor 函数">
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-19 21:06:59" itemprop="dateModified" datetime="2019-02-19T21:06:59+08:00">2019-02-19</time>
+                <time title="Modified: 2019-03-06 23:18:16" itemprop="dateModified" datetime="2019-03-06T23:18:16+08:00">2019-03-06</time>
               
             
           </span>
@@ -451,8 +451,7 @@
 <h1 id="What-is-torch-nn-really"><a href="#What-is-torch-nn-really" class="headerlink" title="What is torch.nn really?"></a>What is torch.nn really?</h1><p>PyTorch 提供许多优雅的模块，如 <code>torch.nn</code>，<code>torch.optim</code>，<code>Dataset</code>，<code>DataLoader</code>等，来协助创建和训练网络。为了充分利用这些来解决问题，需要真正地理解它们到底在做些啥。首先，先不用这些模块的任何功能，在 MNIST 数据上训练一个基础的神经网络，一开始仅用 PyTorch 的最基本的 Tensor 函数。然后，逐步添加这些模块的功能，精确地展示每一块完成什么，并如何工作使得代码更加简介，灵活。</p>
 <h1 id="MNIST-data-setup"><a href="#MNIST-data-setup" class="headerlink" title="MNIST data setup"></a>MNIST data setup</h1><p>使用 <code>pathlib</code> 处理路径，使用 <code>requests</code> 下载数据。仅在使用模块时才导入它们，这样就可以明确知道每个点用了什么。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">DATA_PATH = Path(<span class="string">'data'</span>)</span><br><span class="line">PATH = DATA_PATH / <span class="string">'mnist'</span></span><br><span class="line"></span><br><span class="line">PATH.mkdir(parents=<span class="keyword">True</span>, exist_ok=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">URL = <span class="string">'http://deeplearning.net/data/mnist/'</span></span><br><span class="line">FILENAME = <span class="string">'mnist.pkl.gz'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (PATH / FILENAME).exists():</span><br><span class="line">    content = requests.get(URL + FILENAME).content</span><br><span class="line">    (PATH / FILENAME).open(<span class="string">'wb'</span>).write(content)</span><br></pre></td></tr></table></figure>
-<p><code>pathlib</code> 提供表示文件系统路径的类，其语义适合各种操作系统。分成两类，一类是 pure paths，纯粹的计算操作没有 I/O，另一类是 concrete paths，继承自 pure paths 但提供 I/O 操作。</p>
-<p>该数据集是 NumPy 数组格式，使用一种特殊的 Python 序列化数据格式 <code>pickle</code> 存储的。使用 <code>gzip</code> 来打开。</p>
+<p><code>pathlib</code> 提供表示文件系统路径的类，其语义适合各种操作系统。分成两类，一类是 pure paths，纯粹的计算操作没有 I/O，另一类是 concrete paths，继承自 pure paths 但提供 I/O 操作。<br>该数据集是 NumPy 数组格式，使用一种特殊的 Python 序列化数据格式 <code>pickle</code> 存储的。使用 <code>gzip</code> 来打开。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> gzip.open((PATH / FILENAME).as_posix(), <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ((x_train, y_train), (x_valid, y_valid), _) = \</span><br><span class="line">        pickle.load(f, encoding=<span class="string">'latin-1'</span>)</span><br></pre></td></tr></table></figure>
 <p>每张图像是28x28像素大小的，被存储为扁平的一行，长度为784。可视化需要将其 reshape 为2维的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot</span><br><span class="line"></span><br><span class="line">print(x_train.shape)</span><br><span class="line">pyplot.imshow(x_train[<span class="number">0</span>].reshape((<span class="number">28</span>, <span class="number">28</span>)), cmap=<span class="string">'gray'</span>)</span><br><span class="line">pyplot.show()</span><br></pre></td></tr></table></figure>
@@ -671,7 +670,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

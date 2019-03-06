@@ -321,6 +321,189 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/03/06/13-对抗实例生成-Adversarial-Example-Generation/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QWERDF007">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QWERDF007 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/06/13-对抗实例生成-Adversarial-Example-Generation/" class="post-title-link" itemprop="url">13.对抗实例生成 (Adversarial Example Generation)</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-06 22:46:47 / Modified: 22:48:15" itemprop="dateCreated datePublished" datetime="2019-03-06T22:46:47+08:00">2019-03-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PyTorch学习笔记/" itemprop="url" rel="index"><span itemprop="name">PyTorch学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/06/13-对抗实例生成-Adversarial-Example-Generation/" class="leancloud_visitors" data-flag-title="13.对抗实例生成 (Adversarial Example Generation)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              [TOC]
+Adversarial Example Generation研究正在不断地推动 ML 模型更快，更准和更有效。然而，设计和训练模型时经常会忽略模型的安全性和鲁棒性，特别在面对想欺骗模型的对手时。下面将提高关于 ML 模型的安全漏洞的认知，并深入了解对抗机器学习这一热门话题。在图像中添加细微的扰动就可能导致模型性能的巨大差异。通过一个图像分类器上的例子来探索该主题。使用第一个也是最流行的攻击方法之一，快速梯度符号攻击(FGSM)，来欺骗 MNIST 分类器。
+Threat Model对于上下文，有多种分类的对抗攻击，每种都有不同的目标和对攻击者知识的假设。无论如何，首要目标是添加最少
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/06/13-对抗实例生成-Adversarial-Example-Generation/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/03/04/12-使用-PyTorch-神经风格迁移-Neural-Transfer-Using-PyTorch/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1152,7 +1335,7 @@ x86_64DISTRIB_ID=UbuntuDISTRIB_
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-19 21:06:59" itemprop="dateModified" datetime="2019-02-19T21:06:59+08:00">2019-02-19</time>
+                <time title="Modified: 2019-03-06 23:18:16" itemprop="dateModified" datetime="2019-03-06T23:18:16+08:00">2019-03-06</time>
               
             
           </span>
@@ -1330,12 +1513,24 @@ MNIST data setup使用 pathlib 处理路径，使用 requests 下载数据。仅
                 
               
 
-              <time title="Created: 2019-02-11 11:51:11 / Modified: 22:55:30" itemprop="dateCreated datePublished" datetime="2019-02-11T11:51:11+08:00">2019-02-11</time>
+              <time title="Created: 2019-02-11 11:51:11" itemprop="dateCreated datePublished" datetime="2019-02-11T11:51:11+08:00">2019-02-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-06 23:15:28" itemprop="dateModified" datetime="2019-03-06T23:15:28+08:00">2019-03-06</time>
               
             
           </span>
@@ -1518,12 +1713,24 @@ What is a state_dictPyTorc
                 
               
 
-              <time title="Created: 2019-02-10 14:13:43 / Modified: 21:57:07" itemprop="dateCreated datePublished" datetime="2019-02-10T14:13:43+08:00">2019-02-10</time>
+              <time title="Created: 2019-02-10 14:13:43" itemprop="dateCreated datePublished" datetime="2019-02-10T14:13:43+08:00">2019-02-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-06 23:11:36" itemprop="dateModified" datetime="2019-03-06T23:11:36+08:00">2019-03-06</time>
               
             
           </span>
@@ -1722,7 +1929,7 @@ import copyimport osimport timeimport torchimport torch.nn as nnimport torch.opt
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-09 22:53:11" itemprop="dateModified" datetime="2019-02-09T22:53:11+08:00">2019-02-09</time>
+                <time title="Modified: 2019-03-06 23:10:38" itemprop="dateModified" datetime="2019-03-06T23:10:38+08:00">2019-03-06</time>
               
             
           </span>
@@ -1922,7 +2129,7 @@ TensorWarm-up: NumPy首先用 NumPy 实现该网络，NumPy 提供 N 维数组�
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-08 11:52:42" itemprop="dateModified" datetime="2019-02-08T11:52:42+08:00">2019-02-08</time>
+                <time title="Modified: 2019-03-06 23:09:51" itemprop="dateModified" datetime="2019-03-06T23:09:51+08:00">2019-03-06</time>
               
             
           </span>
@@ -1991,218 +2198,15 @@ TensorWarm-up: NumPy首先用 NumPy 实现该网络，NumPy 提供 N 维数组�
 Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：
 
 scikit-image : 图像输入输出和变换
-
 pandas : 解析 csv
 
-
-import osimport torchimport pandas as pdfrom skimage import io, transformimport numpy as npimport matplotlib.pyplot as pltfrom torch.utils.data import Da
+import osimport torchimport pandas as pdfrom skimage import io, transformimport numpy as npimport matplotlib.pyplot as pltfrom torch.utils.data import Data
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
               <a class="btn" href="/2019/02/07/5-数据加载和处理-Data-Loading-and-Processing/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/02/02/4-训练分类器-Training-a-Classifier/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QWERDF007">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QWERDF007 的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/02/4-训练分类器-Training-a-Classifier/" class="post-title-link" itemprop="url">4.训练分类器 (Training a Classifier)</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-02 18:21:12" itemprop="dateCreated datePublished" datetime="2019-02-02T18:21:12+08:00">2019-02-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-07 12:02:02" itemprop="dateModified" datetime="2019-02-07T12:02:02+08:00">2019-02-07</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PyTorch学习笔记/" itemprop="url" rel="index"><span itemprop="name">PyTorch学习笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/02/02/4-训练分类器-Training-a-Classifier/" class="leancloud_visitors" data-flag-title="4.训练分类器 (Training a Classifier)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              [TOC]
-Training a Classifier已经了解如何定义神经网络，计算网络的损失和更新网络的权重。
-What about data通常，处理图像、文本、音频或者视频数据，可以使用标准 Python 包来加载数据至 NumPy 数组，然后可以将 NumPy 数组转换为 torch.Tensor 。
-
-对于图像，诸如 Pillow, OpenCV 包都有用
-对于音频，诸如 scipy 和 librosa 包
-对于文本，不管是原生的 Python 或 Cython ，或者 NLTK 和 SpaCy 都有用
-
-特别是对于可视化，PyTorch 创建了一个 torchvision 包，有关
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/02/4-训练分类器-Training-a-Classifier/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -2294,7 +2298,7 @@ What about data通常，处理图像、文本、音频或者视频数据，可�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

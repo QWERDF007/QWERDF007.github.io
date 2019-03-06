@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="[TOC] Saving and Loading ModelsPyTorch 模型的保存和加载的解决方案，有三个核心函数需要熟悉：  torch.save ：保存序列化对象至硬盘，该函数使用 Python 的 pickle 进行序列化。各种对象的模型，Tensors，字典都可以使用该函数存储。 torch.load ：使用 pickle 的反序列化功能将 pickle 对象反序列化至内存，该函数也">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-11T14:55:30.707Z">
+<meta property="og:updated_time" content="2019-03-06T15:15:28.864Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8.保存和加载模型 (Saving and Loading Models)">
 <meta name="twitter:description" content="[TOC] Saving and Loading ModelsPyTorch 模型的保存和加载的解决方案，有三个核心函数需要熟悉：  torch.save ：保存序列化对象至硬盘，该函数使用 Python 的 pickle 进行序列化。各种对象的模型，Tensors，字典都可以使用该函数存储。 torch.load ：使用 pickle 的反序列化功能将 pickle 对象反序列化至内存，该函数也">
@@ -368,12 +368,24 @@
                 
               
 
-              <time title="Created: 2019-02-11 11:51:11 / Modified: 22:55:30" itemprop="dateCreated datePublished" datetime="2019-02-11T11:51:11+08:00">2019-02-11</time>
+              <time title="Created: 2019-02-11 11:51:11" itemprop="dateCreated datePublished" datetime="2019-02-11T11:51:11+08:00">2019-02-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-06 23:15:28" itemprop="dateModified" datetime="2019-03-06T23:15:28+08:00">2019-03-06</time>
               
             
           </span>
@@ -457,8 +469,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(model, PATH)</span><br></pre></td></tr></table></figure>
 <p><strong>Load:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model = torch.load(PATH)</span><br><span class="line">model.eval()</span><br></pre></td></tr></table></figure>
-<h1 id="Saving-amp-Loading-a-General-Checkpoint-for-Inference-and-or-Resuming-Training"><a href="#Saving-amp-Loading-a-General-Checkpoint-for-Inference-and-or-Resuming-Training" class="headerlink" title="Saving &amp; Loading a General Checkpoint for Inference and/or Resuming Training"></a>Saving &amp; Loading a General Checkpoint for Inference and/or Resuming Training</h1><p>当存储用于推理或者重新训练的检查点，必须存储多于模型的 state_dict。存储优化器的 state_dict 也很重要，因为其保存的缓存区和参数会随模型的训练而更新。可以存储其他项，如训练损失，外部的 <code>torch.nn.Embedding</code> 层等等。</p>
-<p>要保存多个组件，将它们组织在一字典里，并使用 <code>torch.save()</code> 序列化该字典。保存这些检查点时使用 <code>.tar</code> 文件扩展名。</p>
+<h1 id="Saving-amp-Loading-a-General-Checkpoint-for-Inference-and-or-Resuming-Training"><a href="#Saving-amp-Loading-a-General-Checkpoint-for-Inference-and-or-Resuming-Training" class="headerlink" title="Saving &amp; Loading a General Checkpoint for Inference and/or Resuming Training"></a>Saving &amp; Loading a General Checkpoint for Inference and/or Resuming Training</h1><p>当存储用于推理或者重新训练的检查点，必须存储多于模型的 state_dict。存储优化器的 state_dict 也很重要，因为其保存的缓存区和参数会随模型的训练而更新。可以存储其他项，如训练损失，外部的 <code>torch.nn.Embedding</code> 层等等。要保存多个组件，将它们组织在一字典里，并使用 <code>torch.save()</code> 序列化该字典。保存这些检查点时使用 <code>.tar</code> 文件扩展名。</p>
 <p>要加载这些项目，首先初始化模型和优化器，然后使用 <code>torch.load()</code> 加载字典。可以查询字典以访问这些保存好的项。必须在推理前调用 <code>model.eval()</code> 设置 dropout 和 batch normalization，如果想恢复训练，调用 <code>model.train()</code> 确保这些层为训练模式。</p>
 <p><strong>Save:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">torch.save(&#123;</span><br><span class="line">    <span class="string">'epoch'</span>: epoch,</span><br><span class="line">    <span class="string">'model_state_dict'</span>: model.state_dict(),</span><br><span class="line">    <span class="string">'optimizer_state_dict'</span>: optimizer.state_dict(),</span><br><span class="line">    <span class="string">'loss'</span>: loss,</span><br><span class="line">&#125;, PATH)</span><br></pre></td></tr></table></figure>
@@ -609,7 +620,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

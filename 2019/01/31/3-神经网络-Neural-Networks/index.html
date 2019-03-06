@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络  在输入数据集上迭代  通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数">
+  <meta name="description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络 在输入数据集上迭代 通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数 更新">
 <meta name="keywords" content="Python,PyTorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3.神经网络 (Neural Networks)">
 <meta property="og:url" content="https://QWERDF007.github.io/2019/01/31/3-神经网络-Neural-Networks/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
-<meta property="og:description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络  在输入数据集上迭代  通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数">
+<meta property="og:description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络 在输入数据集上迭代 通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数 更新">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-06T11:32:19.145Z">
+<meta property="og:updated_time" content="2019-03-06T15:06:12.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3.神经网络 (Neural Networks)">
-<meta name="twitter:description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络  在输入数据集上迭代  通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数">
+<meta name="twitter:description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络 在输入数据集上迭代 通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数 更新">
 
 
 
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-06 19:32:19" itemprop="dateModified" datetime="2019-02-06T19:32:19+08:00">2019-02-06</time>
+                <time title="Modified: 2019-03-06 23:06:12" itemprop="dateModified" datetime="2019-03-06T23:06:12+08:00">2019-03-06</time>
               
             
           </span>
@@ -452,10 +452,8 @@
 <p><code>nn</code> 依赖于 <code>autograd</code> 来定义模型并且对其求导。一个 <code>nn.Module</code> 包含多个层，和返回 <code>output</code> 的 <code>forward(input)</code> 方法。</p>
 <p>神经网络典型的训练过程如下:</p>
 <ul>
-<li><p>定义包含训练参数的神经网络</p>
-</li>
-<li><p>在输入数据集上迭代</p>
-</li>
+<li>定义包含训练参数的神经网络</li>
+<li>在输入数据集上迭代</li>
 <li>通过网络处理输入</li>
 <li>计算损失 (输出离正确差多远)</li>
 <li>将梯度反向传播至网络的参数</li>
@@ -467,16 +465,13 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">params = list(net.parameters())</span><br><span class="line">print(len(params))</span><br><span class="line">print(params[<span class="number">0</span>].size())</span><br></pre></td></tr></table></figure>
 <p>清零梯度缓存区，并用随机梯度进行反向传播</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.zero_grad()</span><br><span class="line">out.backward(toch.randn(<span class="number">1</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong></p>
-<p>整个 <code>torch.nn</code> 仅支持小批量样本，而非单个样本 (所以单个样本的要reshape) 。例如，<code>nn.Conv2d</code> 接收形状为 <code>nSamples x nChannels x Height x Width</code> 的4维 Tensor。如果要用单个样本，使用 <code>input.unsqueeze(0)</code> 来虚构 batch 维度。(<code>.unsqueeze()</code> 和 NumPy 的 <code>.expand_dims()</code> 类似)</p>
-<h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>损失函数接收(output, target) 对作为输入，计算评估输出与目标差多少的数值。</p>
-<p>nn包中有许多不同的损失函数。一个简单的损失：<code>nn.MSELoss</code> ，计算输入与目标的均方误差。</p>
+<p><strong>注意：</strong><br>整个 <code>torch.nn</code> 仅支持小批量样本，而非单个样本 (所以单个样本的要reshape) 。例如，<code>nn.Conv2d</code> 接收形状为 <code>nSamples x nChannels x Height x Width</code> 的4维 Tensor。如果要用单个样本，使用 <code>input.unsqueeze(0)</code> 来虚构 batch 维度。(<code>.unsqueeze()</code> 和 NumPy 的 <code>.expand_dims()</code> 类似)</p>
+<h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>损失函数接收(output, target) 对作为输入，计算评估输出与目标差多少的数值。<br>nn 包中有许多不同的损失函数。一个简单的损失：<code>nn.MSELoss</code> ，计算输入与目标的均方误差。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">output = net(input_data)</span><br><span class="line">target = torch.randn(<span class="number">10</span>)</span><br><span class="line">target = target.view(<span class="number">1</span>, <span class="number">-1</span>)</span><br><span class="line">criterion = nn.MSELoss()</span><br><span class="line"></span><br><span class="line">loss = criterion(output, target)</span><br><span class="line">print(loss)</span><br></pre></td></tr></table></figure>
 <p>如果跟踪 <code>loss</code> 的反向过程，使用它的 <code>.grad_fn</code> 属性，将会看到一张如下的计算图：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">input_data -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d</span><br><span class="line">      	   -&gt; view -&gt; linear -&gt; relu -&gt; linear -&gt; relu -&gt; linear</span><br><span class="line">      	   -&gt; MSELoss</span><br><span class="line">      	   -&gt; loss</span><br></pre></td></tr></table></figure>
 <p>当调用 <code>loss.backward()</code> ，整张图对 loss 求导，并且图所有的 <code>requires_grad=True</code> 的 Tensor 的 <code>.grad</code> 属性将累积梯度。</p>
-<h1 id="Backprop"><a href="#Backprop" class="headerlink" title="Backprop"></a>Backprop</h1><p>为了反向传播误差，仅需要调用 <code>loss.backward()</code> 。需要清空已经存在的梯度，否则梯度会累积至已经存在的梯度上。</p>
-<p>调用 <code>loss.backward()</code> ，看一下反向传播前后 conv1 的偏置的梯度。</p>
+<h1 id="Backprop"><a href="#Backprop" class="headerlink" title="Backprop"></a>Backprop</h1><p>为了反向传播误差，仅需要调用 <code>loss.backward()</code> 。需要清空已经存在的梯度，否则梯度会累积至已经存在的梯度上。<br>调用 <code>loss.backward()</code> ，看一下反向传播前后 conv1 的偏置的梯度。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net.zero_grad()</span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv1.bias.grad before backward'</span>)</span><br><span class="line">print(net.conv1.bias.grad)</span><br><span class="line"></span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv1.bias.grad after backward'</span>)</span><br><span class="line">print(net.conv1.bias.grad)</span><br></pre></td></tr></table></figure>
 <h1 id="Update-the-weights"><a href="#Update-the-weights" class="headerlink" title="Update the weights"></a>Update the weights</h1><p>实际使用最简单的更新规则是随机梯度下降算法(SGD)：</p>
 <center>weight = weight - learning_rate * gradient</center>
@@ -606,7 +601,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换  pandas : 解析 csv   123456789101112import osimport torchimport pandas as">
+  <meta name="description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换 pandas : 解析 csv  123456789101112import osimport torchimport pandas as pd">
 <meta name="keywords" content="Python,PyTorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="5.数据加载和处理 (Data Loading and Processing)">
 <meta property="og:url" content="https://QWERDF007.github.io/2019/02/07/5-数据加载和处理-Data-Loading-and-Processing/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
-<meta property="og:description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换  pandas : 解析 csv   123456789101112import osimport torchimport pandas as">
+<meta property="og:description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换 pandas : 解析 csv  123456789101112import osimport torchimport pandas as pd">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-08T03:52:42.786Z">
+<meta property="og:updated_time" content="2019-03-06T15:09:51.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="5.数据加载和处理 (Data Loading and Processing)">
-<meta name="twitter:description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换  pandas : 解析 csv   123456789101112import osimport torchimport pandas as">
+<meta name="twitter:description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换 pandas : 解析 csv  123456789101112import osimport torchimport pandas as pd">
 
 
 
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-08 11:52:42" itemprop="dateModified" datetime="2019-02-08T11:52:42+08:00">2019-02-08</time>
+                <time title="Modified: 2019-03-06 23:09:51" itemprop="dateModified" datetime="2019-03-06T23:09:51+08:00">2019-03-06</time>
               
             
           </span>
@@ -450,10 +450,8 @@
         <p>[TOC]</p>
 <h1 id="Data-Loading-and-Processing"><a href="#Data-Loading-and-Processing" class="headerlink" title="Data Loading and Processing"></a>Data Loading and Processing</h1><p>解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：</p>
 <ul>
-<li><p>scikit-image : 图像输入输出和变换</p>
-</li>
-<li><p>pandas : 解析 csv</p>
-</li>
+<li>scikit-image : 图像输入输出和变换</li>
+<li>pandas : 解析 csv</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> skimage <span class="keyword">import</span> io, transform</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms, utils</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line"></span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)  <span class="comment"># 忽略警告</span></span><br><span class="line">plt.ion()  <span class="comment"># 交互模式</span></span><br></pre></td></tr></table></figure>
 <p>将 csv 中的标注点数据读入至 (N, 2) 的数组，其中 N 为特征点的数量</p>
@@ -614,7 +612,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

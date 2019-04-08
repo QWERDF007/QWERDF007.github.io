@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络 在输入数据集上迭代 通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数 更新">
+  <meta name="description" content="[TOC] PyTorch C++ API这个页面是 PyTorch  C++ API 公开部分的文档，API 能被粗略分为五部分：    ATen：基础的张量和数学操作库，其他库编译的基础 Autograd：ATen上添加自动求导 C++ Frontend：机器学习模型训练和评估的高层次结构 TorchScript：TorchScript JIT 编译器和解释器的一个接口 C++ Extensi">
 <meta name="keywords" content="ML,Python,PyTorch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="3.神经网络 (Neural Networks)">
-<meta property="og:url" content="https://QWERDF007.github.io/2019/01/31/3-神经网络-Neural-Networks/index.html">
+<meta property="og:title" content="16.PyTorch C++ API">
+<meta property="og:url" content="https://QWERDF007.github.io/2019/04/08/16-PyTorch-C-API/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
-<meta property="og:description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络 在输入数据集上迭代 通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数 更新">
+<meta property="og:description" content="[TOC] PyTorch C++ API这个页面是 PyTorch  C++ API 公开部分的文档，API 能被粗略分为五部分：    ATen：基础的张量和数学操作库，其他库编译的基础 Autograd：ATen上添加自动求导 C++ Frontend：机器学习模型训练和评估的高层次结构 TorchScript：TorchScript JIT 编译器和解释器的一个接口 C++ Extensi">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-08T07:36:41.428Z">
+<meta property="og:updated_time" content="2019-04-08T07:40:01.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3.神经网络 (Neural Networks)">
-<meta name="twitter:description" content="[TOC] Neural Networkstorch.nn 可以构建神经网络。 nn 依赖于 autograd 来定义模型并且对其求导。一个 nn.Module 包含多个层，和返回 output 的 forward(input) 方法。 神经网络典型的训练过程如下:  定义包含训练参数的神经网络 在输入数据集上迭代 通过网络处理输入 计算损失 (输出离正确差多远) 将梯度反向传播至网络的参数 更新">
+<meta name="twitter:title" content="16.PyTorch C++ API">
+<meta name="twitter:description" content="[TOC] PyTorch C++ API这个页面是 PyTorch  C++ API 公开部分的文档，API 能被粗略分为五部分：    ATen：基础的张量和数学操作库，其他库编译的基础 Autograd：ATen上添加自动求导 C++ Frontend：机器学习模型训练和评估的高层次结构 TorchScript：TorchScript JIT 编译器和解释器的一个接口 C++ Extensi">
 
 
 
 
 
 
-  <link rel="canonical" href="https://QWERDF007.github.io/2019/01/31/3-神经网络-Neural-Networks/">
+  <link rel="canonical" href="https://QWERDF007.github.io/2019/04/08/16-PyTorch-C-API/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>3.神经网络 (Neural Networks) | QWERDF007 的博客</title>
+  <title>16.PyTorch C++ API | QWERDF007 的博客</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/01/31/3-神经网络-Neural-Networks/">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/04/08/16-PyTorch-C-API/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QWERDF007">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">3.神经网络 (Neural Networks)
+          <h1 class="post-title" itemprop="name headline">16.PyTorch C++ API
 
               
             
@@ -368,24 +368,12 @@
                 
               
 
-              <time title="Created: 2019-01-31 09:02:31" itemprop="dateCreated datePublished" datetime="2019-01-31T09:02:31+08:00">2019-01-31</time>
+              <time title="Created: 2019-04-08 15:28:06 / Modified: 15:40:01" itemprop="dateCreated datePublished" datetime="2019-04-08T15:28:06+08:00">2019-04-08</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-08 15:36:41" itemprop="dateModified" datetime="2019-04-08T15:36:41+08:00">2019-04-08</time>
               
             
           </span>
@@ -430,7 +418,7 @@
 
           
           
-             <span id="/2019/01/31/3-神经网络-Neural-Networks/" class="leancloud_visitors" data-flag-title="3.神经网络 (Neural Networks)">
+             <span id="/2019/04/08/16-PyTorch-C-API/" class="leancloud_visitors" data-flag-title="16.PyTorch C++ API">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -462,39 +450,74 @@
 
       
         <p>[TOC]</p>
-<h1 id="Neural-Networks"><a href="#Neural-Networks" class="headerlink" title="Neural Networks"></a>Neural Networks</h1><p><code>torch.nn</code> 可以构建神经网络。</p>
-<p><code>nn</code> 依赖于 <code>autograd</code> 来定义模型并且对其求导。一个 <code>nn.Module</code> 包含多个层，和返回 <code>output</code> 的 <code>forward(input)</code> 方法。</p>
-<p>神经网络典型的训练过程如下:</p>
+<h1 id="PyTorch-C-API"><a href="#PyTorch-C-API" class="headerlink" title="PyTorch C++ API"></a>PyTorch C++ API</h1><p>这个页面是 PyTorch  C++ API 公开部分的文档，API 能被粗略分为五部分：  </p>
 <ul>
-<li>定义包含训练参数的神经网络</li>
-<li>在输入数据集上迭代</li>
-<li>通过网络处理输入</li>
-<li>计算损失 (输出离正确差多远)</li>
-<li>将梯度反向传播至网络的参数</li>
-<li>更新网络的权重，通常用一个简单的更新规则: <code>weight = weight - learning_rate * gradient</code>  </li>
+<li><strong>ATen</strong>：基础的张量和数学操作库，其他库编译的基础</li>
+<li><strong>Autograd</strong>：ATen上添加自动求导</li>
+<li><strong>C++ Frontend</strong>：机器学习模型训练和评估的高层次结构</li>
+<li><strong>TorchScript</strong>：TorchScript JIT 编译器和解释器的一个接口</li>
+<li><strong>C++ Extensions</strong>：使用自定义 C++ 和 CUDA 例程扩展 PyTorch 的一种方式</li>
 </ul>
-<h1 id="Define-the-network"><a href="#Define-the-network" class="headerlink" title="Define the network"></a>Define the network</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.function <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">Class Net(nn.Module):</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        <span class="comment"># 输入图像通道数为1，输出通道数6，5x5的卷积核</span></span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">6</span>, <span class="number">5</span>)</span><br><span class="line">        self.conv2 = nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>)</span><br><span class="line">        <span class="comment"># 仿射变换: y = Wx + b</span></span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>, <span class="number">120</span>)</span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">120</span>, <span class="number">84</span>)</span><br><span class="line">        self.fc3 = nn.Linear(<span class="number">84</span>, <span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="comment"># 2x2 窗口最大池化</span></span><br><span class="line">        x = F.max_pool2d(F.relu(self.conv1(x)), (<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">        <span class="comment"># 如果 size 为正方形可以仅传个数值</span></span><br><span class="line">        x = F.max_pool2d(F.relu(self.conv2(x)), <span class="number">2</span>)</span><br><span class="line">        x = x.view(<span class="number">-1</span>, self.num_flat_features(x))</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        x = self.fc3(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">num_flat_features</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        size = x.size()[<span class="number">1</span>:]</span><br><span class="line">        num_features = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> size:</span><br><span class="line">            num_features *= s</span><br><span class="line">        <span class="keyword">return</span> num_features</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">net = Net()</span><br><span class="line"><span class="comment"># 打印出网络结构</span></span><br><span class="line">print(net)</span><br><span class="line"><span class="comment"># 用 1x1x32x32 随机 Tensor 测试</span></span><br><span class="line">input_data = torch.randn(<span class="number">1</span>, <span class="number">1</span>, <span class="number">32</span>, <span class="number">32</span>)</span><br><span class="line">out = net(input_data)</span><br><span class="line">print(out)</span><br></pre></td></tr></table></figure>
-<p>仅需要定义 <code>forward</code> 函数， <code>backward</code> 函数会在使用 <code>autograd</code> 时自动定义。可以在 <code>forward</code> 函数内使用任何 Tensor 的操作。</p>
-<p><code>net.parameters()</code> 返回模型的可学习参数(generator)，torch 会自动加偏置(bias)，参数长度会是定义的两倍</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">params = list(net.parameters())</span><br><span class="line">print(len(params))</span><br><span class="line">print(params[<span class="number">0</span>].size())</span><br></pre></td></tr></table></figure>
-<p>清零梯度缓存区，并用随机梯度进行反向传播</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.zero_grad()</span><br><span class="line">out.backward(toch.randn(<span class="number">1</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong><br>整个 <code>torch.nn</code> 仅支持小批量样本，而非单个样本 (所以单个样本的要reshape) 。例如，<code>nn.Conv2d</code> 接收形状为 <code>nSamples x nChannels x Height x Width</code> 的4维 Tensor。如果要用单个样本，使用 <code>input.unsqueeze(0)</code> 来虚构 batch 维度。(<code>.unsqueeze()</code> 和 NumPy 的 <code>.expand_dims()</code> 类似)</p>
-<h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>损失函数接收(output, target) 对作为输入，计算评估输出与目标差多少的数值。<br>nn 包中有许多不同的损失函数。一个简单的损失：<code>nn.MSELoss</code> ，计算输入与目标的均方误差。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">output = net(input_data)</span><br><span class="line">target = torch.randn(<span class="number">10</span>)</span><br><span class="line">target = target.view(<span class="number">1</span>, <span class="number">-1</span>)</span><br><span class="line">criterion = nn.MSELoss()</span><br><span class="line"></span><br><span class="line">loss = criterion(output, target)</span><br><span class="line">print(loss)</span><br></pre></td></tr></table></figure>
-<p>如果跟踪 <code>loss</code> 的反向过程，使用它的 <code>.grad_fn</code> 属性，将会看到一张如下的计算图：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">input_data -&gt; conv2d -&gt; relu -&gt; maxpool2d -&gt; conv2d -&gt; relu -&gt; maxpool2d</span><br><span class="line">      	   -&gt; view -&gt; linear -&gt; relu -&gt; linear -&gt; relu -&gt; linear</span><br><span class="line">      	   -&gt; MSELoss</span><br><span class="line">      	   -&gt; loss</span><br></pre></td></tr></table></figure>
-<p>当调用 <code>loss.backward()</code> ，整张图对 loss 求导，并且图所有的 <code>requires_grad=True</code> 的 Tensor 的 <code>.grad</code> 属性将累积梯度。</p>
-<h1 id="Backprop"><a href="#Backprop" class="headerlink" title="Backprop"></a>Backprop</h1><p>为了反向传播误差，仅需要调用 <code>loss.backward()</code> 。需要清空已经存在的梯度，否则梯度会累积至已经存在的梯度上。<br>调用 <code>loss.backward()</code> ，看一下反向传播前后 conv1 的偏置的梯度。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net.zero_grad()</span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv1.bias.grad before backward'</span>)</span><br><span class="line">print(net.conv1.bias.grad)</span><br><span class="line"></span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv1.bias.grad after backward'</span>)</span><br><span class="line">print(net.conv1.bias.grad)</span><br></pre></td></tr></table></figure>
-<h1 id="Update-the-weights"><a href="#Update-the-weights" class="headerlink" title="Update the weights"></a>Update the weights</h1><p>实际使用最简单的更新规则是随机梯度下降算法(SGD)：</p>
-<center>weight = weight - learning_rate * gradient</center>
-
-<p>使用 Python 简单实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">learning_rate = <span class="number">0.01</span></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> net.parameters():</span><br><span class="line">    f.data.sub_(f.grad.data * learning_rate)</span><br></pre></td></tr></table></figure>
-<p>想使用各种更新规则诸如 SGD，Nesterov-SGD，Adam，RMSProp 等等。<code>torch.optim</code> 实现了这些方法。使用非常简单：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="comment"># 创建优化器</span></span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"><span class="comment"># 训练循环</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line">output = net(input_data)</span><br><span class="line">loss = criterion(output, target)</span><br><span class="line">loss.backward()</span><br><span class="line">optimizer.step() <span class="comment"># 更新参数</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong>需要手动清零梯度的缓存区，因为梯度会如反向传播章节所说，会累加至已存在的梯度上。</p>
+<p>这些构建块共同构成了用于张量计算和动态神经网络的研究和生产 C++ 库，强调 GPU 加速和 CPU 性能。它目前在 Facebook 上用于研究和生产。</p>
+<h1 id="ATen"><a href="#ATen" class="headerlink" title="ATen"></a>ATen</h1><p>ATen 是一个基础的张量库，几乎其他所有 PyTorch 的 Python 和 C++ 接口都建立在此之上。它提供核心的<code>Tensor</code> 类，其上定义了数百个操作。这些操作的大多数都有在 GPU 和 CPU 上实现，<code>Tensor</code> 类将会根据它的类型来动态分配。使用 ATen 的简单示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ATen/ATen.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">at::Tensor a = at::ones(&#123;<span class="number">2</span>, <span class="number">2</span>&#125;, at::kInt);</span><br><span class="line">at::Tensor b = at::randn(&#123;<span class="number">2</span>, <span class="number">2</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> c = a + b.to(at::KInt);</span><br></pre></td></tr></table></figure>
+<p>这个 <code>Tensor</code> 类和其他 ATen 的符号都能在 <code>at::</code> 命名空间内找到，<a href="https://pytorch.org/cppdocs/api/namespace_at.html#namespace-at" target="_blank" rel="noopener">文档</a>。</p>
+<h1 id="Autograd"><a href="#Autograd" class="headerlink" title="Autograd"></a>Autograd</h1><p>autograd 是 PyTorch 的 C++ API 的一部分，用自动求导的能力扩充了 ATen 的 <code>Tensor</code> 类。autograd 系统记录张量上的操作来形成一个自动求导图。在该图的叶节点上调用 <code>backward()</code>，跨越自动求导图中的函数和张量网络执行反向模式求导，最终生成梯度。下面是该接口的示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/csrc/autograd/variable.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/csrc/autograd/function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">torch::Tensor a = torch::ones(&#123;<span class="number">2</span>, <span class="number">2</span>&#125;, torch::requires_grad());</span><br><span class="line">torch::Tensor b = torch::randn(&#123;<span class="number">2</span>, <span class="number">2</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> c = a + b;</span><br><span class="line">c.backward();</span><br></pre></td></tr></table></figure>
+<p>ATen 的 <code>at::Tensor</code> 类默认是不可微的。要为 autograd API 提供的张量添加可微性，需要使用 <code>torch::</code> 命名空间中的张量工厂函数来代替 <code>at::</code> 命名空间的。例如，<code>at::ones</code> 创建的张量不可微，但 <code>torch::ones</code> 创建的张量可微。</p>
+<h1 id="C-Frontend"><a href="#C-Frontend" class="headerlink" title="C++ Frontend"></a>C++ Frontend</h1><p>PyTorch C++ 前端为神经网络和通用机器学习研究和生产用例提供一个高级的，纯 C++ 模型接口，很大程度上遵循 Python API 的设计和提供的功能。C++ 前端包含以下：  </p>
+<ul>
+<li>通过分层模块系统(如 <code>torch.nn.Module</code>)定义机器学习模型的接口；</li>
+<li>用于常用建模目的的已存模块(如 convolutions, RNNs, batch normalization等)的标准库；</li>
+<li>优化器 API，包含流行的优化器的实现，如 SGD, Adam, RMSprop 等；</li>
+<li>一种表示数据集和数据管道的方法，包括在多 个cpu 核心上并行加载数据的功能；</li>
+<li>用于存储和加载训练会话的检查点的序列化格式(如 <code>torch.utils.data.DataLoader</code>)；</li>
+<li>模型在多 GPU 上的自动并行化(如 <code>torch.nn.parallel.DataParallel</code>)；</li>
+<li>支持使用 pybind11 轻松将 C++ 模型绑定至 Python 的代码；</li>
+<li>TorchScript JIT 编译器的入口点；</li>
+<li>实用的工具，促进与 ATen 和 Autograd API的连接；</li>
+</ul>
+<p>有关 C++ 前端更加详细的描述，查看此<a href="https://pytorch.org/cppdocs/frontend.html" target="_blank" rel="noopener">文档</a> 。与 C++ 前端相关的 torch:: 命名空间相关部分包括 <a href="https://pytorch.org/cppdocs/api/namespace_torch__nn.html#namespace-torch-nn" target="_blank" rel="noopener">torch::nn</a>, <a href="https://pytorch.org/cppdocs/api/namespace_torch__optim.html#namespace-torch-optim" target="_blank" rel="noopener">torch::optim</a>, <a href="https://pytorch.org/cppdocs/api/namespace_torch__data.html#namespace-torch-data" target="_blank" rel="noopener">torch::data</a>, <a href="https://pytorch.org/cppdocs/api/namespace_torch__serialize.html#namespace-torch-serialize" target="_blank" rel="noopener">torch::serialize</a>, <a href="https://pytorch.org/cppdocs/api/namespace_torch__jit.html#namespace-torch-jit" target="_blank" rel="noopener">torch::jit</a> 和 <a href="https://pytorch.org/cppdocs/api/namespace_torch__python.html#namespace-torch-python" target="_blank" rel="noopener">torch::python</a>。C++ 前端的示例能在这个<a href="https://github.com/goldsborough/examples/tree/cpp/cpp" target="_blank" rel="noopener">仓库</a>找到。</p>
+<h1 id="TorchScript"><a href="#TorchScript" class="headerlink" title="TorchScript"></a>TorchScript</h1><p>TorchScript 是 PyTorch 模型的一种表示，能被 TorchScript 编译器理解，编译和序列化。本质上，TorchScript 本身就是一种编程语言。它是使用 PyTorch API 的 Python 子集。TorchScript 的 C++ 接口包含三个主要功能：  </p>
+<ul>
+<li>加载和执行用 Python 定义的序列化 TorchScript 模型的机制；</li>
+<li>用于定义扩展 TorchScript 标准库的自定义运算的 API；</li>
+<li>从 C++ 即时编译 TorchScript 程序</li>
+</ul>
+<p>如果想尽可能在 Python 中定义模型，但随后将它们导出至 C++ 以用于生产环境和非 Python 推理，则第一种机制可能很有用。能在这个<a href="https://pytorch.org/tutorials/advanced/cpp_export.html" target="_blank" rel="noopener">链接</a>找到更多与它相关的内容。第二个 API 关注的是想通过自定义运算扩展 TorchScript 的场景，能在推理期间被序列化和 C++ 调用。最后，<a href="https://pytorch.org/cppdocs/api/function_namespacetorch_1_1jit_1a176d99fd5bf0233119a5f49c07a1d01d.html#exhale-function-namespacetorch-1-1jit-1a176d99fd5bf0233119a5f49c07a1d01d" target="_blank" rel="noopener">torch::jit::compile</a> 函数可用于直接由 C++ 访问 TorchScript 编译器。</p>
+<h1 id="C-Extensions"><a href="#C-Extensions" class="headerlink" title="C++ Extensions"></a>C++ Extensions</h1><p>C++ 扩展提供简单但强大的方式以访问上述所有的接口，用于扩展 PyTorch 的常规 Python 用例。C++ 扩展常用于在 C++ 或 CUDA 实现自定义运算以加速使用 PyTorch 进行的研究。C++ 扩展API 并没添加任何新的功能至 PyTorch C++ API。相反，它提供 Python setuptools 和 JIT 编译器的整合，使得能够由 Python 访问 ATen，autograd 和其他 C++ API。想了解更多 C++ 扩展相关，查阅<a href="https://pytorch.org/tutorials/advanced/cpp_extension.html" target="_blank" rel="noopener">教程</a>。</p>
+<h1 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h1><ul>
+<li>安装 PyTorch 的 C++ 版<ul>
+<li>最小示例</li>
+<li>支持</li>
+</ul>
+</li>
+<li>C++ 前端<ul>
+<li>描述</li>
+<li>端到端示例</li>
+<li>哲学</li>
+<li>安装</li>
+</ul>
+</li>
+<li>Library API<ul>
+<li>类层</li>
+<li>文件层</li>
+<li>全部 API</li>
+</ul>
+</li>
+</ul>
+<p>Notes  </p>
+<ul>
+<li>FAQ</li>
+<li>张量基础</li>
+<li>张量创建API</li>
+</ul>
+<h1 id="Indices-and-Tables"><a href="#Indices-and-Tables" class="headerlink" title="Indices and Tables"></a>Indices and Tables</h1><ul>
+<li>索引</li>
+<li>模块索引</li>
+<li>搜索页面</li>
+</ul>
+<p>后面这两部分都有<a href="https://pytorch.org/cppdocs/" target="_blank" rel="noopener">链接</a>，跳转看吧</p>
 
       
     </div>
@@ -535,8 +558,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/30/2-自动求导-Automatic-Differentiation/" rel="next" title="2.自动求导 (Automatic Differentiation)">
-                <i class="fa fa-chevron-left"></i> 2.自动求导 (Automatic Differentiation)
+              <a href="/2019/04/08/15-使用PyTorch前端-Using-the-PyTorch-C-Frontend/" rel="next" title="15.使用PyTorch前端 (Using the PyTorch C++ Frontend)">
+                <i class="fa fa-chevron-left"></i> 15.使用PyTorch前端 (Using the PyTorch C++ Frontend)
               </a>
             
           </div>
@@ -544,10 +567,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/02/4-训练分类器-Training-a-Classifier/" rel="prev" title="4.训练分类器 (Training a Classifier)">
-                4.训练分类器 (Training a Classifier) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -714,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Neural-Networks"><span class="nav-number">1.</span> <span class="nav-text">Neural Networks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Define-the-network"><span class="nav-number">2.</span> <span class="nav-text">Define the network</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss-Function"><span class="nav-number">3.</span> <span class="nav-text">Loss Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Backprop"><span class="nav-number">4.</span> <span class="nav-text">Backprop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Update-the-weights"><span class="nav-number">5.</span> <span class="nav-text">Update the weights</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PyTorch-C-API"><span class="nav-number">1.</span> <span class="nav-text">PyTorch C++ API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ATen"><span class="nav-number">2.</span> <span class="nav-text">ATen</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autograd"><span class="nav-number">3.</span> <span class="nav-text">Autograd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Frontend"><span class="nav-number">4.</span> <span class="nav-text">C++ Frontend</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TorchScript"><span class="nav-number">5.</span> <span class="nav-text">TorchScript</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Extensions"><span class="nav-number">6.</span> <span class="nav-text">C++ Extensions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Contents"><span class="nav-number">7.</span> <span class="nav-text">Contents</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Indices-and-Tables"><span class="nav-number">8.</span> <span class="nav-text">Indices and Tables</span></a></li></ol></div>
             
 
           </div>

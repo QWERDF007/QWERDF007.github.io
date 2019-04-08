@@ -97,14 +97,14 @@
 
 
   <meta name="description" content="[TOC] Adversarial Example Generation研究正在不断地推动 ML 模型更快，更准和更有效。然而，设计和训练模型时经常会忽略模型的安全性和鲁棒性，特别在面对想欺骗模型的对手时。下面将提高关于 ML 模型的安全漏洞的认知，并深入了解对抗机器学习这一热门话题。在图像中添加细微的扰动就可能导致模型性能的巨大差异。通过一个图像分类器上的例子来探索该主题。使用第一个也是最流行的">
-<meta name="keywords" content="Python,PyTorch">
+<meta name="keywords" content="ML,Python,PyTorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="13.对抗实例生成 (Adversarial Example Generation)">
 <meta property="og:url" content="https://QWERDF007.github.io/2019/03/06/13-对抗实例生成-Adversarial-Example-Generation/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="[TOC] Adversarial Example Generation研究正在不断地推动 ML 模型更快，更准和更有效。然而，设计和训练模型时经常会忽略模型的安全性和鲁棒性，特别在面对想欺骗模型的对手时。下面将提高关于 ML 模型的安全漏洞的认知，并深入了解对抗机器学习这一热门话题。在图像中添加细微的扰动就可能导致模型性能的巨大差异。通过一个图像分类器上的例子来探索该主题。使用第一个也是最流行的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-06T14:48:15.308Z">
+<meta property="og:updated_time" content="2019-04-08T07:39:19.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="13.对抗实例生成 (Adversarial Example Generation)">
 <meta name="twitter:description" content="[TOC] Adversarial Example Generation研究正在不断地推动 ML 模型更快，更准和更有效。然而，设计和训练模型时经常会忽略模型的安全性和鲁棒性，特别在面对想欺骗模型的对手时。下面将提高关于 ML 模型的安全漏洞的认知，并深入了解对抗机器学习这一热门话题。在图像中添加细微的扰动就可能导致模型性能的巨大差异。通过一个图像分类器上的例子来探索该主题。使用第一个也是最流行的">
@@ -368,12 +368,24 @@
                 
               
 
-              <time title="Created: 2019-03-06 22:46:47 / Modified: 22:48:15" itemprop="dateCreated datePublished" datetime="2019-03-06T22:46:47+08:00">2019-03-06</time>
+              <time title="Created: 2019-03-06 22:46:47" itemprop="dateCreated datePublished" datetime="2019-03-06T22:46:47+08:00">2019-03-06</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-08 15:39:19" itemprop="dateModified" datetime="2019-04-08T15:39:19+08:00">2019-04-08</time>
               
             
           </span>
@@ -390,7 +402,21 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PyTorch学习笔记/" itemprop="url" rel="index"><span itemprop="name">PyTorch学习笔记</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/" itemprop="url" rel="index"><span itemprop="name">PyTorch</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
 
                 
                 
@@ -486,6 +512,8 @@
       
         <div class="post-tags">
           
+            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
+          
             <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           
             <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
@@ -510,6 +538,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/" rel="prev" title="14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++)">
+                14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -579,7 +611,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -596,7 +628,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

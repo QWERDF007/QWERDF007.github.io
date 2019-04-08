@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="[TOC] Loading a PyTorch Model in C++正如其名，PyTorch 的主要接口是 Python 编程语言。虽然 Python 在许多需要动态性和易于迭代的场景是合适和首选的语言，但也有很多情况下 Python 的这些特性恰恰是不利的。后者经常应用的一个环境是生产环境，延迟低且部署要求严格。对于生产环境，C++ 通常是首选语言，即使只是将其绑定至另一种语言，如 Java">
+<meta name="keywords" content="ML,Python,PyTorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++)">
+<meta property="og:url" content="https://QWERDF007.github.io/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/index.html">
+<meta property="og:site_name" content="QWERDF007 的博客">
+<meta property="og:description" content="[TOC] Loading a PyTorch Model in C++正如其名，PyTorch 的主要接口是 Python 编程语言。虽然 Python 在许多需要动态性和易于迭代的场景是合适和首选的语言，但也有很多情况下 Python 的这些特性恰恰是不利的。后者经常应用的一个环境是生产环境，延迟低且部署要求严格。对于生产环境，C++ 通常是首选语言，即使只是将其绑定至另一种语言，如 Java">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-04-08T07:39:36.623Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++)">
+<meta name="twitter:description" content="[TOC] Loading a PyTorch Model in C++正如其名，PyTorch 的主要接口是 Python 编程语言。虽然 Python 在许多需要动态性和易于迭代的场景是合适和首选的语言，但也有很多情况下 Python 的这些特性恰恰是不利的。后者经常应用的一个环境是生产环境，延迟低且部署要求严格。对于生产环境，C++ 通常是首选语言，即使只是将其绑定至另一种语言，如 Java">
+
+
+
+
+
+
+  <link rel="canonical" href="https://QWERDF007.github.io/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++) | QWERDF007 的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <!--GitHub-start-->
+    <a href="https://github.com/QWERDF007" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <!--GitHub-end-->
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QWERDF007 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QWERDF007">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QWERDF007 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-06 22:18:29" itemprop="dateCreated datePublished" datetime="2019-04-06T22:18:29+08:00">2019-04-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-08 15:39:36" itemprop="dateModified" datetime="2019-04-08T15:39:36+08:00">2019-04-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/" itemprop="url" rel="index"><span itemprop="name">PyTorch</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/" class="leancloud_visitors" data-flag-title="14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="Loading-a-PyTorch-Model-in-C"><a href="#Loading-a-PyTorch-Model-in-C" class="headerlink" title="Loading a PyTorch Model in C++"></a>Loading a PyTorch Model in C++</h1><p>正如其名，PyTorch 的主要接口是 Python 编程语言。虽然 Python 在许多需要动态性和易于迭代的场景是合适和首选的语言，但也有很多情况下 Python 的这些特性恰恰是不利的。后者经常应用的一个环境是生产环境，延迟低且部署要求严格。对于生产环境，C++ 通常是首选语言，即使只是将其绑定至另一种语言，如 Java，Rust 或者 Go。接下来的段落将会概括 PyTorch 提供的从已存在的 Python 模型到序列化表示的路径，该序列化表示能从 C++ 加载和执行，不需要依赖 Python。</p>
+<h1 id="Step-1-Converting-Your-PyTorch-Model-to-Torch-Script"><a href="#Step-1-Converting-Your-PyTorch-Model-to-Torch-Script" class="headerlink" title="Step 1: Converting Your PyTorch Model to Torch Script"></a>Step 1: Converting Your PyTorch Model to Torch Script</h1><p>一个 PyTorch 模型从 Python 至 C++ 的过程被 Torch 脚本实现，PyTorch 模型的表现能被 Torch 脚本编译器理解，编译和序列化。如果从由 “eager” API 编写的现有的 PyTorch 模型开始，首先必须将你的模型转换至 Torch 脚本。在大多数情况下，如下面所讨论的，只需要很少的工作。如果已经有了 Torch 脚本模块，则可以跳过教程的下一节。</p>
+<p>将 PyTorch 模型转换为 Torch 脚本存在两种方式。第一种被称为 <em>tracing</em> (追踪)，一种机制，通过使用示例输入评估一次模型，并记录这些输入在模型中的流动，以捕获模型的结构。这适合使用有限的控制流的模型。第二种方法是添加显示的注释至模型中，通知 Torch  脚本编译器它可以直接地解析和编译模型代码，这受限于 Torch 脚本语言的约束。</p>
+<p><strong>TIP:</strong><br>你可以在官方的 <a href="https://pytorch.org/docs/master/jit.html" target="_blank" rel="noopener">Torch Script reference</a> 中找到上述方法的完整的文档，及使用哪种方法的进一步指导。</p>
+<h2 id="Converting-to-Torch-Script-via-Tracing"><a href="#Converting-to-Torch-Script-via-Tracing" class="headerlink" title="Converting to Torch Script via Tracing"></a>Converting to Torch Script via Tracing</h2><p>通过追踪将 PyTorch 模型转换为 Torch 脚本，必须将模型实例连同示例输入一同传递至 <code>torch.jit.trace</code> 函数。这将会产生一个 <code>torch.jit.ScriptModule</code> 对象以追踪嵌入在模块的 <code>forward</code> 方法中的模型评估：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型实例</span></span><br><span class="line">model = torchvision.models.resnet18()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提供给 forward 方法的实例输入</span></span><br><span class="line">example = torch.rand(<span class="number">1</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 torch.jit.trace 追踪以生成 torch.jit.ScriptModule</span></span><br><span class="line">traced_script_module = torch.jit.trace(model, example)</span><br></pre></td></tr></table></figure>
+<p>被追踪的 <code>ScriptModule</code> 现在可以和常规的 PyTorch 模块一样进行评估：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">output = traced_script_module(torch.ones(<span class="number">1</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>))</span><br><span class="line">print(output[<span class="number">0</span>, :<span class="number">5</span>])</span><br><span class="line"><span class="comment"># output: tensor([-0.3010, -0.3311, -0.2262,  0.3057,  0.1450], grad_fn=&lt;SliceBackward&gt;)</span></span><br></pre></td></tr></table></figure>
+<h2 id="Converting-to-Torch-Script-via-Annotation"><a href="#Converting-to-Torch-Script-via-Annotation" class="headerlink" title="Converting to Torch Script via Annotation"></a>Converting to Torch Script via Annotation</h2><p>在某些情况下，例如模型中使用了特定形式的控制流，你可能希望直接在 Torch 脚本中直接编写模型，并相应地对模型注释。例如，假设有如下的 Pytorch 模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModule</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, N, M)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.weight = torch.nn.Parameter(torch.rand(N, M))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> x.sum() &gt; <span class="number">0</span>:</span><br><span class="line">            output = self.weight.mv(x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            output = self.weight + x</span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+<p>因为该模块中的 <code>forward</code> 方法使用了依赖输入的控制流，它不适用于追踪。相反，能够从<code>torch.jit.ScriptModule</code> 子类化它和添加 <a href="mailto:`@torch.jit.scrip" target="_blank" rel="noopener">`@torch.jit.scrip</a>t_method<code>注释至模型的</code>forward<code>方法来将其转换为</code>SciptModule`：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModule</span><span class="params">(torch.jit.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, N, M)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.weight = torch.nn.Parameter(torch.rand(N, M))</span><br><span class="line"></span><br><span class="line"><span class="meta">    @torch.jit.script_method</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> x.sum() &gt; <span class="number">0</span>:</span><br><span class="line">            output = self.weight.mv(x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            output = self.weight + x</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">my_script_module = MyModule(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>现在创建一个 <code>MyModule</code> 对象直接产生一个 <code>ScriptModule</code> 实例，并准备好序列化。</p>
+<h1 id="Step-2-Serializing-Your-Script-Module-to-a-File"><a href="#Step-2-Serializing-Your-Script-Module-to-a-File" class="headerlink" title="Step 2:  Serializing Your Script Module to a File"></a>Step 2:  Serializing Your Script Module to a File</h1><p>一旦你手中有了 <code>ScriptModule</code>，不管是来自追踪或者注释 PyTorch 模型，你就准备好将其序列化为文件。稍后，你能够在 C++ 中加载该模块，并不依赖 Python 而执行它。假设想要序列化之前追踪示例中的 <code>ResNet18</code> 模型。要执行该序列化，只需简单地调用模块的 <a href="https://pytorch.org/docs/master/jit.html#torch.jit.ScriptModule.save" target="_blank" rel="noopener"><code>save</code></a> 方法，并传递一个文件名:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">traced_script_module.save(<span class="string">"model.pt"</span>)</span><br></pre></td></tr></table></figure>
+<p>这将在你的工作目录下产生一个 <code>model.pt</code> 文件。现在已经正式地离开 Python 领域，并跨入至 C++ 的范围。</p>
+<h1 id="Step-3-Loading-Your-Script-Module-in-C"><a href="#Step-3-Loading-Your-Script-Module-in-C" class="headerlink" title="Step 3: Loading Your Script Module in C++"></a>Step 3: Loading Your Script Module in C++</h1><p>要在 C++ 中加载序列化的 PyTorch 模型，你的应用必须基于 PyTorch C++ API—也叫做 LibTorch。LibTorch 发行版包含一系列共享库、头文件和 CMake 配置文件。虽然 CMake 不是LibTorch 的必须项，但它是推荐方法，将来会得到很好的支持。对于这个教程，我们将使用 CMake 和 LibTorch 构建最小的 C++ 应用，以简单地加载和执行序列化的 PyTorch 模型。</p>
+<h2 id="A-Minimal-C-Application"><a href="#A-Minimal-C-Application" class="headerlink" title="A Minimal C++ Application"></a>A Minimal C++ Application</h2><p>让我们从讨论加载模型的代码开始：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/script.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (argc != <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"usage: example-app &lt;path-to-exported-script-module&gt;\n"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 使用 torch::jit::load() 从文件反序列化 ScriptModule</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;torch::jit::script::Module&gt; <span class="keyword">module</span> = torch::jit::load(argv[<span class="number">1</span>]);</span><br><span class="line">    assert(<span class="keyword">module</span> != <span class="literal">nullptr</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ok\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>头文件 <code>&lt;torch/script.h&gt;</code> 包含运行示例所需的所有相关的 LibTorch 的内容。我们的应用接收序列化的 PyTorch  <code>ScriptModule</code> 的路径作为它唯一的命令行参数，并且随后使用 <code>torch::jit::load()</code> 函数接收该输入，反序列化模块。作为结果，我们收到一个指向 <code>torch::jit::script::Module</code> 的共享指针，相当于一个 C++ 的 <code>torch.jit.ScriptModule</code>。现在，我们仅需验证该指针不是空指针。稍后将研究如何执行它。</p>
+<h2 id="Depending-on-LibTorch-and-Building-the-Application"><a href="#Depending-on-LibTorch-and-Building-the-Application" class="headerlink" title="Depending on LibTorch and Building the Application"></a>Depending on LibTorch and Building the Application</h2><p>假定我们存储上面的代码至一个叫做 <code>example-app.cpp</code> 的文件中。编译它最小的 <code>CMakeLists.txt</code> 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.0 FATAL_ERROR)</span><br><span class="line">project(custom_ops)</span><br><span class="line"></span><br><span class="line">find_package(Torch REQUIRED)</span><br><span class="line"></span><br><span class="line">add_executable(example-app example-app.cpp)</span><br><span class="line">target_link_libraries(example-app &quot;$&#123;TORCH_LIBRARIES&#125;&quot;)</span><br><span class="line">set_property(TARGET example-app PROPERTY CXX_STANDARD 11)</span><br></pre></td></tr></table></figure>
+<p>我们编译示例所需最后的一样东西是 LibTorch 发行版。你能够在 PyTorch 的<a href="https://pytorch.org/" target="_blank" rel="noopener">下载页面</a>中找到最新的稳定版本。如果你下载和解压最新的归档文件，你会看到如下结构的文件夹：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">libtorch/</span><br><span class="line">	bin/</span><br><span class="line">	include/</span><br><span class="line">	lib/</span><br><span class="line">	share/</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>lib/</code> 文件夹包含你必须链接的共享库，</li>
+<li><code>include/</code> 文件夹包含你程序所需的头文件</li>
+<li><code>share/</code> 文件夹包含必需的 CMake 配置，以启用上述的简单的 <code>find_package(Torch)</code> 命令。</li>
+</ul>
+<p>最后一步是编译应用。为此，假定我们的示例目录如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">example-app/</span><br><span class="line">	CMakeLists.txt</span><br><span class="line">	example-app.cpp</span><br></pre></td></tr></table></figure>
+<p>现在我们可以运行如下命令来在 <code>example-app/</code> 文件夹里编译应用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -DCMAKE_PREFIX_PATH=/path/to/libtorch ..</span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span> windows</span><br><span class="line">cmake -D CMAKE_PREFIX_PATH=/path/to/libtorch -D CMAKE_GENERATOR_PLATFORM=x64 -D CMAKE_BUILD_TYPE=Release ..</span><br></pre></td></tr></table></figure>
+<h1 id="Step-4-Executing-the-Script-Module-in-C"><a href="#Step-4-Executing-the-Script-Module-in-C" class="headerlink" title="Step 4: Executing the Script Module in C++"></a>Step 4: Executing the Script Module in C++</h1><p>已经在 C++ 中成功地加载序列化的 <code>ResNet18</code>，现在仅需几行代码来执行它。让我们添加几行代码至 C++ 应用的 <code>main()</code> 函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建输入向量</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;torch::jit::IValue&gt; inputs;</span><br><span class="line">inputs.push_back(torch::ones(&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>&#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行模型，并将输出转换为张量</span></span><br><span class="line">at::Tensor output = <span class="keyword">module</span>-&gt;forward(inputs).toTensor();</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; output.slice(<span class="number">1</span>, <span class="number">0</span>, <span class="number">5</span>) &lt;&lt; <span class="string">'\n'</span>; <span class="comment">// 切片</span></span><br></pre></td></tr></table></figure>
+<p>前两行代码设置模型的输入。创建一个 <code>torch::jit::IValue</code>( <code>script::Module</code> 接受和返回的类型) 向量，并添加一个输入。我们使用 <code>torch::ones()</code> 创建输入张量，相当于 C++ 的 <code>torch.ones</code>。之后运行 <code>script::Module</code> 的 <code>forward</code> 方法，传递我们创建的输入张量给它。作为结果，我们得到一个新的 <code>IValue</code>，我们通过调用 <code>toTensor()</code> 将其转换为张量。</p>
+<p>最后一行，我们打印了输出的前五个元素。由于在之前 Python 中提供相同的输入，所以应该看到相同的输出。让我们来重新编译应用并再次运行它。</p>
+<p><strong>TIP:</strong><br>要将你的模型移至 GPU，你可以编写 <code>model-&gt;to(at::kCUDA);</code>。确保输入也在 GPU 的内存中，也可以调用 <code>tensor.to(at::kCUDA);</code> 来将输入移至 GPU，这将导致返回的输出也存储在 GPU 内存里。</p>
+<h1 id="Step-5-Getting-Help-and-Exploring-the-API"><a href="#Step-5-Getting-Help-and-Exploring-the-API" class="headerlink" title="Step 5: Getting Help and Exploring the API"></a>Step 5: Getting Help and Exploring the API</h1><p>本教程希望你对 PyTorch 模型从 Python 至 C++ 的路径有一个很好的理解。有了本教程中描述的概念，你应该能够从普通的 “eager” PyTorch 模型出发，到 Python 编译的 <code>ScriptModule</code>，到磁盘上的序列化文件，再到 C++ 中可执行的 <code>script::Module</code>。</p>
+<p>当然，还有许多概念未曾覆盖。例如，你可能想在你的 <code>ScriptModule</code> 中扩展以 C++ 或 CUDA 实现的自定义运算，并在纯 C++ 生产环境中加载的 <code>ScriptModule</code> 中执行该自定义运算。好消息是：这是可行的，并得到充分支持的。现在，你可以探索这个文件夹的示例，稍后会提供一个教程。现在，以下链接可能会有帮助：</p>
+<ul>
+<li>Torch 脚本参考：<a href="https://pytorch.org/docs/master/jit.html" target="_blank" rel="noopener">https://pytorch.org/docs/master/jit.html</a></li>
+<li>PyTorch C++ 文档：<a href="https://pytorch.org/cppdocs/" target="_blank" rel="noopener">https://pytorch.org/cppdocs/</a></li>
+<li>PyTorch Python 文档：<a href="https://pytorch.org/docs/" target="_blank" rel="noopener">https://pytorch.org/docs/</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/06/13-对抗实例生成-Adversarial-Example-Generation/" rel="next" title="13.对抗实例生成 (Adversarial Example Generation)">
+                <i class="fa fa-chevron-left"></i> 13.对抗实例生成 (Adversarial Example Generation)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/08/15-使用PyTorch前端-Using-the-PyTorch-C-Frontend/" rel="prev" title="15.使用PyTorch前端 (Using the PyTorch C++ Frontend)">
+                15.使用PyTorch前端 (Using the PyTorch C++ Frontend) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QWERDF007</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/QWERDF007" title="GitHub &rarr; https://github.com/QWERDF007" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Loading-a-PyTorch-Model-in-C"><span class="nav-number">1.</span> <span class="nav-text">Loading a PyTorch Model in C++</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-1-Converting-Your-PyTorch-Model-to-Torch-Script"><span class="nav-number">2.</span> <span class="nav-text">Step 1: Converting Your PyTorch Model to Torch Script</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Converting-to-Torch-Script-via-Tracing"><span class="nav-number">2.1.</span> <span class="nav-text">Converting to Torch Script via Tracing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Converting-to-Torch-Script-via-Annotation"><span class="nav-number">2.2.</span> <span class="nav-text">Converting to Torch Script via Annotation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-2-Serializing-Your-Script-Module-to-a-File"><span class="nav-number">3.</span> <span class="nav-text">Step 2:  Serializing Your Script Module to a File</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-3-Loading-Your-Script-Module-in-C"><span class="nav-number">4.</span> <span class="nav-text">Step 3: Loading Your Script Module in C++</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Minimal-C-Application"><span class="nav-number">4.1.</span> <span class="nav-text">A Minimal C++ Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Depending-on-LibTorch-and-Building-the-Application"><span class="nav-number">4.2.</span> <span class="nav-text">Depending on LibTorch and Building the Application</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-4-Executing-the-Script-Module-in-C"><span class="nav-number">5.</span> <span class="nav-text">Step 4: Executing the Script Module in C++</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-5-Getting-Help-and-Exploring-the-API"><span class="nav-number">6.</span> <span class="nav-text">Step 5: Getting Help and Exploring the API</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QWERDF007</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "Krm9HI5SLyUYN5cnLvBfPp6C-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "Krm9HI5SLyUYN5cnLvBfPp6C-gzGzoHsz",
+                'X-LC-Key': "787aFD6m4QVDw9BhnJTF05E0",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

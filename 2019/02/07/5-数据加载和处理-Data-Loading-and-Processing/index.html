@@ -97,14 +97,14 @@
 
 
   <meta name="description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换 pandas : 解析 csv  123456789101112import osimport torchimport pandas as pd">
-<meta name="keywords" content="Python,PyTorch">
+<meta name="keywords" content="ML,Python,PyTorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="5.数据加载和处理 (Data Loading and Processing)">
 <meta property="og:url" content="https://QWERDF007.github.io/2019/02/07/5-数据加载和处理-Data-Loading-and-Processing/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换 pandas : 解析 csv  123456789101112import osimport torchimport pandas as pd">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-06T15:09:51.349Z">
+<meta property="og:updated_time" content="2019-04-08T07:37:10.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="5.数据加载和处理 (Data Loading and Processing)">
 <meta name="twitter:description" content="[TOC] Data Loading and Processing解决机器学习问题时，大部分精力花费在处理数据上。PyTorch 提供许多工具使得加载数据变得简单，代码更具可读性。请确保安装了以下的包：  scikit-image : 图像输入输出和变换 pandas : 解析 csv  123456789101112import osimport torchimport pandas as pd">
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-06 23:09:51" itemprop="dateModified" datetime="2019-03-06T23:09:51+08:00">2019-03-06</time>
+                <time title="Modified: 2019-04-08 15:37:10" itemprop="dateModified" datetime="2019-04-08T15:37:10+08:00">2019-04-08</time>
               
             
           </span>
@@ -402,7 +402,21 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PyTorch学习笔记/" itemprop="url" rel="index"><span itemprop="name">PyTorch学习笔记</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/" itemprop="url" rel="index"><span itemprop="name">PyTorch</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
 
                 
                 
@@ -463,7 +477,7 @@
 <li><code>__len__</code> ：使 len(dataset) 返回数据集的长度</li>
 <li><code>__getitem__</code> ：支持索引，因此 <code>dataset[i]</code> 可以获取第 i 个样本</li>
 </ul>
-<p>为人类特征数据集创建 <code>Dataset</code> 类，在 <code>__init__</code> 中读取 csv 文件，<code>__getitem__</code> 中读取图像。因为不是一次性全部存进内存而是在需要时读取，这样会节省内存。</p>
+<p>为人脸特征数据集创建 <code>Dataset</code> 类，在 <code>__init__</code> 中读取 csv 文件，<code>__getitem__</code> 中读取图像。因为不是一次性全部存进内存而是在需要时读取，这样会节省内存。</p>
 <p>数据集的样本将是一个字典形如：<code>{&#39;image&#39;: image, &#39;landmarks&#39;: landmarks}</code> 。自定的 <code>Dataset</code> 的有一个可选参数 <code>transform</code> ，这样就可以在需要时处理样本。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FaceLandmarksDataset</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    <span class="string">"""Face Landmarks dataset."""</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, csv_file, root_dir, transform=None)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">        	csv_file: 标注文件</span></span><br><span class="line"><span class="string">        	root_dir: 存储图像的目录</span></span><br><span class="line"><span class="string">        	transform: (可选)图像变换</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.landmarks_frame = pd.read_csv(csv_file)</span><br><span class="line">        self.root_dir = root_dir</span><br><span class="line">        self.transform = transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.landmarks_frame)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, idx)</span>:</span></span><br><span class="line">        img_name = os.path.join(self.root_dir,</span><br><span class="line">                                self.landmarks_frame.iloc[idx, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        image = io.imread(img_name)</span><br><span class="line">        landmarks = self.landmarks_frame.iloc[idx, <span class="number">1</span>:].values</span><br><span class="line">        landmarks = landmarks.astype(<span class="string">'float'</span>).reshape(<span class="number">-1</span>, <span class="number">2</span>)</span><br><span class="line">        sample = &#123;<span class="string">'image'</span>: image, <span class="string">'landmarks'</span>: landmarks&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform:</span><br><span class="line">            sample = self.transform(sample)</span><br><span class="line">        <span class="keyword">return</span> sample</span><br></pre></td></tr></table></figure>
 <p>实例化该类并遍历数据样本。</p>
@@ -514,6 +528,8 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
           
             <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           
@@ -612,7 +628,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -629,7 +645,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="[TOC] CUDA 安装前准备 验证是否有支持的GPU 验证系统是否是受支持版本 验证是否已安装gcc 验证是否安装相应的内核头文件和开发包 下载 NVIDIA 驱动 下载 CUDA 和 cuDNN 工具包  验证 GPU1lspci | grep -i nvidia http://developer.nvidia.com/cuda-gpus 中列出了受支持的 GPU 验证 Linux 系统CU">
+  <meta name="description" content="CUDA 安装前准备 验证 GPU 验证 Linux 系统 验证 gcc 验证内核文件和开发包 下载 NVIDIA 驱动 下载 CUDA 和 cuDNN 工具包   安装 概述 安装过程 1.执行安装前准备 2.关闭 Nouveau 驱动 3.设备节点验证 4.重启进入文本模式 5.安装 NVIDIA 驱动 6.安装 CUDA 7.安装 cuDNN 8.执行安装后准备       CUDA 安">
 <meta name="keywords" content="Linux,NVIDIA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux安装NVIDIA驱动,CUDA和cuDNN">
 <meta property="og:url" content="https://QWERDF007.github.io/2019/02/19/Linux安装NVIDIA驱动-CUDA和cuDNN/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
-<meta property="og:description" content="[TOC] CUDA 安装前准备 验证是否有支持的GPU 验证系统是否是受支持版本 验证是否已安装gcc 验证是否安装相应的内核头文件和开发包 下载 NVIDIA 驱动 下载 CUDA 和 cuDNN 工具包  验证 GPU1lspci | grep -i nvidia http://developer.nvidia.com/cuda-gpus 中列出了受支持的 GPU 验证 Linux 系统CU">
+<meta property="og:description" content="CUDA 安装前准备 验证 GPU 验证 Linux 系统 验证 gcc 验证内核文件和开发包 下载 NVIDIA 驱动 下载 CUDA 和 cuDNN 工具包   安装 概述 安装过程 1.执行安装前准备 2.关闭 Nouveau 驱动 3.设备节点验证 4.重启进入文本模式 5.安装 NVIDIA 驱动 6.安装 CUDA 7.安装 cuDNN 8.执行安装后准备       CUDA 安">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-08T07:34:20.985Z">
+<meta property="og:updated_time" content="2019-05-08T16:02:51.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux安装NVIDIA驱动,CUDA和cuDNN">
-<meta name="twitter:description" content="[TOC] CUDA 安装前准备 验证是否有支持的GPU 验证系统是否是受支持版本 验证是否已安装gcc 验证是否安装相应的内核头文件和开发包 下载 NVIDIA 驱动 下载 CUDA 和 cuDNN 工具包  验证 GPU1lspci | grep -i nvidia http://developer.nvidia.com/cuda-gpus 中列出了受支持的 GPU 验证 Linux 系统CU">
+<meta name="twitter:description" content="CUDA 安装前准备 验证 GPU 验证 Linux 系统 验证 gcc 验证内核文件和开发包 下载 NVIDIA 驱动 下载 CUDA 和 cuDNN 工具包   安装 概述 安装过程 1.执行安装前准备 2.关闭 Nouveau 驱动 3.设备节点验证 4.重启进入文本模式 5.安装 NVIDIA 驱动 6.安装 CUDA 7.安装 cuDNN 8.执行安装后准备       CUDA 安">
 
 
 
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-08 15:34:20" itemprop="dateModified" datetime="2019-04-08T15:34:20+08:00">2019-04-08</time>
+                <time title="Modified: 2019-05-09 00:02:51" itemprop="dateModified" datetime="2019-05-09T00:02:51+08:00">2019-05-09</time>
               
             
           </span>
@@ -454,8 +454,35 @@
       
 
       
-        <p>[TOC]</p>
-<h1 id="CUDA-安装前准备"><a href="#CUDA-安装前准备" class="headerlink" title="CUDA 安装前准备"></a>CUDA 安装前准备</h1><ul>
+        <!-- toc -->
+<ul>
+<li><a href="#cuda-安装前准备">CUDA 安装前准备</a><ul>
+<li><a href="#验证-gpu">验证 GPU</a></li>
+<li><a href="#验证-linux-系统">验证 Linux 系统</a></li>
+<li><a href="#验证-gcc">验证 gcc</a></li>
+<li><a href="#验证内核文件和开发包">验证内核文件和开发包</a></li>
+<li><a href="#下载-nvidia-驱动">下载 NVIDIA 驱动</a></li>
+<li><a href="#下载-cuda-和-cudnn-工具包">下载 CUDA 和 cuDNN 工具包</a></li>
+</ul>
+</li>
+<li><a href="#安装">安装</a><ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#安装过程">安装过程</a><ul>
+<li><a href="#1执行安装前准备">1.执行安装前准备</a></li>
+<li><a href="#2关闭-nouveau-驱动">2.关闭 Nouveau 驱动</a></li>
+<li><a href="#3设备节点验证">3.设备节点验证</a></li>
+<li><a href="#4重启进入文本模式">4.重启进入文本模式</a></li>
+<li><a href="#5安装-nvidia-驱动">5.安装 NVIDIA 驱动</a></li>
+<li><a href="#6安装-cuda">6.安装 CUDA</a></li>
+<li><a href="#7安装-cudnn">7.安装 cuDNN</a></li>
+<li><a href="#8执行安装后准备">8.执行安装后准备</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="cuda-安装前准备">CUDA 安装前准备</span></h1><ul>
 <li>验证是否有支持的GPU</li>
 <li>验证系统是否是受支持版本</li>
 <li>验证是否已安装gcc</li>
@@ -463,16 +490,16 @@
 <li>下载 NVIDIA 驱动</li>
 <li>下载 CUDA 和 cuDNN 工具包</li>
 </ul>
-<h2 id="验证-GPU"><a href="#验证-GPU" class="headerlink" title="验证 GPU"></a>验证 GPU</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci | grep -i nvidia</span><br></pre></td></tr></table></figure>
+<h2><span id="验证-gpu">验证 GPU</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci | grep -i nvidia</span><br></pre></td></tr></table></figure>
 <p><a href="http://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">http://developer.nvidia.com/cuda-gpus</a> 中列出了受支持的 GPU</p>
-<h2 id="验证-Linux-系统"><a href="#验证-Linux-系统" class="headerlink" title="验证 Linux 系统"></a>验证 Linux 系统</h2><p>CUDA 仅在某些特定的 Linux 发行版受支持</p>
+<h2><span id="验证-linux-系统">验证 Linux 系统</span></h2><p>CUDA 仅在某些特定的 Linux 发行版受支持</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -m &amp;&amp; cat /etc/*release</span><br></pre></td></tr></table></figure>
 <p>output：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x86_64</span><br><span class="line">DISTRIB_ID=Ubuntu</span><br><span class="line">DISTRIB_RELEASE=16.04</span><br><span class="line">DISTRIB_CODENAME=xenial</span><br><span class="line">DISTRIB_DESCRIPTION=&quot;Ubuntu 16.04.5 LTS&quot;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h2 id="验证-gcc"><a href="#验证-gcc" class="headerlink" title="验证 gcc"></a>验证 gcc</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
+<h2><span id="验证-gcc">验证 gcc</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
 <p>output：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc (Ubuntu 5.4.0-6ubuntu1~16.04.10) 5.4.0 20160609</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h2 id="验证内核文件和开发包"><a href="#验证内核文件和开发包" class="headerlink" title="验证内核文件和开发包"></a>验证内核文件和开发包</h2><p>查看内核版本：</p>
+<h2><span id="验证内核文件和开发包">验证内核文件和开发包</span></h2><p>查看内核版本：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
 <p>运行以下命令确保安装正确的内核文件和开发包：</p>
 <p><strong>Ubuntu</strong>：</p>
@@ -481,11 +508,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install kernel-devel-$(uname -r) kernel-headers-$(uname -r)</span><br></pre></td></tr></table></figure>
 <p><strong>Fedora</strong>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install kernel-devel-$(uname -r) kernel-headers-$(uname -r)</span><br></pre></td></tr></table></figure>
-<h2 id="下载-NVIDIA-驱动"><a href="#下载-NVIDIA-驱动" class="headerlink" title="下载 NVIDIA 驱动"></a>下载 NVIDIA 驱动</h2><p>单独安装驱动，而不要安装 CUDA 附带的驱动，建议下载runfile。<br>下载地址：<a href="https://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" rel="noopener">https://www.nvidia.com/Download/index.aspx?lang=en-us</a></p>
-<h2 id="下载-CUDA-和-cuDNN-工具包"><a href="#下载-CUDA-和-cuDNN-工具包" class="headerlink" title="下载 CUDA 和 cuDNN 工具包"></a>下载 CUDA 和 cuDNN 工具包</h2><p>建议下载 runfile(.run 文件)，这里以 <strong>CUDA 10</strong> 为例<br>CUDA 下载地址：<a href="http://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">http://developer.nvidia.com/cuda-downloads</a><br>cuDNN 下载地址：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a></p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>先单独安装驱动，再安装 CUDA 和 cudnn。runfile (.run 文件) 通过交互式文本界面安装 NVIDIA 驱动，CUDA 和 CUDA 示例。使用 root 执行安装程序，而不要在安装期间使用权限提升。</p>
-<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="1-执行安装前准备"><a href="#1-执行安装前准备" class="headerlink" title="1.执行安装前准备"></a>1.执行安装前准备</h3><p>按上面的 CUDA 安装前准备进行</p>
-<h3 id="2-关闭-Nouveau-驱动"><a href="#2-关闭-Nouveau-驱动" class="headerlink" title="2.关闭 Nouveau 驱动"></a>2.关闭 Nouveau 驱动</h3><p>安装 NVIDIA 显卡驱动，首先得关闭 Nouveau 驱动，如果执行下面的命令，有输出则说明 Nouveau 驱动被加载</p>
+<h2><span id="下载-nvidia-驱动">下载 NVIDIA 驱动</span></h2><p>单独安装驱动，而不要安装 CUDA 附带的驱动，建议下载runfile。<br>下载地址：<a href="https://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" rel="noopener">https://www.nvidia.com/Download/index.aspx?lang=en-us</a></p>
+<h2><span id="下载-cuda-和-cudnn-工具包">下载 CUDA 和 cuDNN 工具包</span></h2><p>建议下载 runfile(.run 文件)，这里以 <strong>CUDA 10</strong> 为例<br>CUDA 下载地址：<a href="http://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">http://developer.nvidia.com/cuda-downloads</a><br>cuDNN 下载地址：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a></p>
+<h1><span id="安装">安装</span></h1><h2><span id="概述">概述</span></h2><p>先单独安装驱动，再安装 CUDA 和 cudnn。runfile (.run 文件) 通过交互式文本界面安装 NVIDIA 驱动，CUDA 和 CUDA 示例。使用 root 执行安装程序，而不要在安装期间使用权限提升。</p>
+<h2><span id="安装过程">安装过程</span></h2><h3><span id="1执行安装前准备">1.执行安装前准备</span></h3><p>按上面的 CUDA 安装前准备进行</p>
+<h3><span id="2关闭-nouveau-驱动">2.关闭 Nouveau 驱动</span></h3><p>安装 NVIDIA 显卡驱动，首先得关闭 Nouveau 驱动，如果执行下面的命令，有输出则说明 Nouveau 驱动被加载</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></table></figure>
 <p><strong>Ubuntu</strong>：</p>
 <ol>
@@ -514,20 +541,20 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dracut --force</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="3-设备节点验证"><a href="#3-设备节点验证" class="headerlink" title="3.设备节点验证"></a>3.设备节点验证</h3><p>检查设备文件 <code>/dev/NVIDIA*</code> 存在且有666的文件权限，使用 NVIDIA 驱动程序一般会自动创建这些文件，但可能某些系统不允许，可用下面的脚本手动创建：</p>
+<h3><span id="3设备节点验证">3.设备节点验证</span></h3><p>检查设备文件 <code>/dev/NVIDIA*</code> 存在且有666的文件权限，使用 NVIDIA 驱动程序一般会自动创建这些文件，但可能某些系统不允许，可用下面的脚本手动创建：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line">/sbin/modprobe nvidia</span><br><span class="line"></span><br><span class="line">if [ "$?" -eq 0 ]; then</span><br><span class="line"><span class="meta">  #</span> Count the number of NVIDIA controllers found.</span><br><span class="line">  NVDEVS=`lspci | grep -i NVIDIA`</span><br><span class="line">  N3D=`echo "$NVDEVS" | grep "3D controller" | wc -l`</span><br><span class="line">  NVGA=`echo "$NVDEVS" | grep "VGA compatible controller" | wc -l`</span><br><span class="line"></span><br><span class="line">  N=`expr $N3D + $NVGA - 1`</span><br><span class="line">  for i in `seq 0 $N`; do</span><br><span class="line">    mknod -m 666 /dev/nvidia$i c 195 $i</span><br><span class="line">  done</span><br><span class="line"></span><br><span class="line">  mknod -m 666 /dev/nvidiactl c 195 255</span><br><span class="line"></span><br><span class="line">else</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">/sbin/modprobe nvidia-uvm</span><br><span class="line"></span><br><span class="line">if [ "$?" -eq 0 ]; then</span><br><span class="line"><span class="meta">  #</span> Find out the major device number used by the nvidia-uvm driver</span><br><span class="line">  D=`grep nvidia-uvm /proc/devices | awk '&#123;print $1&#125;'`</span><br><span class="line"></span><br><span class="line">  mknod -m 666 /dev/nvidia-uvm c $D 0</span><br><span class="line">else</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<h3 id="4-重启进入文本模式"><a href="#4-重启进入文本模式" class="headerlink" title="4.重启进入文本模式"></a>4.重启进入文本模式</h3><p>重启电脑，在登陆界面按 Ctrl + Alt + F1 进入命令行界面，再登录 root 账号。输入下面指令关闭图形化界面，否则会提示无法安装。</p>
+<h3><span id="4重启进入文本模式">4.重启进入文本模式</span></h3><p>重启电脑，在登陆界面按 Ctrl + Alt + F1 进入命令行界面，再登录 root 账号。输入下面指令关闭图形化界面，否则会提示无法安装。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service lightdm stop</span><br></pre></td></tr></table></figure>
 <p>貌似这个指令也行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init 3</span><br></pre></td></tr></table></figure>
-<h3 id="5-安装-NVIDIA-驱动"><a href="#5-安装-NVIDIA-驱动" class="headerlink" title="5.安装 NVIDIA 驱动"></a>5.安装 NVIDIA 驱动</h3><p>运行下面的指令安装驱动：</p>
+<h3><span id="5安装-nvidia-驱动">5.安装 NVIDIA 驱动</span></h3><p>运行下面的指令安装驱动：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh NVIDIA-Linux-x86_64-410.93.run</span><br></pre></td></tr></table></figure>
 <p>或者通过 chmod 修改权限，直接在终端运行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x NVIDIA-Linux-x86_64-410.93.run</span><br><span class="line">./NVIDIA-Linux-x86_64-410.93.run</span><br></pre></td></tr></table></figure>
 <p>然后巴拉巴拉一顿安装，安装完可能会出现黑屏或者无限登录的情况，网上有多种解决方案：</p>
 <ol>
 <li><p>安装的时候加参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh NVIDIA-Linux-x86_64-410.93.run -no-x-check -no-nouveau-check -no-opengl-files</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./NVIDIA-Linux-x86_64-410.93.run -no-x-check -no-nouveau-check -no-opengl-files</span><br></pre></td></tr></table></figure>
 <ul>
 <li>-no-x-check：安装时关闭 X</li>
 <li>-no-nouveau-check：安装时禁用 Nouveau</li>
@@ -542,7 +569,7 @@
 <li>nomodeset：在 X 之前不要加载显卡驱动，调用集显驱动 </li>
 <li>acpi_osi=linux：告诉 BIOS 以 Linux 系统启动，调用 Linux 的驱动，因此可以调用 NVIDIA 驱动</li>
 </ul>
-<p><a href="http://www.kbase101.com/question/23589.html" target="_blank" rel="noopener">http://www.kbase101.com/question/23589.html</a> 这里介绍了acpi_osi的作用</p>
+<p><a href="http://www.kbase101.com/question/23589.html" target="_blank" rel="noopener">这里</a>介绍了acpi_osi的作用</p>
 <p>修改前：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash nomodeset&quot;</span><br></pre></td></tr></table></figure>
 <p>修改后：</p>
@@ -550,11 +577,11 @@
 </li>
 </ol>
 <p><strong>注意：</strong>安装过程可能会提示是否要用 NVIDIA 的 xconfig 覆盖，如果用 N 卡作为显示卡，则选择覆盖。</p>
-<h3 id="6-安装-CUDA"><a href="#6-安装-CUDA" class="headerlink" title="6.安装 CUDA"></a>6.安装 CUDA</h3><p>运行下面的命令安装 CUDA，并按照指示进行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh cuda_10.0.130_410.48_linux.run</span><br></pre></td></tr></table></figure>
+<h3><span id="6安装-cuda">6.安装 CUDA</span></h3><p>运行下面的命令安装 CUDA，并按照指示进行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x cuda_10.0.130_410.48_linux.run</span><br><span class="line">./cuda_10.0.130_410.48_linux.run</span><br></pre></td></tr></table></figure>
 <p>这里如果不是 root 用户可能会提示权限不够，建议使用 root 用户安装，或者使用 <strong>sudo</strong> 提升权限。注意先前已经安装了驱动，因此不要安装 CUDA 附带的驱动。</p>
 <p>安装 CUDA 也可以加参数，和安装驱动差不多，如果显示卡不是 N 卡，建议加上 <code>--no-opengl-libs</code> 参数，否则会覆盖非 N 卡的 OpenGL，导致无法显示。如果显示卡是 N 卡，则 X 的配置文件，<code>/etc/X11/xorg.conf</code> 可能需要修改。某些情况，nvidia-xconfig 能被用来自动生成系统文件 xorg.conf 文件，因此加上 <code>--run-nvidia-xconfig</code> 参数可以配置 X。</p>
-<h3 id="7-安装-cuDNN"><a href="#7-安装-cuDNN" class="headerlink" title="7.安装 cuDNN"></a>7.安装 cuDNN</h3><ul>
+<h3><span id="7安装-cudnn">7.安装 cuDNN</span></h3><ul>
 <li>需要安装 NVIDIA 驱动</li>
 <li>需要安装 CUDA</li>
 </ul>
@@ -562,12 +589,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp cudnn-10.0-linux-x64-v7.4.2.24.solitairetheme8 cudnn-10.0-linux-x64-v7.4.2.24.tgz</span><br><span class="line">tar -zxvf cudnn-10.0-linux-x64-v7.4.2.24.tgz</span><br></pre></td></tr></table></figure>
 <p>然后将 cuDNN 拷贝到 CUDA 的目录下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp cuda/include/cudnn.h /usr/local/cuda/include</span><br><span class="line">sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64</span><br><span class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
-<h3 id="8-执行安装后准备"><a href="#8-执行安装后准备" class="headerlink" title="8.执行安装后准备"></a>8.执行安装后准备</h3><ol>
+<h3><span id="8执行安装后准备">8.执行安装后准备</span></h3><ol>
 <li><p>添加环境变量</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/profile</span><br></pre></td></tr></table></figure>
 <p>将下面的添加至末尾</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/cuda-10.0/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:/usr/local/cuda/bin</span><br><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -689,7 +715,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -712,7 +738,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -735,7 +767,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -786,7 +824,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA-安装前准备"><span class="nav-number">1.</span> <span class="nav-text">CUDA 安装前准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#验证-GPU"><span class="nav-number">1.1.</span> <span class="nav-text">验证 GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证-Linux-系统"><span class="nav-number">1.2.</span> <span class="nav-text">验证 Linux 系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证-gcc"><span class="nav-number">1.3.</span> <span class="nav-text">验证 gcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证内核文件和开发包"><span class="nav-number">1.4.</span> <span class="nav-text">验证内核文件和开发包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载-NVIDIA-驱动"><span class="nav-number">1.5.</span> <span class="nav-text">下载 NVIDIA 驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载-CUDA-和-cuDNN-工具包"><span class="nav-number">1.6.</span> <span class="nav-text">下载 CUDA 和 cuDNN 工具包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装过程"><span class="nav-number">2.2.</span> <span class="nav-text">安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-执行安装前准备"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.执行安装前准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-关闭-Nouveau-驱动"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.关闭 Nouveau 驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-设备节点验证"><span class="nav-number">2.2.3.</span> <span class="nav-text">3.设备节点验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-重启进入文本模式"><span class="nav-number">2.2.4.</span> <span class="nav-text">4.重启进入文本模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-安装-NVIDIA-驱动"><span class="nav-number">2.2.5.</span> <span class="nav-text">5.安装 NVIDIA 驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-安装-CUDA"><span class="nav-number">2.2.6.</span> <span class="nav-text">6.安装 CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-安装-cuDNN"><span class="nav-number">2.2.7.</span> <span class="nav-text">7.安装 cuDNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-执行安装后准备"><span class="nav-number">2.2.8.</span> <span class="nav-text">8.执行安装后准备</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">CUDA 安装前准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">验证 GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">验证 Linux 系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">验证 gcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">验证内核文件和开发包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.</span> <span class="nav-text">下载 NVIDIA 驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.</span> <span class="nav-text">下载 CUDA 和 cuDNN 工具包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.执行安装前准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.关闭 Nouveau 驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">3.设备节点验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.4.</span> <span class="nav-text">4.重启进入文本模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.5.</span> <span class="nav-text">5.安装 NVIDIA 驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.6.</span> <span class="nav-text">6.安装 CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.7.</span> <span class="nav-text">7.安装 cuDNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.8.</span> <span class="nav-text">8.执行安装后准备</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

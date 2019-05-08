@@ -450,7 +450,7 @@
 
       
         <p>[TOC]</p>
-<h1 id="PyTorch-C-API"><a href="#PyTorch-C-API" class="headerlink" title="PyTorch C++ API"></a>PyTorch C++ API</h1><p>这个页面是 PyTorch  C++ API 公开部分的文档，API 能被粗略分为五部分：  </p>
+<h1><span id="pytorch-c-api">PyTorch C++ API</span></h1><p>这个页面是 PyTorch  C++ API 公开部分的文档，API 能被粗略分为五部分：  </p>
 <ul>
 <li><strong>ATen</strong>：基础的张量和数学操作库，其他库编译的基础</li>
 <li><strong>Autograd</strong>：ATen上添加自动求导</li>
@@ -459,13 +459,13 @@
 <li><strong>C++ Extensions</strong>：使用自定义 C++ 和 CUDA 例程扩展 PyTorch 的一种方式</li>
 </ul>
 <p>这些构建块共同构成了用于张量计算和动态神经网络的研究和生产 C++ 库，强调 GPU 加速和 CPU 性能。它目前在 Facebook 上用于研究和生产。</p>
-<h1 id="ATen"><a href="#ATen" class="headerlink" title="ATen"></a>ATen</h1><p>ATen 是一个基础的张量库，几乎其他所有 PyTorch 的 Python 和 C++ 接口都建立在此之上。它提供核心的<code>Tensor</code> 类，其上定义了数百个操作。这些操作的大多数都有在 GPU 和 CPU 上实现，<code>Tensor</code> 类将会根据它的类型来动态分配。使用 ATen 的简单示例：</p>
+<h1><span id="aten">ATen</span></h1><p>ATen 是一个基础的张量库，几乎其他所有 PyTorch 的 Python 和 C++ 接口都建立在此之上。它提供核心的<code>Tensor</code> 类，其上定义了数百个操作。这些操作的大多数都有在 GPU 和 CPU 上实现，<code>Tensor</code> 类将会根据它的类型来动态分配。使用 ATen 的简单示例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ATen/ATen.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">at::Tensor a = at::ones(&#123;<span class="number">2</span>, <span class="number">2</span>&#125;, at::kInt);</span><br><span class="line">at::Tensor b = at::randn(&#123;<span class="number">2</span>, <span class="number">2</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> c = a + b.to(at::KInt);</span><br></pre></td></tr></table></figure>
 <p>这个 <code>Tensor</code> 类和其他 ATen 的符号都能在 <code>at::</code> 命名空间内找到，<a href="https://pytorch.org/cppdocs/api/namespace_at.html#namespace-at" target="_blank" rel="noopener">文档</a>。</p>
-<h1 id="Autograd"><a href="#Autograd" class="headerlink" title="Autograd"></a>Autograd</h1><p>autograd 是 PyTorch 的 C++ API 的一部分，用自动求导的能力扩充了 ATen 的 <code>Tensor</code> 类。autograd 系统记录张量上的操作来形成一个自动求导图。在该图的叶节点上调用 <code>backward()</code>，跨越自动求导图中的函数和张量网络执行反向模式求导，最终生成梯度。下面是该接口的示例：</p>
+<h1><span id="autograd">Autograd</span></h1><p>autograd 是 PyTorch 的 C++ API 的一部分，用自动求导的能力扩充了 ATen 的 <code>Tensor</code> 类。autograd 系统记录张量上的操作来形成一个自动求导图。在该图的叶节点上调用 <code>backward()</code>，跨越自动求导图中的函数和张量网络执行反向模式求导，最终生成梯度。下面是该接口的示例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/csrc/autograd/variable.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/csrc/autograd/function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">torch::Tensor a = torch::ones(&#123;<span class="number">2</span>, <span class="number">2</span>&#125;, torch::requires_grad());</span><br><span class="line">torch::Tensor b = torch::randn(&#123;<span class="number">2</span>, <span class="number">2</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> c = a + b;</span><br><span class="line">c.backward();</span><br></pre></td></tr></table></figure>
 <p>ATen 的 <code>at::Tensor</code> 类默认是不可微的。要为 autograd API 提供的张量添加可微性，需要使用 <code>torch::</code> 命名空间中的张量工厂函数来代替 <code>at::</code> 命名空间的。例如，<code>at::ones</code> 创建的张量不可微，但 <code>torch::ones</code> 创建的张量可微。</p>
-<h1 id="C-Frontend"><a href="#C-Frontend" class="headerlink" title="C++ Frontend"></a>C++ Frontend</h1><p>PyTorch C++ 前端为神经网络和通用机器学习研究和生产用例提供一个高级的，纯 C++ 模型接口，很大程度上遵循 Python API 的设计和提供的功能。C++ 前端包含以下：  </p>
+<h1><span id="c-frontend">C++ Frontend</span></h1><p>PyTorch C++ 前端为神经网络和通用机器学习研究和生产用例提供一个高级的，纯 C++ 模型接口，很大程度上遵循 Python API 的设计和提供的功能。C++ 前端包含以下：  </p>
 <ul>
 <li>通过分层模块系统(如 <code>torch.nn.Module</code>)定义机器学习模型的接口；</li>
 <li>用于常用建模目的的已存模块(如 convolutions, RNNs, batch normalization等)的标准库；</li>
@@ -478,15 +478,15 @@
 <li>实用的工具，促进与 ATen 和 Autograd API的连接；</li>
 </ul>
 <p>有关 C++ 前端更加详细的描述，查看此<a href="https://pytorch.org/cppdocs/frontend.html" target="_blank" rel="noopener">文档</a> 。与 C++ 前端相关的 torch:: 命名空间相关部分包括 <a href="https://pytorch.org/cppdocs/api/namespace_torch__nn.html#namespace-torch-nn" target="_blank" rel="noopener">torch::nn</a>, <a href="https://pytorch.org/cppdocs/api/namespace_torch__optim.html#namespace-torch-optim" target="_blank" rel="noopener">torch::optim</a>, <a href="https://pytorch.org/cppdocs/api/namespace_torch__data.html#namespace-torch-data" target="_blank" rel="noopener">torch::data</a>, <a href="https://pytorch.org/cppdocs/api/namespace_torch__serialize.html#namespace-torch-serialize" target="_blank" rel="noopener">torch::serialize</a>, <a href="https://pytorch.org/cppdocs/api/namespace_torch__jit.html#namespace-torch-jit" target="_blank" rel="noopener">torch::jit</a> 和 <a href="https://pytorch.org/cppdocs/api/namespace_torch__python.html#namespace-torch-python" target="_blank" rel="noopener">torch::python</a>。C++ 前端的示例能在这个<a href="https://github.com/goldsborough/examples/tree/cpp/cpp" target="_blank" rel="noopener">仓库</a>找到。</p>
-<h1 id="TorchScript"><a href="#TorchScript" class="headerlink" title="TorchScript"></a>TorchScript</h1><p>TorchScript 是 PyTorch 模型的一种表示，能被 TorchScript 编译器理解，编译和序列化。本质上，TorchScript 本身就是一种编程语言。它是使用 PyTorch API 的 Python 子集。TorchScript 的 C++ 接口包含三个主要功能：  </p>
+<h1><span id="torchscript">TorchScript</span></h1><p>TorchScript 是 PyTorch 模型的一种表示，能被 TorchScript 编译器理解，编译和序列化。本质上，TorchScript 本身就是一种编程语言。它是使用 PyTorch API 的 Python 子集。TorchScript 的 C++ 接口包含三个主要功能：  </p>
 <ul>
 <li>加载和执行用 Python 定义的序列化 TorchScript 模型的机制；</li>
 <li>用于定义扩展 TorchScript 标准库的自定义运算的 API；</li>
 <li>从 C++ 即时编译 TorchScript 程序</li>
 </ul>
 <p>如果想尽可能在 Python 中定义模型，但随后将它们导出至 C++ 以用于生产环境和非 Python 推理，则第一种机制可能很有用。能在这个<a href="https://pytorch.org/tutorials/advanced/cpp_export.html" target="_blank" rel="noopener">链接</a>找到更多与它相关的内容。第二个 API 关注的是想通过自定义运算扩展 TorchScript 的场景，能在推理期间被序列化和 C++ 调用。最后，<a href="https://pytorch.org/cppdocs/api/function_namespacetorch_1_1jit_1a176d99fd5bf0233119a5f49c07a1d01d.html#exhale-function-namespacetorch-1-1jit-1a176d99fd5bf0233119a5f49c07a1d01d" target="_blank" rel="noopener">torch::jit::compile</a> 函数可用于直接由 C++ 访问 TorchScript 编译器。</p>
-<h1 id="C-Extensions"><a href="#C-Extensions" class="headerlink" title="C++ Extensions"></a>C++ Extensions</h1><p>C++ 扩展提供简单但强大的方式以访问上述所有的接口，用于扩展 PyTorch 的常规 Python 用例。C++ 扩展常用于在 C++ 或 CUDA 实现自定义运算以加速使用 PyTorch 进行的研究。C++ 扩展API 并没添加任何新的功能至 PyTorch C++ API。相反，它提供 Python setuptools 和 JIT 编译器的整合，使得能够由 Python 访问 ATen，autograd 和其他 C++ API。想了解更多 C++ 扩展相关，查阅<a href="https://pytorch.org/tutorials/advanced/cpp_extension.html" target="_blank" rel="noopener">教程</a>。</p>
-<h1 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h1><ul>
+<h1><span id="c-extensions">C++ Extensions</span></h1><p>C++ 扩展提供简单但强大的方式以访问上述所有的接口，用于扩展 PyTorch 的常规 Python 用例。C++ 扩展常用于在 C++ 或 CUDA 实现自定义运算以加速使用 PyTorch 进行的研究。C++ 扩展API 并没添加任何新的功能至 PyTorch C++ API。相反，它提供 Python setuptools 和 JIT 编译器的整合，使得能够由 Python 访问 ATen，autograd 和其他 C++ API。想了解更多 C++ 扩展相关，查阅<a href="https://pytorch.org/tutorials/advanced/cpp_extension.html" target="_blank" rel="noopener">教程</a>。</p>
+<h1><span id="contents">Contents</span></h1><ul>
 <li>安装 PyTorch 的 C++ 版<ul>
 <li>最小示例</li>
 <li>支持</li>
@@ -512,7 +512,7 @@
 <li>张量基础</li>
 <li>张量创建API</li>
 </ul>
-<h1 id="Indices-and-Tables"><a href="#Indices-and-Tables" class="headerlink" title="Indices and Tables"></a>Indices and Tables</h1><ul>
+<h1><span id="indices-and-tables">Indices and Tables</span></h1><ul>
 <li>索引</li>
 <li>模块索引</li>
 <li>搜索页面</li>
@@ -567,6 +567,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/17/1-1-广义线性模型-Generalized-Linear-Models/" rel="prev" title="1.1 广义线性模型 (Generalized Linear Models)">
+                1.1 广义线性模型 (Generalized Linear Models) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -636,7 +640,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -659,7 +663,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -682,7 +692,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -733,7 +749,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PyTorch-C-API"><span class="nav-number">1.</span> <span class="nav-text">PyTorch C++ API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ATen"><span class="nav-number">2.</span> <span class="nav-text">ATen</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autograd"><span class="nav-number">3.</span> <span class="nav-text">Autograd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Frontend"><span class="nav-number">4.</span> <span class="nav-text">C++ Frontend</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TorchScript"><span class="nav-number">5.</span> <span class="nav-text">TorchScript</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Extensions"><span class="nav-number">6.</span> <span class="nav-text">C++ Extensions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Contents"><span class="nav-number">7.</span> <span class="nav-text">Contents</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Indices-and-Tables"><span class="nav-number">8.</span> <span class="nav-text">Indices and Tables</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">PyTorch C++ API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">ATen</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Autograd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">C++ Frontend</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">TorchScript</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">C++ Extensions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">Contents</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">Indices and Tables</span></a></li></ol></div>
             
 
           </div>

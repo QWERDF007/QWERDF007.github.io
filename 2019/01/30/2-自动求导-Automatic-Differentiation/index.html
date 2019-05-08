@@ -462,8 +462,8 @@
 
       
         <p>[TOC]</p>
-<h1 id="Autograd-Automatic-Differentiation"><a href="#Autograd-Automatic-Differentiation" class="headerlink" title="Autograd: Automatic Differentiation"></a>Autograd: Automatic Differentiation</h1><p><code>autograd</code> 包是 <strong>PyTorch</strong> 中所有神经网络的核心。<code>autograd</code> 包为所有 Tensors 上的操作提供自动求导。这是个运行时定义的框架，这意味着反向传播是根据代码如何运行来决定的，并且每次迭代可能是不同的。</p>
-<h1 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h1><p><code>torch.Tensor</code> 是这个包的核心类。如果将它的属性 <code>.requires_grad</code> 设为 <code>True</code>，将跟踪对该 Tensor 的所有的操作。当计算完成时可以调用 <code>.backward()</code>，来自动计算所有的梯度。该 Tensor 的梯度将会自动累加至 <code>.grad</code> 属性。</p>
+<h1><span id="autograd-automatic-differentiation">Autograd: Automatic Differentiation</span></h1><p><code>autograd</code> 包是 <strong>PyTorch</strong> 中所有神经网络的核心。<code>autograd</code> 包为所有 Tensors 上的操作提供自动求导。这是个运行时定义的框架，这意味着反向传播是根据代码如何运行来决定的，并且每次迭代可能是不同的。</p>
+<h1><span id="tensor">Tensor</span></h1><p><code>torch.Tensor</code> 是这个包的核心类。如果将它的属性 <code>.requires_grad</code> 设为 <code>True</code>，将跟踪对该 Tensor 的所有的操作。当计算完成时可以调用 <code>.backward()</code>，来自动计算所有的梯度。该 Tensor 的梯度将会自动累加至 <code>.grad</code> 属性。</p>
 <p>停止跟踪一个 Tensor ，可以调用 <code>.detach()</code> 来使之脱离跟踪历史，阻止跟踪它将来的计算。停止跟踪历史，你可以把代码块包在 <code>with torch.no_grad():</code> 里。这对评估一个模型时尤其有用，因为模型可能包含 <code>requires_grad=True</code> 的可训练参数，但我们不需要这些梯度。  </p>
 <p>还有一个类对于自动求导实现非常有用 — <code>Function</code> 。 <code>Tensor</code> 和 <code>Function</code> 相互连接并且生成了一个非循环图，这个图编码了整个计算历史。每个 Tensor 都有 <code>.grad_fn</code> 属性，它引用一个创建该 Tensor 的 <code>Function</code> (除非 Tensor 是由用户创建的 — 它们的 <code>grad_fn</code> 是 <code>None</code>)。</p>
 <p>如果想计算导数，可以在 <code>Tensor</code> 上调用 <code>.backward()</code> 。如果 <code>Tensor</code> 是一个标量 (只有一个元素)，不需要为 <code>backward()</code> 指定任何参数，然而如果包含多个元素，则需为 <code>gradient</code> 参数指定一个匹配形状的 tensor。<br>创建一个张量，并设置 <code>requires_grad=True</code> 来跟踪它的计算</p>
@@ -475,7 +475,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">z = y * y * <span class="number">3</span></span><br><span class="line">out = z.mean()</span><br><span class="line">print(z, out)</span><br></pre></td></tr></table></figure>
 <p><code>.requires_grad_()</code> 就地改变存在的 Tensor 的<code>requires_grad</code> 标志，默认参数为 <code>False</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = torch.randn(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">a = ((a * <span class="number">3</span>) / (a <span class="number">-1</span>))</span><br><span class="line">print(a.requires_grad)</span><br><span class="line">a.requires_grad_(<span class="keyword">True</span>)</span><br><span class="line">print(a.requires_grad)</span><br><span class="line">b = (a * a).sum()</span><br><span class="line">print(b.grad_fn)</span><br></pre></td></tr></table></figure>
-<h1 id="Gradients"><a href="#Gradients" class="headerlink" title="Gradients"></a>Gradients</h1><p><code>out</code> 是一个标量，<code>out.backward()</code> 等于 <code>out.backward(torch.tensor(1.))</code></p>
+<h1><span id="gradients">Gradients</span></h1><p><code>out</code> 是一个标量，<code>out.backward()</code> 等于 <code>out.backward(torch.tensor(1.))</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out.backward()</span><br><span class="line"><span class="comment"># 打印梯度 d(out)/dx</span></span><br><span class="line">print(x.grad)</span><br></pre></td></tr></table></figure>
 <p>通常来说，<code>torch.autograd</code> 是一个计算雅克比矩阵向量积的引擎。(链式法则) 使得将外部梯度反馈至有非标量输出的模型变得非常容易。</p>
 <p>下面看一个关于雅克比矩阵的例子</p>
@@ -605,7 +605,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -628,7 +628,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -651,7 +657,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -702,7 +714,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Autograd-Automatic-Differentiation"><span class="nav-number">1.</span> <span class="nav-text">Autograd: Automatic Differentiation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensor"><span class="nav-number">2.</span> <span class="nav-text">Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradients"><span class="nav-number">3.</span> <span class="nav-text">Gradients</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Autograd: Automatic Differentiation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Gradients</span></a></li></ol></div>
             
 
           </div>

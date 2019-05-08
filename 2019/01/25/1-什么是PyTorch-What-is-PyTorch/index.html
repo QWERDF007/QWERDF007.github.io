@@ -462,8 +462,8 @@
 
       
         <p>[TOC]</p>
-<h1 id="What-is-PyTorch"><a href="#What-is-PyTorch" class="headerlink" title="What is PyTorch"></a>What is PyTorch</h1><p>PyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似</p>
-<h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h2 id="Tensors"><a href="#Tensors" class="headerlink" title="Tensors"></a>Tensors</h2><p>构造 5 x 3 的矩阵，不初始化:</p>
+<h1><span id="what-is-pytorch">What is PyTorch</span></h1><p>PyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似</p>
+<h1><span id="getting-started">Getting Started</span></h1><h2><span id="tensors">Tensors</span></h2><p>构造 5 x 3 的矩阵，不初始化:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 <p>构造随机初始化的矩阵</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = torch.rand(<span class="number">5</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
@@ -477,7 +477,7 @@
 <p>获取 Tensor 的 size:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(x.size())</span><br></pre></td></tr></table></figure>
 <p>注意: <code>torch.Size</code> 实际是一个元组，因此支持所有元组的操作</p>
-<h2 id="Operations"><a href="#Operations" class="headerlink" title="Operations"></a>Operations</h2><p>加法:</p>
+<h2><span id="operations">Operations</span></h2><p>加法:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = torch.rand(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line">print(x + y)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(torch.add(x, y))</span><br></pre></td></tr></table></figure>
 <p>参数 – 输出 Tensor</p>
@@ -489,13 +489,13 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">y = x.view(<span class="number">16</span>)</span><br><span class="line">z = x.view(<span class="number">-1</span>, <span class="number">8</span>) <span class="comment"># size -1 将由其他维度推测出</span></span><br></pre></td></tr></table></figure>
 <p>只有一个元素的 Tensor，可以用 <code>.item()</code> 获取其 Python 数值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">1</span>)</span><br><span class="line">print(x)</span><br><span class="line">print(x.item())</span><br></pre></td></tr></table></figure>
-<h1 id="Numpy-Bridge"><a href="#Numpy-Bridge" class="headerlink" title="Numpy Bridge"></a>Numpy Bridge</h1><p>将一个 Torch Tensor 转换为 NumPy 数组很简单，反之亦然</p>
+<h1><span id="numpy-bridge">Numpy Bridge</span></h1><p>将一个 Torch Tensor 转换为 NumPy 数组很简单，反之亦然</p>
 <p>Torch Tensor 和NumPy 数组将共享底层内存位置，改变其中之一会改变另外一个</p>
-<h2 id="Convert-a-Torch-Tensor-to-a-NumPy-Array"><a href="#Convert-a-Torch-Tensor-to-a-NumPy-Array" class="headerlink" title="Convert a Torch Tensor to a NumPy Array"></a>Convert a Torch Tensor to a NumPy Array</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(<span class="number">5</span>)</span><br><span class="line">b = a.numpy() <span class="comment"># 将 Tensor 转为 NumPy 数组</span></span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">a.add_(<span class="number">1</span>)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
-<h2 id="Converting-NumPy-Array-to-Torch-Tensor"><a href="#Converting-NumPy-Array-to-Torch-Tensor" class="headerlink" title="Converting NumPy Array to Torch Tensor"></a>Converting NumPy Array to Torch Tensor</h2><p>修改 NumPy 数组将自动修改相应的 Tensor</p>
+<h2><span id="convert-a-torch-tensor-to-a-numpy-array">Convert a Torch Tensor to a NumPy Array</span></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(<span class="number">5</span>)</span><br><span class="line">b = a.numpy() <span class="comment"># 将 Tensor 转为 NumPy 数组</span></span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">a.add_(<span class="number">1</span>)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
+<h2><span id="converting-numpy-array-to-torch-tensor">Converting NumPy Array to Torch Tensor</span></h2><p>修改 NumPy 数组将自动修改相应的 Tensor</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.ones(<span class="number">5</span>)</span><br><span class="line">b = torch.from_numpy(a)</span><br><span class="line">np.add(a, <span class="number">1</span>, out=a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
 <p>CPU 上的 Tensor，除了 CharTensor，都支持转换为 NumPy  和返回</p>
-<h1 id="CUDA-Tensors"><a href="#CUDA-Tensors" class="headerlink" title="CUDA Tensors"></a>CUDA Tensors</h1><p>使用 <code>.to()</code> 方法，Tensors 能被移动至任何设备上</p>
+<h1><span id="cuda-tensors">CUDA Tensors</span></h1><p>使用 <code>.to()</code> 方法，Tensors 能被移动至任何设备上</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅当 GPU 可用才执行</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="comment"># 创建 GPU 设备对象</span></span><br><span class="line">    device = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line">    <span class="comment"># 直接在 GPU 上创建 Tensor</span></span><br><span class="line">    y = torch.ones_like(x, device=device)</span><br><span class="line">    <span class="comment"># 使用 .to 方法将 Tensor 移至 GPU</span></span><br><span class="line">    x = x.to(device)</span><br><span class="line">    z = x + y</span><br><span class="line">    print(z)</span><br><span class="line">    <span class="comment"># .to 也可以改变 dtype</span></span><br><span class="line">    print(z.to(<span class="string">"cpu"</span>, torch.double))</span><br></pre></td></tr></table></figure>
 
       
@@ -615,7 +615,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -638,7 +638,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -661,7 +667,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -712,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-PyTorch"><span class="nav-number">1.</span> <span class="nav-text">What is PyTorch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Getting-Started"><span class="nav-number">2.</span> <span class="nav-text">Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensors"><span class="nav-number">2.1.</span> <span class="nav-text">Tensors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operations"><span class="nav-number">2.2.</span> <span class="nav-text">Operations</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numpy-Bridge"><span class="nav-number">3.</span> <span class="nav-text">Numpy Bridge</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Convert-a-Torch-Tensor-to-a-NumPy-Array"><span class="nav-number">3.1.</span> <span class="nav-text">Convert a Torch Tensor to a NumPy Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Converting-NumPy-Array-to-Torch-Tensor"><span class="nav-number">3.2.</span> <span class="nav-text">Converting NumPy Array to Torch Tensor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA-Tensors"><span class="nav-number">4.</span> <span class="nav-text">CUDA Tensors</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">What is PyTorch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">Tensors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">Operations</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Numpy Bridge</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">Convert a Torch Tensor to a NumPy Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">Converting NumPy Array to Torch Tensor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">CUDA Tensors</span></a></li></ol></div>
             
 
           </div>

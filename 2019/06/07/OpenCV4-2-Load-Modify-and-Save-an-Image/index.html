@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="Load, Modify and Save an Image Goals Source Code Explanation 相关链接     Load, Modify and Save an ImageGoals 加载图像(cv::imread) 将图像由 BGR 转换为灰度格式(cv::cvtColor)] 保存图像至磁盘(cv::imwrite)  Source CodeC++: 12345">
+  <meta name="description" content="Load, Modify and Save an ImageGoals 加载图像(cv::imread) 将图像由 BGR 转换为灰度格式(cv::cvtColor)] 保存图像至磁盘(cv::imwrite)  CodeC++: 12345678910111213141516171819#include &amp;lt;iostream&amp;gt;#include &amp;lt;opencv2/opencv.hp">
 <meta name="keywords" content="Python,OpenCV,C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenCV4 - 2.Load Modify and Save an Image">
 <meta property="og:url" content="https://QWERDF007.github.io/2019/06/07/OpenCV4-2-Load-Modify-and-Save-an-Image/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
-<meta property="og:description" content="Load, Modify and Save an Image Goals Source Code Explanation 相关链接     Load, Modify and Save an ImageGoals 加载图像(cv::imread) 将图像由 BGR 转换为灰度格式(cv::cvtColor)] 保存图像至磁盘(cv::imwrite)  Source CodeC++: 12345">
+<meta property="og:description" content="Load, Modify and Save an ImageGoals 加载图像(cv::imread) 将图像由 BGR 转换为灰度格式(cv::cvtColor)] 保存图像至磁盘(cv::imwrite)  CodeC++: 12345678910111213141516171819#include &amp;lt;iostream&amp;gt;#include &amp;lt;opencv2/opencv.hp">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-07T02:58:11.959Z">
+<meta property="og:updated_time" content="2019-06-23T01:22:49.959Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV4 - 2.Load Modify and Save an Image">
-<meta name="twitter:description" content="Load, Modify and Save an Image Goals Source Code Explanation 相关链接     Load, Modify and Save an ImageGoals 加载图像(cv::imread) 将图像由 BGR 转换为灰度格式(cv::cvtColor)] 保存图像至磁盘(cv::imwrite)  Source CodeC++: 12345">
+<meta name="twitter:description" content="Load, Modify and Save an ImageGoals 加载图像(cv::imread) 将图像由 BGR 转换为灰度格式(cv::cvtColor)] 保存图像至磁盘(cv::imwrite)  CodeC++: 12345678910111213141516171819#include &amp;lt;iostream&amp;gt;#include &amp;lt;opencv2/opencv.hp">
 
 
 
@@ -368,12 +368,24 @@
                 
               
 
-              <time title="Created: 2019-06-07 10:43:13 / Modified: 10:58:11" itemprop="dateCreated datePublished" datetime="2019-06-07T10:43:13+08:00">2019-06-07</time>
+              <time title="Created: 2019-06-07 10:43:13" itemprop="dateCreated datePublished" datetime="2019-06-07T10:43:13+08:00">2019-06-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-23 09:22:49" itemprop="dateModified" datetime="2019-06-23T09:22:49+08:00">2019-06-23</time>
               
             
           </span>
@@ -449,32 +461,24 @@
       
 
       
-        <!-- toc -->
-<ul>
-<li><a href="#load-modify-and-save-an-image">Load, Modify and Save an Image</a><ul>
-<li><a href="#goals">Goals</a></li>
-<li><a href="#source-code">Source Code</a></li>
-<li><a href="#explanation">Explanation</a></li>
-<li><a href="#相关链接">相关链接</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-<h1><span id="load-modify-and-save-an-image">Load, Modify and Save an Image</span></h1><h2><span id="goals">Goals</span></h2><ul>
+        <h1><span id="load-modify-and-save-an-image">Load, Modify and Save an Image</span></h1><h2><span id="goals">Goals</span></h2><ul>
 <li>加载图像(cv::imread)</li>
 <li>将图像由 BGR 转换为灰度格式(cv::cvtColor)]</li>
 <li>保存图像至磁盘(cv::imwrite)</li>
 </ul>
-<h2><span id="source-code">Source Code</span></h2><p><strong>C++:</strong></p>
+<h2><span id="code">Code</span></h2><p><strong>C++:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> imagePath = <span class="string">"car.jpg"</span>;</span><br><span class="line">    cv::Mat image;</span><br><span class="line">    image = cv::imread( imagePath, cv::IMREAD_COLOR );</span><br><span class="line">    <span class="keyword">if</span>(!image.data) <span class="comment">// image empty</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Could not load image!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cv::Mat grayImage;</span><br><span class="line">    cv::cvtColor(image, grayImage, cv::COLOR_BGR2GRAY );</span><br><span class="line">    cv::imwrite(<span class="string">"result.jpg"</span>, grayImage);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>Python:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    image_path = <span class="string">'./car.jpg'</span></span><br><span class="line">    image = cv2.imread(image_path)</span><br><span class="line">    <span class="keyword">if</span> image <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:      </span><br><span class="line">        gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</span><br><span class="line">        cv2.imwrite(<span class="string">"result.jpg"</span>, gray_image)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"Could not open image: &#123;&#125;"</span>.format(image_path))</span><br></pre></td></tr></table></figure>
-<h2><span id="explanation">Explanation</span></h2><p>上述代码将目录下 <code>car.jpg</code> 加载并转换为灰度格式后保存至目录下的 <code>result.jpg</code>。同样是加载后先判断是否为空再进行下一步操作，不为空则将图像转换为灰度格式后保存。</p>
-<ul>
-<li>cvtColor：转换图像的颜色空间，第一个参数为输入图像Object，第二个参数为输出Object，第三个参数为颜色空间转换代码，支持就地操作</li>
-<li>imwrite：将图像保存至指定文件，第一个参数为文件路径，第二个参数为图像Object</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    image_path = <span class="string">'./car.jpg'</span></span><br><span class="line">    image = cv2.imread(image_path)</span><br><span class="line">    <span class="keyword">if</span> image <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:      </span><br><span class="line">        gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)</span><br><span class="line">        cv2.imwrite(<span class="string">"result.jpg"</span>, gray_image)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"Could not open image: &#123;&#125;"</span>.format(image_path))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2><span id="explanation">Explanation</span></h2><ul>
+<li><a href="https://docs.opencv.org/master/db/d64/tutorial_load_save_image.html" target="_blank" rel="noopener">Load, Modify, and Save an Image</a></li>
+<li><a href="https://github.com/QWERDF007/LearningOpenCV4" target="_blank" rel="noopener">Github Full Source Code</a></li>
 </ul>
-<h2><span id="相关链接">相关链接</span></h2><p><a href="https://docs.opencv.org/master/db/d64/tutorial_load_save_image.html" target="_blank" rel="noopener">OpenCV Tutorial</a><br><a href="https://github.com/QWERDF007/LearningOpenCV4" target="_blank" rel="noopener">Github</a></p>
+<p>上述代码将目录下 <code>car.jpg</code> 加载并转换为灰度格式后保存至目录下的 <code>result.jpg</code>。同样是加载后先判断是否为空再进行下一步操作，不为空则将图像转换为灰度格式后保存。</p>
+<h2><span id="something-interesting">Something interesting</span></h2><ul>
+<li><a href="https://docs.opencv.org/master/d8/d01/group__imgproc__color__conversions.html#ga397ae87e1288a81d2363b61574eb8cab" target="_blank" rel="noopener">cv::cvtColor</a>：转换图像的颜色空间，第一个参数为输入图像Object，第二个参数为输出Object，第三个参数为颜色空间转换编码 <a href="https://docs.opencv.org/master/d8/d01/group__imgproc__color__conversions.html#ga4e0972be5de079fed4e3a10e24ef5ef0" target="_blank" rel="noopener">Here</a>，支持就地操作</li>
+<li><a href="https://docs.opencv.org/master/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce" target="_blank" rel="noopener">cv::imwrite</a>：将图像保存至指定文件，第一个参数为文件路径，第二个参数为图像Object</li>
+</ul>
 
       
     </div>
@@ -524,6 +528,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/08/OpenCV4-3-Mat-The-Basic-Image-Container/" rel="prev" title="OpenCV4 - 3.Mat - The Basic Image Container">
+                OpenCV4 - 3.Mat - The Basic Image Container <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -593,7 +601,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -659,9 +667,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -712,7 +718,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Load, Modify and Save an Image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Source Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">相关链接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Load, Modify and Save an Image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Something interesting</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -973,8 +979,13 @@
 
   
 
+  <!-- 代码块复制功能 -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  
 </body>
 </html>
 
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
+

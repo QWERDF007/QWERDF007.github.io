@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="[TOC] What is PyTorchPyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似 Getting StartedTensors构造 5 x 3 的矩阵，不初始化: 12import torchx = torch.empty(5, 3) 构造随机初始化的矩阵 1x = torch.rand(5, 3) torch.r">
-<meta name="keywords" content="ML,Python,PyTorch">
+  <meta name="description" content="Mat - The Basic Image ContainerGoals 熟悉 cv::Mat 熟悉 OpenCV 如何操作与存储图像  CodeC++: 1234567891011121314151617181920212223242526272829int main(int argc, char *argv[])&amp;#123;		Mat A; // 仅创建头指针	A = imread(&quot;./ca">
+<meta name="keywords" content="Python,OpenCV,C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1.什么是PyTorch (What is PyTorch)">
-<meta property="og:url" content="https://QWERDF007.github.io/2019/01/25/1-什么是PyTorch-What-is-PyTorch/index.html">
+<meta property="og:title" content="OpenCV4 - 3.Mat - The Basic Image Container">
+<meta property="og:url" content="https://QWERDF007.github.io/2019/06/08/OpenCV4-3-Mat-The-Basic-Image-Container/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
-<meta property="og:description" content="[TOC] What is PyTorchPyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似 Getting StartedTensors构造 5 x 3 的矩阵，不初始化: 12import torchx = torch.empty(5, 3) 构造随机初始化的矩阵 1x = torch.rand(5, 3) torch.r">
+<meta property="og:description" content="Mat - The Basic Image ContainerGoals 熟悉 cv::Mat 熟悉 OpenCV 如何操作与存储图像  CodeC++: 1234567891011121314151617181920212223242526272829int main(int argc, char *argv[])&amp;#123;		Mat A; // 仅创建头指针	A = imread(&quot;./ca">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-08T07:35:57.241Z">
+<meta property="og:updated_time" content="2019-06-23T01:23:17.215Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1.什么是PyTorch (What is PyTorch)">
-<meta name="twitter:description" content="[TOC] What is PyTorchPyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似 Getting StartedTensors构造 5 x 3 的矩阵，不初始化: 12import torchx = torch.empty(5, 3) 构造随机初始化的矩阵 1x = torch.rand(5, 3) torch.r">
+<meta name="twitter:title" content="OpenCV4 - 3.Mat - The Basic Image Container">
+<meta name="twitter:description" content="Mat - The Basic Image ContainerGoals 熟悉 cv::Mat 熟悉 OpenCV 如何操作与存储图像  CodeC++: 1234567891011121314151617181920212223242526272829int main(int argc, char *argv[])&amp;#123;		Mat A; // 仅创建头指针	A = imread(&quot;./ca">
 
 
 
 
 
 
-  <link rel="canonical" href="https://QWERDF007.github.io/2019/01/25/1-什么是PyTorch-What-is-PyTorch/">
+  <link rel="canonical" href="https://QWERDF007.github.io/2019/06/08/OpenCV4-3-Mat-The-Basic-Image-Container/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>1.什么是PyTorch (What is PyTorch) | QWERDF007 的博客</title>
+  <title>OpenCV4 - 3.Mat - The Basic Image Container | QWERDF007 的博客</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/01/25/1-什么是PyTorch-What-is-PyTorch/">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/06/08/OpenCV4-3-Mat-The-Basic-Image-Container/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QWERDF007">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">1.什么是PyTorch (What is PyTorch)
+          <h1 class="post-title" itemprop="name headline">OpenCV4 - 3.Mat - The Basic Image Container
 
               
             
@@ -368,7 +368,7 @@
                 
               
 
-              <time title="Created: 2019-01-25 19:58:38" itemprop="dateCreated datePublished" datetime="2019-01-25T19:58:38+08:00">2019-01-25</time>
+              <time title="Created: 2019-06-08 00:18:43" itemprop="dateCreated datePublished" datetime="2019-06-08T00:18:43+08:00">2019-06-08</time>
             
 
             
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-08 15:35:57" itemprop="dateModified" datetime="2019-04-08T15:35:57+08:00">2019-04-08</time>
+                <time title="Modified: 2019-06-23 09:23:17" itemprop="dateModified" datetime="2019-06-23T09:23:17+08:00">2019-06-23</time>
               
             
           </span>
@@ -402,21 +402,21 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a></span>
 
                 
                 
                   , 
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/" itemprop="url" rel="index"><span itemprop="name">PyTorch</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/Tutorials/" itemprop="url" rel="index"><span itemprop="name">Tutorials</span></a></span>
 
                 
                 
                   , 
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/Tutorials/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
 
                 
                 
@@ -430,7 +430,7 @@
 
           
           
-             <span id="/2019/01/25/1-什么是PyTorch-What-is-PyTorch/" class="leancloud_visitors" data-flag-title="1.什么是PyTorch (What is PyTorch)">
+             <span id="/2019/06/08/OpenCV4-3-Mat-The-Basic-Image-Container/" class="leancloud_visitors" data-flag-title="OpenCV4 - 3.Mat - The Basic Image Container">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -461,42 +461,39 @@
       
 
       
-        <p>[TOC]</p>
-<h1><span id="what-is-pytorch">What is PyTorch</span></h1><p>PyTorch 是基于 Python 的科学计算软件包，GPU 版 NumPy，深度学习框架，操作与 NumPy 很多类似</p>
-<h1><span id="getting-started">Getting Started</span></h1><h2><span id="tensors">Tensors</span></h2><p>构造 5 x 3 的矩阵，不初始化:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p>构造随机初始化的矩阵</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = torch.rand(<span class="number">5</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p><code>torch.rand()</code> 返回在区间 [0, 1] 均匀分布的随机数组。<code>torch.randn()</code> 返回符合正态分布的随机数组，均值为0，方差为1</p>
-<p>构造由零填充的矩阵，类型为 long</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = torch.zeros(<span class="number">5</span>, <span class="number">3</span>, dtype=torch.long)</span><br></pre></td></tr></table></figure>
-<p>直接由 data 构造 Tensor</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">5.5</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-<p>由存在的 Tensor 创建 Tensor，这些方法除了用户传递的新值，会保留输入 Tensor 的属性，如 dtype 等。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = x.new_ones(<span class="number">5</span>, <span class="number">3</span>, dtype=torch.double)</span><br><span class="line">x = torch.randn_like(x, dtype=torch.float)</span><br></pre></td></tr></table></figure>
-<p>获取 Tensor 的 size:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(x.size())</span><br></pre></td></tr></table></figure>
-<p>注意: <code>torch.Size</code> 实际是一个元组，因此支持所有元组的操作</p>
-<h2><span id="operations">Operations</span></h2><p>加法:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = torch.rand(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line">print(x + y)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(torch.add(x, y))</span><br></pre></td></tr></table></figure>
-<p>参数 – 输出 Tensor</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = touch.empty(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line">torch.add(x, y, out=result)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-<p>任何调整 Tensor 的操作都可以用相应名称+后缀 “_” 替代，例如: <code>x.copy()</code> ，<code>x.t()</code></p>
-<p>与 NumPy 类似的索引操作</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(x[:, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<p>想要 resize/reshape Tensor，可以用 <code>torch.view()</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">y = x.view(<span class="number">16</span>)</span><br><span class="line">z = x.view(<span class="number">-1</span>, <span class="number">8</span>) <span class="comment"># size -1 将由其他维度推测出</span></span><br></pre></td></tr></table></figure>
-<p>只有一个元素的 Tensor，可以用 <code>.item()</code> 获取其 Python 数值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">1</span>)</span><br><span class="line">print(x)</span><br><span class="line">print(x.item())</span><br></pre></td></tr></table></figure>
-<h1><span id="numpy-bridge">Numpy Bridge</span></h1><p>将一个 Torch Tensor 转换为 NumPy 数组很简单，反之亦然</p>
-<p>Torch Tensor 和NumPy 数组将共享底层内存位置，改变其中之一会改变另外一个</p>
-<h2><span id="convert-a-torch-tensor-to-a-numpy-array">Convert a Torch Tensor to a NumPy Array</span></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(<span class="number">5</span>)</span><br><span class="line">b = a.numpy() <span class="comment"># 将 Tensor 转为 NumPy 数组</span></span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">a.add_(<span class="number">1</span>)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
-<h2><span id="converting-numpy-array-to-torch-tensor">Converting NumPy Array to Torch Tensor</span></h2><p>修改 NumPy 数组将自动修改相应的 Tensor</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.ones(<span class="number">5</span>)</span><br><span class="line">b = torch.from_numpy(a)</span><br><span class="line">np.add(a, <span class="number">1</span>, out=a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
-<p>CPU 上的 Tensor，除了 CharTensor，都支持转换为 NumPy  和返回</p>
-<h1><span id="cuda-tensors">CUDA Tensors</span></h1><p>使用 <code>.to()</code> 方法，Tensors 能被移动至任何设备上</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅当 GPU 可用才执行</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="comment"># 创建 GPU 设备对象</span></span><br><span class="line">    device = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line">    <span class="comment"># 直接在 GPU 上创建 Tensor</span></span><br><span class="line">    y = torch.ones_like(x, device=device)</span><br><span class="line">    <span class="comment"># 使用 .to 方法将 Tensor 移至 GPU</span></span><br><span class="line">    x = x.to(device)</span><br><span class="line">    z = x + y</span><br><span class="line">    print(z)</span><br><span class="line">    <span class="comment"># .to 也可以改变 dtype</span></span><br><span class="line">    print(z.to(<span class="string">"cpu"</span>, torch.double))</span><br></pre></td></tr></table></figure>
+        <h1><span id="mat-the-basic-image-container">Mat - The Basic Image Container</span></h1><h2><span id="goals">Goals</span></h2><ul>
+<li>熟悉 cv::Mat</li>
+<li>熟悉 OpenCV 如何操作与存储图像</li>
+</ul>
+<h2><span id="code">Code</span></h2><p><strong>C++:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	Mat A; <span class="comment">// 仅创建头指针</span></span><br><span class="line">	A = imread(<span class="string">"./car.jpg"</span>, IMREAD_COLOR); <span class="comment">// 读取图像</span></span><br><span class="line">	<span class="function">Mat <span class="title">B</span><span class="params">(A)</span></span>; <span class="comment">// 拷贝构造</span></span><br><span class="line">	Mat C = A; <span class="comment">// ABC指向同一份数据，头指针不同，任意一个上的操作将修改全部</span></span><br><span class="line">	<span class="comment">// 构造函数 Mat(nrows, ncols, type[, fillValue])</span></span><br><span class="line">	<span class="function">Mat <span class="title">M0</span><span class="params">(<span class="number">7</span>, <span class="number">7</span>, CV_32FC2, Scalar(<span class="number">1</span>, <span class="number">3</span>))</span></span>; <span class="comment">// 创建7x7复数矩阵</span></span><br><span class="line">	<span class="comment">// 创建一个 100x100 的单通道 8bit 矩阵，并以 255 填充</span></span><br><span class="line">	<span class="function">Mat <span class="title">M1</span><span class="params">(<span class="number">100</span>, <span class="number">100</span>, CV_8UC1, Scalar(<span class="number">255</span>))</span></span>; </span><br><span class="line">	<span class="function">Mat <span class="title">M2</span><span class="params">(Size(<span class="number">100</span>, <span class="number">100</span>), CV_8UC3)</span></span>;</span><br><span class="line">	<span class="comment">// 拷贝一份数据，修改DE不会修改A</span></span><br><span class="line">	Mat D = A.clone();  <span class="comment">// A.copyTo(D);</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// ROI</span></span><br><span class="line">	<span class="function">Mat <span class="title">E</span><span class="params">(A, Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">10</span>))</span></span>;</span><br><span class="line">	Mat F = A(Range::all(), Range(<span class="number">1</span>, <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Output</span></span><br><span class="line">	Mat R = Mat(<span class="number">3</span>, <span class="number">2</span>, CV_8UC3);</span><br><span class="line">	randu(R, Scalar::all(<span class="number">0</span>), Scalar::all(<span class="number">255</span>)); <span class="comment">// 随机填充0-255至R</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"R (default format):\n"</span> &lt;&lt; R &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"R (python):\n"</span> &lt;&lt; format(R, Formatter::FMT_PYTHON) &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"R (numpy):\n"</span> &lt;&lt; format(R, Formatter::FMT_NUMPY) &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"R (csv):\n"</span> &lt;&lt; format(R, Formatter::FMT_CSV) &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"R (c):\n"</span> &lt;&lt; format(R, Formatter::FMT_C) &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Python:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    A = cv2.imread(<span class="string">'./car.jpg'</span>, cv2.IMREAD_COLOR)</span><br><span class="line">    B = A</span><br><span class="line">    <span class="comment"># 拷贝构造</span></span><br><span class="line">    C = A.copy()</span><br><span class="line">    <span class="comment"># print(B is A, C is A)  # True, False</span></span><br><span class="line">    <span class="comment"># 创建400X400的3通道矩阵，填充红色(0,0,255)</span></span><br><span class="line">    D = np.full((<span class="number">400</span>, <span class="number">400</span>, <span class="number">3</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), np.uint8)</span><br><span class="line">    <span class="comment"># ROI</span></span><br><span class="line">    E = D[:<span class="number">100</span>, :<span class="number">100</span>, :]  <span class="comment"># 前100行列所有通道</span></span><br><span class="line">    <span class="comment"># 修改 D 的前100行列为绿色(0,255,0)</span></span><br><span class="line">    E[:] = (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>)</span><br><span class="line">    F = np.zeros((<span class="number">7</span>, <span class="number">7</span>), np.uint8)</span><br><span class="line">    F = np.ones((<span class="number">7</span>, <span class="number">7</span>), np.uint8)</span><br><span class="line">    F = np.eye(<span class="number">3</span>, <span class="number">3</span>, dtype=np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2><span id="explanation">Explanation</span></h2><ul>
+<li><a href="https://docs.opencv.org/master/d6/d6d/tutorial_mat_the_basic_image_container.html" target="_blank" rel="noopener">Mat - The Basic Image Container</a> </li>
+<li><a href="https://github.com/QWERDF007/LearningOpenCV4/tree/master/project/mat_basic_image_container" target="_blank" rel="noopener">Github Full Source Code</a></li>
+</ul>
+<p>上述代码读取图像赋给 A，然后创建 B&amp;C 指向 A，三者共享一份数据，头部不同，通过 Mat 的构造函数创建了3个矩阵 M0, M1, M2；从 A 获取一份副本赋给 D；通过选取 A 的 ROI 赋给E和F。最后通过 <code>cout</code> 输出随机从0-255填充的3x2的 8bit 三通道矩阵。</p>
+<h2><span id="something-interesting">Something interesting</span></h2><p>详情参考这 <a href="https://docs.opencv.org/master/d3/d63/classcv_1_1Mat.html" target="_blank" rel="noopener">cv::Mat</a></p>
+<h3><span id="mat-public-attributes">Mat Public Attributes</span></h3><ul>
+<li>cols：列数，图像宽度</li>
+<li>rows：行数，图像高度</li>
+<li>dims：维度</li>
+</ul>
+<h3><span id="mat-public-member-functions">Mat Public Member Functions</span></h3><ul>
+<li>at：模板函数，返回对指定元素的引用</li>
+<li>begin &amp; end：配合迭代器使用</li>
+<li>clone：返回矩阵的副本</li>
+<li>copyTo：将矩阵拷贝至指定矩阵</li>
+<li>create：创建矩阵</li>
+<li>empty：判断矩阵是否为空</li>
+<li>dot：矩阵乘法</li>
+<li>ptr：模板，指向指定行的指针</li>
+<li>diag：创建对角矩阵</li>
+<li>eye：创建单位矩阵</li>
+<li>ones：创建全1的矩阵</li>
+<li>zeros：创建全0的矩阵</li>
+</ul>
 
       
     </div>
@@ -520,11 +517,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
-          
             <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           
-            <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
+            <a href="/tags/OpenCV/" rel="tag"><i class="fa fa-tag"></i> OpenCV</a>
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
           
         </div>
       
@@ -537,14 +534,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/06/07/OpenCV4-2-Load-Modify-and-Save-an-Image/" rel="next" title="OpenCV4 - 2.Load Modify and Save an Image">
+                <i class="fa fa-chevron-left"></i> OpenCV4 - 2.Load Modify and Save an Image
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/30/2-自动求导-Automatic-Differentiation/" rel="prev" title="2.自动求导 (Automatic Differentiation)">
-                2.自动求导 (Automatic Differentiation) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/09/OpenCV4-4-How-to-scan-images-lookup-tables-and-time-measurement-with-OpenCV/" rel="prev" title="OpenCV4 - 4.How to scan images, lookup tables and time measurement with OpenCV">
+                OpenCV4 - 4.How to scan images, lookup tables and time measurement with OpenCV <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -732,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">What is PyTorch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">Tensors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">Operations</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Numpy Bridge</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">Convert a Torch Tensor to a NumPy Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">Converting NumPy Array to Torch Tensor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">CUDA Tensors</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Mat - The Basic Image Container</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Something interesting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.1.</span> <span class="nav-text">Mat Public Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.2.</span> <span class="nav-text">Mat Public Member Functions</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

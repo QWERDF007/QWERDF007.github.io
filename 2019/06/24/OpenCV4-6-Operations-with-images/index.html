@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="Load and Display an ImageGoal 加载图像(cv::imread) 创建 OpenCV 窗口(cv::namedWindow) 在 OpenCV 窗口显示图像(cv::imshow)  Source CodeC++: 123456789101112131415161718#include &amp;lt;iostream&amp;gt;#include &amp;lt;opencv2/highg">
+  <meta name="description" content="Operations with imagesGoals 图像读取、修改、保存 转换图像的颜色空间 显示图像  CodeC++: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849int main(int argc, char *argv[])&amp;#123;    //  读">
 <meta name="keywords" content="Python,OpenCV,C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenCV4 - 1.Load and Display an Image">
-<meta property="og:url" content="https://QWERDF007.github.io/2019/06/07/OpenCV4-1-Load-and-Display-an-Image/index.html">
+<meta property="og:title" content="OpenCV4 - 6.Operations with images">
+<meta property="og:url" content="https://QWERDF007.github.io/2019/06/24/OpenCV4-6-Operations-with-images/index.html">
 <meta property="og:site_name" content="QWERDF007 的博客">
-<meta property="og:description" content="Load and Display an ImageGoal 加载图像(cv::imread) 创建 OpenCV 窗口(cv::namedWindow) 在 OpenCV 窗口显示图像(cv::imshow)  Source CodeC++: 123456789101112131415161718#include &amp;lt;iostream&amp;gt;#include &amp;lt;opencv2/highg">
+<meta property="og:description" content="Operations with imagesGoals 图像读取、修改、保存 转换图像的颜色空间 显示图像  CodeC++: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849int main(int argc, char *argv[])&amp;#123;    //  读">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-23T10:35:38.847Z">
+<meta property="og:updated_time" content="2019-06-24T14:14:56.509Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OpenCV4 - 1.Load and Display an Image">
-<meta name="twitter:description" content="Load and Display an ImageGoal 加载图像(cv::imread) 创建 OpenCV 窗口(cv::namedWindow) 在 OpenCV 窗口显示图像(cv::imshow)  Source CodeC++: 123456789101112131415161718#include &amp;lt;iostream&amp;gt;#include &amp;lt;opencv2/highg">
+<meta name="twitter:title" content="OpenCV4 - 6.Operations with images">
+<meta name="twitter:description" content="Operations with imagesGoals 图像读取、修改、保存 转换图像的颜色空间 显示图像  CodeC++: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849int main(int argc, char *argv[])&amp;#123;    //  读">
 
 
 
 
 
 
-  <link rel="canonical" href="https://QWERDF007.github.io/2019/06/07/OpenCV4-1-Load-and-Display-an-Image/">
+  <link rel="canonical" href="https://QWERDF007.github.io/2019/06/24/OpenCV4-6-Operations-with-images/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>OpenCV4 - 1.Load and Display an Image | QWERDF007 的博客</title>
+  <title>OpenCV4 - 6.Operations with images | QWERDF007 的博客</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/06/07/OpenCV4-1-Load-and-Display-an-Image/">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/06/24/OpenCV4-6-Operations-with-images/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QWERDF007">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OpenCV4 - 1.Load and Display an Image
+          <h1 class="post-title" itemprop="name headline">OpenCV4 - 6.Operations with images
 
               
             
@@ -368,24 +368,12 @@
                 
               
 
-              <time title="Created: 2019-06-07 09:59:31" itemprop="dateCreated datePublished" datetime="2019-06-07T09:59:31+08:00">2019-06-07</time>
+              <time title="Created: 2019-06-24 21:37:31 / Modified: 22:14:56" itemprop="dateCreated datePublished" datetime="2019-06-24T21:37:31+08:00">2019-06-24</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-23 18:35:38" itemprop="dateModified" datetime="2019-06-23T18:35:38+08:00">2019-06-23</time>
               
             
           </span>
@@ -430,7 +418,7 @@
 
           
           
-             <span id="/2019/06/07/OpenCV4-1-Load-and-Display-an-Image/" class="leancloud_visitors" data-flag-title="OpenCV4 - 1.Load and Display an Image">
+             <span id="/2019/06/24/OpenCV4-6-Operations-with-images/" class="leancloud_visitors" data-flag-title="OpenCV4 - 6.Operations with images">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -461,30 +449,22 @@
       
 
       
-        <h1><span id="load-and-display-an-image">Load and Display an Image</span></h1><h2><span id="goal">Goal</span></h2><ul>
-<li>加载图像(cv::imread)</li>
-<li>创建 OpenCV 窗口(cv::namedWindow)</li>
-<li>在 OpenCV 窗口显示图像(cv::imshow)</li>
+        <h1><span id="operations-with-images">Operations with images</span></h1><h2><span id="goals">Goals</span></h2><ul>
+<li>图像读取、修改、保存</li>
+<li>转换图像的颜色空间</li>
+<li>显示图像</li>
 </ul>
-<h2><span id="source-code">Source Code</span></h2><p><strong>C++:</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/highgui.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> imagePath = <span class="string">"./car.jpg"</span>;</span><br><span class="line">    cv::Mat image = cv::imread(imagePath); <span class="comment">// 默认读取RGB</span></span><br><span class="line">    <span class="keyword">if</span> (image.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Could not open image: "</span> &lt;&lt; imagePath &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cv::namedWindow(<span class="string">"Display window"</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::imshow(<span class="string">"Display window"</span>, image);</span><br><span class="line">    cv::waitKey(); <span class="comment">// 等待任意键退出显示</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="code">Code</span></h2><p><strong>C++:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//  读取图像</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> imagePath = <span class="string">"./car.jpg"</span>;</span><br><span class="line">    Mat src = imread(imagePath); <span class="comment">// 默认读取BGR</span></span><br><span class="line">    Mat gray = imread(imagePath, IMREAD_GRAYSCALE); <span class="comment">// 读取灰度图</span></span><br><span class="line">    <span class="comment">// 判断图像是否为空，也可以用.data属性来判断是否空指针</span></span><br><span class="line">    <span class="keyword">if</span> (src.empty() || gray.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Can't open image"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 访问像素亮度</span></span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">10</span>, y =<span class="number">10</span>; <span class="comment">// 图像原点在左上角</span></span><br><span class="line">    Scalar grayIntensity = gray.at&lt;uchar&gt;(x,y); </span><br><span class="line">    <span class="comment">// Scalar grayIntensity = gray.at&lt;uchar&gt;(Point(x,y));</span></span><br><span class="line">    </span><br><span class="line">    Vec3b srcIntensity = src.at&lt;Vec3b&gt;(x, y);</span><br><span class="line">    uchar blue = srcIntensity[<span class="number">0</span>]; <span class="comment">// uchar blue = intensity.val[0];</span></span><br><span class="line">    uchar green = srcIntensity[<span class="number">1</span>];</span><br><span class="line">    uchar red = srcIntensity[<span class="number">2</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 修改图像</span></span><br><span class="line">    gray.at&lt;uchar&gt;(x,y) = <span class="number">255</span>; <span class="comment">// 修改像素值</span></span><br><span class="line">    Mat hsv;</span><br><span class="line">    cvtColor(src, hsv, COLOR_BGR2HSV); <span class="comment">// 转换颜色空间 RGB -&gt; HSV</span></span><br><span class="line">    Mat f32Image;</span><br><span class="line">    src.convertTo(f32Image, CV_32F); <span class="comment">// 转换格式 CV_8UC1 -&gt; CV_32FC1</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ROI</span></span><br><span class="line">    Mat roi = src(Rect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">20</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 复制数据</span></span><br><span class="line">    Mat srcCopy = src.clone(); <span class="comment">// src.copyTo(srcCopy);</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 将图像写入文件</span></span><br><span class="line">    imwrite(<span class="string">"gray.jpg"</span>, gray);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 可视化图像</span></span><br><span class="line">    namedWindow(<span class="string">"src"</span>, WINDOW_AUTOSIZE); <span class="comment">// 创建窗口并指定窗口标志</span></span><br><span class="line">    namedWindow(<span class="string">"hsv"</span>, WINDOW_NORMAL);</span><br><span class="line">    imshow(<span class="string">"src"</span>, src);</span><br><span class="line">    imshow(<span class="string">"gray"</span>, gray);</span><br><span class="line">    imshow(<span class="string">"hsv"</span>, hsv);</span><br><span class="line">    <span class="keyword">char</span> key = waitKey(<span class="number">0</span>); <span class="comment">// 返回按键的ascii值</span></span><br><span class="line">    destroyAllWindows(); <span class="comment">// 简单程序可不用，程序退出时会自动销毁</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>Python:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    image_path = <span class="string">'./car.jpg'</span></span><br><span class="line">    image = cv2.imread(image_path)</span><br><span class="line">    <span class="keyword">if</span> image <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        print(<span class="string">"Could not open image: &#123;&#125;"</span>.format(image_path))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        cv2.namedWindow(<span class="string">'Display window'</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">        cv2.imshow(<span class="string">'Display window'</span>, image)</span><br><span class="line">        cv2.waitKey()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 读取</span></span><br><span class="line">    image_path = <span class="string">'./car.jpg'</span></span><br><span class="line">    src = cv2.imread(image_path)</span><br><span class="line">    gray = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">    <span class="keyword">if</span> src <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        print(<span class="string">"can't open image!"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    x, y = <span class="number">10</span>, <span class="number">10</span></span><br><span class="line">    gray_intensity = gray[x, y]</span><br><span class="line">    blue = src[x, y, <span class="number">0</span>]</span><br><span class="line">    green = src[x, y, <span class="number">1</span>]</span><br><span class="line">    red = src[x, y, <span class="number">2</span>]</span><br><span class="line">    <span class="comment"># 修改</span></span><br><span class="line">    gray[x, y] = <span class="number">255</span></span><br><span class="line">    hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)</span><br><span class="line">    f32_image = src.astype(np.float32)</span><br><span class="line">    <span class="comment"># roi、copy</span></span><br><span class="line">    roi = src[<span class="number">10</span>:<span class="number">10</span>+<span class="number">20</span>, <span class="number">10</span>:<span class="number">10</span>+<span class="number">20</span>, :] <span class="comment"># 第10到30行列</span></span><br><span class="line">    src_copy = src.copy()</span><br><span class="line">    <span class="comment"># 写入文件</span></span><br><span class="line">    cv2.imwrite(<span class="string">'gray.jpg'</span>, gray)</span><br><span class="line">    <span class="comment"># 可视化</span></span><br><span class="line">    cv2.namedWindow(<span class="string">"src"</span>, cv2.WINDOW_AUTOSIZE)</span><br><span class="line">    cv2.namedWindow(<span class="string">"gray"</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">    cv2.imshow(<span class="string">"src"</span>, src)</span><br><span class="line">    cv2.imshow(<span class="string">"gray"</span>, gray)</span><br><span class="line">    cv2.imshow(<span class="string">"hsv"</span>, hsv)</span><br><span class="line">    cv2.waitKey()</span><br><span class="line">    cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <h2><span id="explanation">Explanation</span></h2><ul>
-<li><a href="https://github.com/QWERDF007/LearningOpenCV4" target="_blank" rel="noopener">Github Full Source Code</a></li>
+<li><a href="https://github.com/QWERDF007/LearningOpenCV4/tree/master/project/operations_with_images" target="_blank" rel="noopener">Github Full Source Code</a></li>
 </ul>
-<p>上述代码是加载目录下的 <code>car.jpg</code> 文件并显示至标题为<code>Display window</code> 的 OpenCV 窗口，读取图像后判断是否为空来确定是否执行下一步操作，如果数据为空则打印错误信息并终止程序，不为空则显示图像。</p>
-<h2><span id="something-interesting">Something interesting</span></h2><ul>
-<li><a href="https://docs.opencv.org/4.1.0/db/deb/tutorial_display_image.html" target="_blank" rel="noopener">Load and Display an Image</a></li>
-<li><a href="https://docs.opencv.org/4.1.0/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56" target="_blank" rel="noopener">cv::imread</a>：读取图像，第一个参数为文件路径，第二个参数为图像大致格式分三种 (<a href="https://docs.opencv.org/4.1.0/d4/da8/group__imgcodecs.html#gga61d9b0126a3e57d9277ac48327799c80af660544735200cbe942eea09232eb822" target="_blank" rel="noopener">Here</a>)：<ul>
-<li>IMREAD_UNCHANGED (&lt;0)：加载包含alpha通道的图像(png)</li>
-<li>IMREAD_GRAYSCALE (0)：加载灰度图</li>
-<li>IMREAD_COLOR (&gt;0)：加载 RGB 图像，注意 OpenCV 中图像的通道为 BGR</li>
-</ul>
-</li>
-<li><a href="https://docs.opencv.org/4.1.0/d7/dfc/group__highgui.html#ga453d42fe4cb60e5723281a89973ee563" target="_blank" rel="noopener">cv::imshow</a>：显示图像，第一个参数为窗口名，第二个参数为图像 Object</li>
-<li><a href="https://docs.opencv.org/4.1.0/d7/dfc/group__highgui.html#ga5afdf8410934fd099df85c75b2e0888b" target="_blank" rel="noopener">cv::namedWindow</a>：创建 OpenCV 窗口，第一个参数为窗口名，第二个参数为处理窗口缩放的方式</li>
-<li><a href="https://docs.opencv.org/4.1.0/d7/dfc/group__highgui.html#ga5628525ad33f52eab17feebcfba38bd7" target="_blank" rel="noopener">cv::waitKey</a>：等待按键响应，并返回键值，参数为要延时的毫秒数</li>
+<p>上述代码首先分别读取图像的 RGB 图和 gray 图，接着访问图像的指定位置的像素，以获取该像素点 RGB 强度和灰度信息，然后修改该像素点的强度，之后使用 <code>cvtColor</code> 转换图像的颜色空间 BGR -&gt; HSV，使用 <code>covertTo</code> 转换图像的数据类型，由 8bit uchar 转为 32bit float，最后将图像的 gray保存，将图像与结果显示出来。</p>
+<h2><span id="reference">Reference</span></h2><ul>
+<li><a href="https://docs.opencv.org/4.1.0/d5/d98/tutorial_mat_operations.html" target="_blank" rel="noopener">Operations with images</a></li>
+<li><a href="https://docs.opencv.org/4.1.0/d3/d63/classcv_1_1Mat.html#adf88c60c5b4980e05bb556080916978b" target="_blank" rel="noopener">cv::Mat::convertTo</a></li>
 </ul>
 
       
@@ -526,8 +506,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/06/Ubuntu-16-04-Server-安装教程/" rel="next" title="Ubuntu 16.04 Server 安装教程">
-                <i class="fa fa-chevron-left"></i> Ubuntu 16.04 Server 安装教程
+              <a href="/2019/06/13/OpenCV4-5-Mask-operations-on-matrices/" rel="next" title="OpenCV4 - 5.Mask operations on matrices">
+                <i class="fa fa-chevron-left"></i> OpenCV4 - 5.Mask operations on matrices
               </a>
             
           </div>
@@ -535,10 +515,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/07/OpenCV4-2-Load-Modify-and-Save-an-Image/" rel="prev" title="OpenCV4 - 2.Load Modify and Save an Image">
-                OpenCV4 - 2.Load Modify and Save an Image <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -725,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Load and Display an Image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Goal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Source Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Something interesting</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Operations with images</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
             
 
           </div>

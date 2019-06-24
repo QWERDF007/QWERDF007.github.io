@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="Mat - The Basic Image ContainerGoals 熟悉 cv::Mat 熟悉 OpenCV 如何操作与存储图像  CodeC++: 1234567891011121314151617181920212223242526272829int main(int argc, char *argv[])&amp;#123;		Mat A; // 仅创建头指针	A = imread(&quot;./ca">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-23T01:23:17.215Z">
+<meta property="og:updated_time" content="2019-06-23T10:36:11.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV4 - 3.Mat - The Basic Image Container">
 <meta name="twitter:description" content="Mat - The Basic Image ContainerGoals 熟悉 cv::Mat 熟悉 OpenCV 如何操作与存储图像  CodeC++: 1234567891011121314151617181920212223242526272829int main(int argc, char *argv[])&amp;#123;		Mat A; // 仅创建头指针	A = imread(&quot;./ca">
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-23 09:23:17" itemprop="dateModified" datetime="2019-06-23T09:23:17+08:00">2019-06-23</time>
+                <time title="Modified: 2019-06-23 18:36:11" itemprop="dateModified" datetime="2019-06-23T18:36:11+08:00">2019-06-23</time>
               
             
           </span>
@@ -470,11 +470,13 @@
 <p><strong>Python:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    A = cv2.imread(<span class="string">'./car.jpg'</span>, cv2.IMREAD_COLOR)</span><br><span class="line">    B = A</span><br><span class="line">    <span class="comment"># 拷贝构造</span></span><br><span class="line">    C = A.copy()</span><br><span class="line">    <span class="comment"># print(B is A, C is A)  # True, False</span></span><br><span class="line">    <span class="comment"># 创建400X400的3通道矩阵，填充红色(0,0,255)</span></span><br><span class="line">    D = np.full((<span class="number">400</span>, <span class="number">400</span>, <span class="number">3</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), np.uint8)</span><br><span class="line">    <span class="comment"># ROI</span></span><br><span class="line">    E = D[:<span class="number">100</span>, :<span class="number">100</span>, :]  <span class="comment"># 前100行列所有通道</span></span><br><span class="line">    <span class="comment"># 修改 D 的前100行列为绿色(0,255,0)</span></span><br><span class="line">    E[:] = (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>)</span><br><span class="line">    F = np.zeros((<span class="number">7</span>, <span class="number">7</span>), np.uint8)</span><br><span class="line">    F = np.ones((<span class="number">7</span>, <span class="number">7</span>), np.uint8)</span><br><span class="line">    F = np.eye(<span class="number">3</span>, <span class="number">3</span>, dtype=np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <h2><span id="explanation">Explanation</span></h2><ul>
-<li><a href="https://docs.opencv.org/master/d6/d6d/tutorial_mat_the_basic_image_container.html" target="_blank" rel="noopener">Mat - The Basic Image Container</a> </li>
 <li><a href="https://github.com/QWERDF007/LearningOpenCV4/tree/master/project/mat_basic_image_container" target="_blank" rel="noopener">Github Full Source Code</a></li>
 </ul>
-<p>上述代码读取图像赋给 A，然后创建 B&amp;C 指向 A，三者共享一份数据，头部不同，通过 Mat 的构造函数创建了3个矩阵 M0, M1, M2；从 A 获取一份副本赋给 D；通过选取 A 的 ROI 赋给E和F。最后通过 <code>cout</code> 输出随机从0-255填充的3x2的 8bit 三通道矩阵。</p>
-<h2><span id="something-interesting">Something interesting</span></h2><p>详情参考这 <a href="https://docs.opencv.org/master/d3/d63/classcv_1_1Mat.html" target="_blank" rel="noopener">cv::Mat</a></p>
+<p>上述代码读取图像赋给 A，然后创建 B&amp;C 指向 A，三者共享一份数据，头部不同，通过 <code>Mat</code> 的构造函数创建了3个矩阵 M0, M1, M2；从 A 获取一份副本赋给 D；通过选取 A 的 ROI 赋给E和F。最后通过 <code>std::cout</code> 输出随机从0-255填充的3x2的 8bit 三通道矩阵。</p>
+<h2><span id="reference">Reference</span></h2><ul>
+<li><a href="https://docs.opencv.org/4.1.0/d6/d6d/tutorial_mat_the_basic_image_container.html" target="_blank" rel="noopener">Mat - The Basic Image Container</a> </li>
+<li><a href="https://docs.opencv.org/4.1.0/d3/d63/classcv_1_1Mat.html" target="_blank" rel="noopener">cv::Mat</a></li>
+</ul>
 <h3><span id="mat-public-attributes">Mat Public Attributes</span></h3><ul>
 <li>cols：列数，图像宽度</li>
 <li>rows：行数，图像高度</li>
@@ -483,6 +485,7 @@
 <h3><span id="mat-public-member-functions">Mat Public Member Functions</span></h3><ul>
 <li>at：模板函数，返回对指定元素的引用</li>
 <li>begin &amp; end：配合迭代器使用</li>
+<li>channels：返回矩阵的通道数</li>
 <li>clone：返回矩阵的副本</li>
 <li>copyTo：将矩阵拷贝至指定矩阵</li>
 <li>create：创建矩阵</li>
@@ -616,7 +619,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -733,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Mat - The Basic Image Container</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Something interesting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.1.</span> <span class="nav-text">Mat Public Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.2.</span> <span class="nav-text">Mat Public Member Functions</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Mat - The Basic Image Container</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Reference</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.1.</span> <span class="nav-text">Mat Public Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.2.</span> <span class="nav-text">Mat Public Member Functions</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -994,13 +997,14 @@
 
   
 
-  <!-- 代码块复制功能 -->
-  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
-  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
   
 </body>
 </html>
 
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
 

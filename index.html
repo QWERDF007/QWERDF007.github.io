@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/06/13/OpenCV4-5-Operations-with-martix/">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/06/24/OpenCV4-6-Operations-with-images/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QWERDF007">
@@ -341,7 +341,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/13/OpenCV4-5-Operations-with-martix/" class="post-title-link" itemprop="url">OpenCV4 - 5.Operations with martix</a>
+                <a href="/2019/06/24/OpenCV4-6-Operations-with-images/" class="post-title-link" itemprop="url">OpenCV4 - 6.Operations with images</a>
               
             
           </h1>
@@ -366,13 +366,49 @@
                 
               
 
-              <time title="Created: 2019-06-13 22:48:06" itemprop="dateCreated datePublished" datetime="2019-06-13T22:48:06+08:00">2019-06-13</time>
+              <time title="Created: 2019-06-24 21:37:31 / Modified: 22:14:56" itemprop="dateCreated datePublished" datetime="2019-06-24T21:37:31+08:00">2019-06-24</time>
             
 
+            
+              
+
+              
             
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/Tutorials/" itemprop="url" rel="index"><span itemprop="name">Tutorials</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/Tutorials/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -380,7 +416,7 @@
 
           
           
-             <span id="/2019/06/13/OpenCV4-5-Operations-with-martix/" class="leancloud_visitors" data-flag-title="OpenCV4 - 5.Operations with martix">
+             <span id="/2019/06/24/OpenCV4-6-Operations-with-images/" class="leancloud_visitors" data-flag-title="OpenCV4 - 6.Operations with images">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -414,13 +450,231 @@
         
           
             <p>
-              
-              
+              Operations with imagesGoals
+图像读取、修改、保存
+转换图像的颜色空间
+显示图像
+
+CodeC++:
+int main(int argc, char *argv[])&#123;    //  读取图像    std::string imagePath = "./car.jpg";    Mat src = imread(imagePath); // 默认读取BGR    Mat gray = imread(imagePath, IMREAD_GRAYSCALE); // 读取灰度图    // 判断图像是否为空，也可以用.data属性来判断是否空指针    if (
+              ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/06/13/OpenCV4-5-Operations-with-martix/#more" rel="contents">
+              <a class="btn" href="/2019/06/24/OpenCV4-6-Operations-with-images/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/06/13/OpenCV4-5-Mask-operations-on-matrices/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QWERDF007">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QWERDF007 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/13/OpenCV4-5-Mask-operations-on-matrices/" class="post-title-link" itemprop="url">OpenCV4 - 5.Mask operations on matrices</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-13 22:48:06" itemprop="dateCreated datePublished" datetime="2019-06-13T22:48:06+08:00">2019-06-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-24 21:55:28" itemprop="dateModified" datetime="2019-06-24T21:55:28+08:00">2019-06-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/Tutorials/" itemprop="url" rel="index"><span itemprop="name">Tutorials</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/Tutorials/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/13/OpenCV4-5-Mask-operations-on-matrices/" class="leancloud_visitors" data-flag-title="OpenCV4 - 5.Mask operations on matrices">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              Mask operations on matricesGoals
+使用公式实现图像卷积
+使用 cv::filter2D 实现图像卷积
+
+CodeC++:
+int main(int argc, char *argv[])&#123;    std::string imagePath = "./car.jpg";    Mat src, dst0, dst1;    src = imread(imagePath, IMREAD_COLOR);    if (src.empty())    &#123;        std::cout &lt;&lt; "Can't open image: " &
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/13/OpenCV4-5-Mask-operations-on-matrices/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -542,7 +796,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-23 09:23:47" itemprop="dateModified" datetime="2019-06-23T09:23:47+08:00">2019-06-23</time>
+                <time title="Modified: 2019-06-23 18:36:30" itemprop="dateModified" datetime="2019-06-23T18:36:30+08:00">2019-06-23</time>
               
             
           </span>
@@ -755,7 +1009,7 @@ int main(int argc, char *argv[])&#123;    std::string imagePath = "./scene.jpg";
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-23 09:23:17" itemprop="dateModified" datetime="2019-06-23T09:23:17+08:00">2019-06-23</time>
+                <time title="Modified: 2019-06-23 18:36:11" itemprop="dateModified" datetime="2019-06-23T18:36:11+08:00">2019-06-23</time>
               
             
           </span>
@@ -967,7 +1221,7 @@ int main(int argc, char *argv[])&#123;		Mat A; // 仅创建头指针	A = imread(
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-23 09:22:49" itemprop="dateModified" datetime="2019-06-23T09:22:49+08:00">2019-06-23</time>
+                <time title="Modified: 2019-06-23 18:35:15" itemprop="dateModified" datetime="2019-06-23T18:35:15+08:00">2019-06-23</time>
               
             
           </span>
@@ -1180,7 +1434,7 @@ CodeC++:
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-23 09:22:18" itemprop="dateModified" datetime="2019-06-23T09:22:18+08:00">2019-06-23</time>
+                <time title="Modified: 2019-06-23 18:35:38" itemprop="dateModified" datetime="2019-06-23T18:35:38+08:00">2019-06-23</time>
               
             
           </span>
@@ -2146,215 +2400,6 @@ Using the PyTorch C++ FrontendPyTorch C++ 文档PyTorch 的 C++ 前端是 PyTorc
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://QWERDF007.github.io/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QWERDF007">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QWERDF007 的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/" class="post-title-link" itemprop="url">14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++)</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-06 22:18:29" itemprop="dateCreated datePublished" datetime="2019-04-06T22:18:29+08:00">2019-04-06</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-08 15:39:36" itemprop="dateModified" datetime="2019-04-08T15:39:36+08:00">2019-04-08</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/" itemprop="url" rel="index"><span itemprop="name">PyTorch</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/PyTorch/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/" class="leancloud_visitors" data-flag-title="14.在C++中加载PyTorch模型 (Loading a PyTorch Model in C++)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              [TOC]
-Loading a PyTorch Model in C++正如其名，PyTorch 的主要接口是 Python 编程语言。虽然 Python 在许多需要动态性和易于迭代的场景是合适和首选的语言，但也有很多情况下 Python 的这些特性恰恰是不利的。后者经常应用的一个环境是生产环境，延迟低且部署要求严格。对于生产环境，C++ 通常是首选语言，即使只是将其绑定至另一种语言，如 Java，Rust 或者 Go。接下来的段落将会概括 PyTorch 提供的从已存在的 Python 模型到序列化表示的路径，该序列化表示能从 C++ 加载和执行，不需要依赖 Python。
-Step 1: 
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/06/14-在C-中加载PyTorch模型-Loading-a-PyTorch-Model-in-C/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2402,7 +2447,7 @@ Step 1:
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2762,13 +2807,14 @@ Step 1:
 
   
 
-  <!-- 代码块复制功能 -->
-  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
-  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
   
 </body>
 </html>
 
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
 

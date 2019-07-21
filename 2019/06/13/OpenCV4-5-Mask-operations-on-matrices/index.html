@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="Mask operations on matricesGoals 使用公式实现图像卷积 使用 cv::filter2D 实现图像卷积  CodeC++: 12345678910111213141516171819202122232425262728int main(int argc, char *argv[])&amp;#123;    std::string imagePath = &quot;./car.jpg">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-24T13:55:28.903Z">
+<meta property="og:updated_time" content="2019-07-21T02:52:36.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV4 - 5.Mask operations on matrices">
 <meta name="twitter:description" content="Mask operations on matricesGoals 使用公式实现图像卷积 使用 cv::filter2D 实现图像卷积  CodeC++: 12345678910111213141516171819202122232425262728int main(int argc, char *argv[])&amp;#123;    std::string imagePath = &quot;./car.jpg">
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-24 21:55:28" itemprop="dateModified" datetime="2019-06-24T21:55:28+08:00">2019-06-24</time>
+                <time title="Modified: 2019-07-21 10:52:36" itemprop="dateModified" datetime="2019-07-21T10:52:36+08:00">2019-07-21</time>
               
             
           </span>
@@ -463,7 +463,7 @@
       
         <h1><span id="mask-operations-on-matrices">Mask operations on matrices</span></h1><h2><span id="goals">Goals</span></h2><ul>
 <li>使用公式实现图像卷积</li>
-<li>使用 cv::filter2D 实现图像卷积</li>
+<li>使用 <code>cv::filter2D</code> 实现图像卷积</li>
 </ul>
 <h2><span id="code">Code</span></h2><p><strong>C++:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> imagePath = <span class="string">"./car.jpg"</span>;</span><br><span class="line">    Mat src, dst0, dst1;</span><br><span class="line">    src = imread(imagePath, IMREAD_COLOR);</span><br><span class="line">    <span class="keyword">if</span> (src.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Can't open image: "</span> &lt;&lt; imagePath;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> t = getTickCount();</span><br><span class="line">    sharpen(src, dst0);</span><br><span class="line">    t = <span class="keyword">double</span>(getTickCount() - t) / getTickFrequency();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"sharpen time elapsed: "</span> &lt;&lt; t &lt;&lt; <span class="string">"s"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    Mat kernel = (Mat_&lt;<span class="keyword">char</span>&gt;(<span class="number">3</span>,<span class="number">3</span>) &lt;&lt; <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>,</span><br><span class="line">                                     <span class="number">-1</span>, <span class="number">5</span>, <span class="number">-1</span>,</span><br><span class="line">                                     <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line">    t = getTickCount();</span><br><span class="line">    filter2D(src, dst1, src.depth(), kernel);</span><br><span class="line">    t = <span class="keyword">double</span>(getTickCount() - t) / getTickFrequency();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"filter2D time elapsed: "</span> &lt;&lt; t &lt;&lt; <span class="string">"s"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    imshow(<span class="string">"src"</span>, src);</span><br><span class="line">    imshow(<span class="string">"Sharpen"</span>, dst0);</span><br><span class="line">    imshow(<span class="string">"filter2D"</span>, dst1);</span><br><span class="line">    waitKey();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -472,11 +472,11 @@
 <h2><span id="explanation">Explanation</span></h2><ul>
 <li><a href="https://github.com/QWERDF007/LearningOpenCV4/tree/master/project/mask_operations" target="_blank" rel="noopener">Github Full Source Code</a></li>
 </ul>
-<p>上述代码首先分别读取图像的RGB模式和gray模式，接着使用手写的卷积函数来完成对图像的锐化，并使用 <code>cv::getTickCount</code> 和 <code>cv::getTickFrequency</code> 来测量耗时，接着使用 OpenCV 提供的 <code>cv::filter2D</code> 来实现卷积操作，同样计算时间，最后将卷积结果与耗时显示出来。</p>
+<p>上述代码首先分别读取图像的 RGB 模式和 gray 模式，接着使用手写的卷积函数来完成对图像的锐化，并使用 <code>cv::getTickCount</code> 和 <code>cv::getTickFrequency</code> 来测量耗时，接着使用 <code>cv::filter2D</code> 来实现卷积操作，同样计算时间，最后将卷积结果与耗时显示出来。</p>
 <h2><span id="reference">Reference</span></h2><ul>
 <li><a href="https://docs.opencv.org/4.1.0/d7/d37/tutorial_mat_mask_operations.html" target="_blank" rel="noopener">Mask operations on matrices</a></li>
 <li><a href="https://docs.opencv.org/4.1.0/d4/d86/group__imgproc__filter.html#ga27c049795ce870216ddfb366086b5a04" target="_blank" rel="noopener">cv::filter2D</a>：2D 滤波器，将图像与 kernel 卷积，第一个参数 <code>src</code> 为输入图像矩阵，第二个参数 <code>dst</code> 为输出图像矩阵，第三个参数 <code>ddepth</code> 为目标图像的深度 <a href="https://docs.opencv.org/4.1.0/d4/d86/group__imgproc__filter.html#filter_depths" target="_blank" rel="noopener">Here</a>，第四个参数 <code>kernel</code> 为卷积核，第五个参数 <code>anchor</code> 为锚点位置，默认值(-1,-1)表示为卷积核的中心，第六个参数 <code>delta</code> 为存储目标图像前像素的叠加值，第7个参数 <code>borderType</code> 为边界填充方法  <a href="https://docs.opencv.org/4.1.0/d2/de8/group__core__array.html#ga209f2f4869e304c82d07739337eae7c5" target="_blank" rel="noopener">Here</a></li>
-<li><a href="https://docs.opencv.org/4.1.0/db/de0/group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b" target="_blank" rel="noopener">CV_Assert</a>：OpenCV 提供的检测条件的函数，如果不满足则抛出异常</li>
+<li><a href="https://docs.opencv.org/4.1.0/db/de0/group__core__utils.html#gaf62bcd90f70e275191ab95136d85906b" target="_blank" rel="noopener">CV_Assert</a>：检测条件的函数，如果不满足则抛出异常</li>
 </ul>
 
       
@@ -600,7 +600,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

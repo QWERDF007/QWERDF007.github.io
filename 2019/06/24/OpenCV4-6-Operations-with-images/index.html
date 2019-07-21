@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="QWERDF007 的博客">
 <meta property="og:description" content="Operations with imagesGoals 图像读取、修改、保存 转换图像的颜色空间 显示图像  CodeC++: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849int main(int argc, char *argv[])&amp;#123;    //  读">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-24T14:14:56.509Z">
+<meta property="og:updated_time" content="2019-07-21T03:21:09.482Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV4 - 6.Operations with images">
 <meta name="twitter:description" content="Operations with imagesGoals 图像读取、修改、保存 转换图像的颜色空间 显示图像  CodeC++: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849int main(int argc, char *argv[])&amp;#123;    //  读">
@@ -368,12 +368,24 @@
                 
               
 
-              <time title="Created: 2019-06-24 21:37:31 / Modified: 22:14:56" itemprop="dateCreated datePublished" datetime="2019-06-24T21:37:31+08:00">2019-06-24</time>
+              <time title="Created: 2019-06-24 21:37:31" itemprop="dateCreated datePublished" datetime="2019-06-24T21:37:31+08:00">2019-06-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-21 11:21:09" itemprop="dateModified" datetime="2019-07-21T11:21:09+08:00">2019-07-21</time>
               
             
           </span>
@@ -461,10 +473,12 @@
 <h2><span id="explanation">Explanation</span></h2><ul>
 <li><a href="https://github.com/QWERDF007/LearningOpenCV4/tree/master/project/operations_with_images" target="_blank" rel="noopener">Github Full Source Code</a></li>
 </ul>
-<p>上述代码首先分别读取图像的 RGB 图和 gray 图，接着访问图像的指定位置的像素，以获取该像素点 RGB 强度和灰度信息，然后修改该像素点的强度，之后使用 <code>cvtColor</code> 转换图像的颜色空间 BGR -&gt; HSV，使用 <code>covertTo</code> 转换图像的数据类型，由 8bit uchar 转为 32bit float，最后将图像的 gray保存，将图像与结果显示出来。</p>
+<p>上述代码首先分别读取图像的 RGB 图和 Gray 图，RGB 转 Gray 公式：<code>Gray = R*0.299 + G*0.587 + B*0.114</code>接着访问图像的指定位置的像素，以获取该像素点 RGB 强度和灰度信息，然后修改该像素点的强度，之后使用 <code>cvtColor</code> 转换图像的颜色空间 BGR -&gt; HSV，使用 <code>covertTo</code> 转换图像的数据类型，由 8bit uchar 转为 32bit float，最后将图像的 gray保存，将图像与结果显示出来。</p>
 <h2><span id="reference">Reference</span></h2><ul>
 <li><a href="https://docs.opencv.org/4.1.0/d5/d98/tutorial_mat_operations.html" target="_blank" rel="noopener">Operations with images</a></li>
-<li><a href="https://docs.opencv.org/4.1.0/d3/d63/classcv_1_1Mat.html#adf88c60c5b4980e05bb556080916978b" target="_blank" rel="noopener">cv::Mat::convertTo</a></li>
+<li><a href="https://docs.opencv.org/4.1.0/d3/d63/classcv_1_1Mat.html#adf88c60c5b4980e05bb556080916978b" target="_blank" rel="noopener">cv::Mat::convertTo</a>：将数组转换为另一种类型，可选的缩放，偏移 <code>r(x, y) = alpha*s(x, y) + beta</code>，第一个参数为待转换数组，第二个参数为输出类型，第三个参数为缩放比例，第四个参数为偏移量</li>
+<li><a href="https://blog.csdn.net/xdrt81y/article/details/8289963" target="_blank" rel="noopener">从RGB色转为灰度色算法</a></li>
+<li><a href="https://blog.csdn.net/hanshanbuleng/article/details/80383813" target="_blank" rel="noopener">从 RGB 到 HSV 的转换详细介绍</a></li>
 </ul>
 
       
@@ -515,6 +529,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/21/OpenCV4-7-Blending-two-images-using-OpenCV/" rel="prev" title="OpenCV4 - 7.Blending two images using OpenCV">
+                OpenCV4 - 7.Blending two images using OpenCV <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -584,7 +602,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
